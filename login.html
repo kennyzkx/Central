@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Portal do Atendente</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #111419;
+      color: #F5F6F8;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* =========================
+   LAYOUT
+========================= */
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =========================
+   LADO ESQUERDO
+========================= */
+
+    .login-left {
+      width: 55%;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 90, 0, 0.08), transparent 35%),
+        #111419;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .constelacao {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .estrela {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255, 255, 255, .8);
+      animation:
+        piscarEstrela 3s ease-in-out infinite,
+        flutuarEstrela 7s ease-in-out infinite;
+    }
+
+    .linha {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(255, 90, 0, .35),
+          transparent);
+      transform-origin: left center;
+      animation: brilhoLinha 4s ease-in-out infinite;
+    }
+
+    @keyframes piscarEstrela {
+
+      0%,
+      100% {
+        opacity: .25;
+        transform: scale(.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.4);
+      }
+    }
+
+    @keyframes flutuarEstrela {
+
+      0%,
+      100% {
+        margin-top: 0;
+      }
+
+      50% {
+        margin-top: -8px;
+      }
+    }
+
+    @keyframes brilhoLinha {
+
+      0%,
+      100% {
+        opacity: .1;
+      }
+
+      50% {
+        opacity: .7;
+      }
+    }
+
+    .login-brand {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .login-brand img {
+      width: 220px;
+      max-width: 70%;
+    }
+
+    .login-brand p {
+      margin-top: 15px;
+      color: #9BA3AE;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+    }
+
+    /* =========================
+   LADO DIREITO
+========================= */
+
+    .login-right {
+      width: 45%;
+      min-width: 420px;
+      background: #15181E;
+      border-left: 1px solid #303640;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 390px;
+    }
+
+    .login-box h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .login-box .subtitle {
+      color: #9BA3AE;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .campo {
+      margin-bottom: 20px;
+    }
+
+    .campo label {
+      display: block;
+      color: #DDE1E7;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .campo input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #303640;
+      border-radius: 8px;
+      background: #191D24;
+      color: #F5F6F8;
+      padding: 0 14px;
+      outline: none;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .campo input:focus {
+      border-color: #FF5A00;
+      box-shadow: 0 0 0 3px rgba(255, 90, 0, .12);
+    }
+
+    .opcoes {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0 24px;
+    }
+
+    .lembrar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #9BA3AE;
+      font-size: 13px;
+    }
+
+    .lembrar input {
+      accent-color: #FF5A00;
+    }
+
+    .esqueci {
+      border: none;
+      background: transparent;
+      color: #FF6A1A;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .esqueci:hover {
+      text-decoration: underline;
+    }
+
+    .btn-entrar {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 8px;
+      background: #FF5A00;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-entrar:hover {
+      background: #FF6A1A;
+    }
+
+    .btn-entrar:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .mensagem {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: rgba(220, 53, 69, .12);
+      border: 1px solid rgba(220, 53, 69, .35);
+      color: #ff8f99;
+    }
+
+    .mensagem.sucesso {
+      display: block;
+      background: rgba(40, 167, 69, .12);
+      border: 1px solid rgba(40, 167, 69, .35);
+      color: #7ee29a;
+    }
+
+    /* =========================
+   RESPONSIVO
+========================= */
+
+    @media (max-width: 850px) {
+      .login-left {
+        display: none;
+      }
+
+      .login-right {
+        width: 100%;
+        min-width: 0;
+        border-left: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-page">
+
+    <!-- =========================
+         LADO ESQUERDO
+    ========================== -->
+
+    <div class="login-left">
+
+      <div class="constelacao">
+
+        <span class="estrela" style="left:8%;top:15%;animation-delay:.2s"></span>
+        <span class="estrela" style="left:18%;top:35%;animation-delay:1s"></span>
+        <span class="estrela" style="left:31%;top:18%;animation-delay:1.8s"></span>
+        <span class="estrela" style="left:42%;top:30%;animation-delay:.6s"></span>
+        <span class="estrela" style="left:56%;top:13%;animation-delay:2.2s"></span>
+        <span class="estrela" style="left:70%;top:28%;animation-delay:1.2s"></span>
+        <span class="estrela" style="left:83%;top:17%;animation-delay:2.8s"></span>
+
+        <span class="estrela" style="left:12%;top:60%;animation-delay:1.5s"></span>
+        <span class="estrela" style="left:26%;top:73%;animation-delay:.8s"></span>
+        <span class="estrela" style="left:39%;top:55%;animation-delay:2s"></span>
+        <span class="estrela" style="left:53%;top:70%;animation-delay:.4s"></span>
+        <span class="estrela" style="left:67%;top:58%;animation-delay:2.6s"></span>
+        <span class="estrela" style="left:79%;top:76%;animation-delay:1.4s"></span>
+        <span class="estrela" style="left:91%;top:55%;animation-delay:2.4s"></span>
+
+        <span class="estrela" style="left:48%;top:45%;animation-delay:.9s"></span>
+
+        <span class="linha" style="left:18%;top:35%;width:145px;transform:rotate(-12deg);animation-delay:.4s">
+        </span>
+
+        <span class="linha" style="left:31%;top:18%;width:135px;transform:rotate(23deg);animation-delay:1.2s">
+        </span>
+
+        <span class="linha" style="left:42%;top:30%;width:125px;transform:rotate(-8deg);animation-delay:2s">
+        </span>
+
+        <span class="linha" style="left:26%;top:73%;width:150px;transform:rotate(-25deg);animation-delay:.8s">
+        </span>
+
+        <span class="linha" style="left:53%;top:70%;width:145px;transform:rotate(-18deg);animation-delay:1.6s">
+        </span>
+
+        <span class="linha" style="left:67%;top:58%;width:135px;transform:rotate(22deg);animation-delay:2.4s">
+        </span>
+
+        <span class="linha" style="left:48%;top:45%;width:115px;transform:rotate(18deg);animation-delay:1s">
+        </span>
+
+      </div>
+
+      <div class="login-brand">
+        <img src="logo-alcans.png" alt="Alcans">
+        <p>PORTAL DO ATENDENTE</p>
+      </div>
+
+    </div>
+
+    <!-- =========================
+         LADO DIREITO
+    ========================== -->
+
+    <div class="login-right">
+
+      <div class="login-box">
+
+        <h1>Bem-vindo</h1>
+
+        <p class="subtitle">
+          Entre com suas credenciais para acessar o portal.
+        </p>
+
+        <form id="loginForm">
+
+          <div class="campo">
+            <label for="usuario">Usuário</label>
+
+            <input type="text" id="usuario" placeholder="Digite seu usuário" autocomplete="username" required>
+          </div>
+
+          <div class="campo">
+            <label for="senha">Senha</label>
+
+            <input type="password" id="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+          </div>
+
+          <div class="opcoes">
+
+            <label class="lembrar">
+              <input type="checkbox" id="lembrar">
+              <span>Lembrar de mim</span>
+            </label>
+
+            <button type="button" class="esqueci" id="esqueciSenha">
+              Esqueci minha senha
+            </button>
+
+          </div>
+
+          <button type="submit" class="btn-entrar" id="btnEntrar">
+            Entrar
+          </button>
+
+          <div id="mensagem" class="mensagem"></div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    /* =====================================================
+       SUPABASE
+    ===================================================== */
+
+    const SUPABASE_URL =
+      "https://adjrbgwnvagdqbqzfgwf.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_YFkBbmCNye3C74aJuu7BcA_zmvSdRnT";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const usuarioInput =
+      document.getElementById("usuario");
+
+    const senhaInput =
+      document.getElementById("senha");
+
+    const btnEntrar =
+      document.getElementById("btnEntrar");
+
+    const mensagem =
+      document.getElementById("mensagem");
+
+    const esqueciSenha =
+      document.getElementById("esqueciSenha");
+
+
+    /* =====================================================
+       MENSAGEM
+    ===================================================== */
+
+    function mostrarMensagem(texto, tipo = "erro") {
+
+      mensagem.textContent = texto;
+
+      mensagem.className =
+        "mensagem " + tipo;
+
+    }
+
+
+    /* =====================================================
+       CONVERTER USUÁRIO PARA E-MAIL
+    ===================================================== */
+
+    function obterEmail(usuario) {
+
+      usuario = usuario.trim().toLowerCase();
+
+      /*
+         Usuários cadastrados no Supabase Auth
+      */
+
+      if (usuario === "call.center") {
+
+        return "call.center@alcans.com.br";
+
+      }
+
+      if (usuario === "gestores.alcans") {
+
+        return "gestores.alcans@alcans.com.br";
+
+      }
+
+      /*
+         Caso seja digitado diretamente
+         um e-mail, também permite.
+      */
+
+      if (usuario.includes("@")) {
+
+        return usuario;
+
+      }
+
+      return null;
+
+    }
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    loginForm.addEventListener("submit", async function (event) {
+
+      event.preventDefault();
+
+      const usuario =
+        usuarioInput.value.trim();
+
+      const senha =
+        senhaInput.value;
+
+      if (!usuario || !senha) {
+
+        mostrarMensagem(
+          "Preencha o usuário e a senha."
+        );
+
+        return;
+
+      }
+
+      const email =
+        obterEmail(usuario);
+
+      if (!email) {
+
+        mostrarMensagem(
+          "Usuário não encontrado."
+        );
+
+        return;
+
+      }
+
+      btnEntrar.disabled = true;
+      btnEntrar.textContent = "Entrando...";
+
+      mensagem.className = "mensagem";
+      mensagem.textContent = "";
+
+
+      try {
+
+        /*
+         * AUTENTICAÇÃO SUPABASE
+         */
+
+        const { data, error } =
+          await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: senha
+          });
+
+
+        if (error) {
+
+          console.error(
+            "Erro Supabase:",
+            error
+          );
+
+          mostrarMensagem(
+            "Usuário ou senha incorretos."
+          );
+
+          return;
+
+        }
+
+
+        if (!data || !data.user) {
+
+          mostrarMensagem(
+            "Não foi possível identificar o usuário."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * BUSCA O PERFIL DO USUÁRIO
+         */
+
+        const { data: perfil, error: erroPerfil } =
+          await supabaseClient
+            .from("perfis")
+            .select("usuario, perfil")
+            .eq("id", data.user.id)
+            .single();
+
+
+        if (erroPerfil) {
+
+          console.error(
+            "Erro ao buscar perfil:",
+            erroPerfil
+          );
+
+          /*
+           * Se o usuário autenticou, mas ainda não
+           * existe na tabela perfis.
+           */
+
+          await supabaseClient.auth.signOut();
+
+          mostrarMensagem(
+            "Seu usuário foi autenticado, mas o perfil ainda não está configurado no sistema."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * SALVA AS INFORMAÇÕES DA SESSÃO
+         */
+
+        sessionStorage.setItem(
+          "portal_usuario",
+          perfil.usuario
+        );
+
+        sessionStorage.setItem(
+          "portal_perfil",
+          perfil.perfil
+        );
+
+        sessionStorage.setItem(
+          "portal_email",
+          data.user.email
+        );
+
+
+        /*
+         * LOGIN CONCLUÍDO
+         */
+
+        mostrarMensagem(
+          "Login realizado com sucesso!",
+          "sucesso"
+        );
+
+
+        setTimeout(function () {
+
+          window.location.href =
+            "index.html";
+
+        }, 500);
+
+
+      } catch (erro) {
+
+        console.error(
+          "Erro inesperado:",
+          erro
+        );
+
+        mostrarMensagem(
+          "Ocorreu um erro ao realizar o login."
+        );
+
+      } finally {
+
+        btnEntrar.disabled = false;
+        btnEntrar.textContent = "Entrar";
+
+      }
+
+    });
+
+
+    /* =====================================================
+       ESQUECI MINHA SENHA
+    ===================================================== */
+
+    esqueciSenha.addEventListener("click", async function () {
+
+      const usuario =
+        usuarioInput.value.trim();
+
+      if (!usuario) {
+
+        mostrarMensagem(
+          "Digite seu usuário primeiro."
+        );
+
+        usuarioInput.focus();
+
+        return;
+
+      }
+
+      const email =
+        obterEmail(usuario);
+
+      if (!email) {
+
+        mostrarMensagem(
+          "Usuário não encontrado."
+        );
+
+        return;
+
+      }
+
+      esqueciSenha.disabled = true;
+      esqueciSenha.textContent = "Enviando...";
+
+
+      try {
+
+        const { error } =
+          await supabaseClient.auth.resetPasswordForEmail(
+            email,
+            {
+              redirectTo:
+                window.location.origin +
+                "/login.html"
+            }
+          );
+
+
+        if (error) {
+
+          console.error(
+            "Erro recuperação:",
+            error
+          );
+
+          mostrarMensagem(
+            "Não foi possível enviar o e-mail de recuperação."
+          );
+
+          return;
+
+        }
+
+
+        mostrarMensagem(
+          "Se o usuário estiver cadastrado, as instruções para redefinir a senha serão enviadas para o e-mail cadastrado.",
+          "sucesso"
+        );
+
+
+      } catch (erro) {
+
+        console.error(
+          erro
+        );
+
+        mostrarMensagem(
+          "Ocorreu um erro ao solicitar a recuperação da senha."
+        );
+
+      } finally {
+
+        esqueciSenha.disabled = false;
+        esqueciSenha.textContent =
+          "Esqueci minha senha";
+
+      }
+
+    });
+
+
+    /* =====================================================
+       VERIFICAR SESSÃO EXISTENTE
+    ===================================================== */
+
+    async function verificarSessao() {
+
+      try {
+
+        const {
+          data: {
+            session
+          }
+        } = await supabaseClient.auth.getSession();
+
+
+        if (session) {
+
+          const {
+            data: perfil
+          } = await supabaseClient
+            .from("perfis")
+            .select("usuario, perfil")
+            .eq("id", session.user.id)
+            .single();
+
+
+          if (perfil) {
+
+            sessionStorage.setItem(
+              "portal_usuario",
+              perfil.usuario
+            );
+
+            sessionStorage.setItem(
+              "portal_perfil",
+              perfil.perfil
+            );
+
+            sessionStorage.setItem(
+              "portal_email",
+              session.user.email
+            );
+
+          }
+
+        }
+
+      } catch (erro) {
+
+        console.error(
+          "Erro ao verificar sessão:",
+          erro
+        );
+
+      }
+
+    }
+
+    verificarSessao();
+
+  </script>
+
+</body>
+
+</html>
