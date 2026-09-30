@@ -2,15 +2,19 @@
 <html lang="pt-BR">
 
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Alcans | Portal do Atendente</title>
 
 
     <style>
+
         /* =====================================================
            CONFIGURAÇÕES GERAIS
         ===================================================== */
@@ -25,22 +29,43 @@
         :root {
 
             /* =================================================
-               CORES
+               LARANJA DA IDENTIDADE VISUAL
             ================================================= */
 
-            --laranja: #FF5A00;
-            --laranja-hover: #FF6A1A;
+              --laranja: #FF5A00;
+    --laranja-hover: #FF6A1A;
 
-            --fundo: #111419;
-            --fundo-menu: #15181E;
 
-            --card: #191D24;
-            --card-hover: #20252D;
+            /* =================================================
+               FUNDOS
+            ================================================= */
 
-            --borda: #303640;
+               --fundo: #111419;
+    --fundo-menu: #15181E;
 
-            --texto: #F5F6F8;
-            --texto-secundario: #9BA3AE;
+
+
+            /* =================================================
+               CARDS
+            ================================================= */
+           --card: #191D24;
+           --card-hover: #20252D;
+
+
+            /* =================================================
+               BORDAS
+            ================================================= */
+
+            
+         --borda: #303640;
+
+
+            /* =================================================
+               TEXTOS
+            ================================================= */
+
+             --texto: #F5F6F8;
+    --texto-secundario: #9BA3AE;
 
         }
 
@@ -51,6 +76,7 @@
         ===================================================== */
 
         body {
+
             font-family:
                 Arial,
                 Helvetica,
@@ -321,7 +347,8 @@
                 translateX(0);
 
             box-shadow:
-                20px 0 50px rgba(0, 0, 0, 0.40);
+                20px 0 50px
+                rgba(0, 0, 0, 0.40);
 
         }
 
@@ -691,7 +718,7 @@
             border-radius: 10px;
 
             background:
-                rgba(255, 90, 0, 0.13);
+                rgba(255, 138, 51, 0.13);
 
             display: grid;
 
@@ -728,252 +755,6 @@
 
 
         /* =====================================================
-           SOBRE A ALCANS
-        ===================================================== */
-
-        .sobre-alcans {
-
-            margin-top: 50px;
-
-        }
-
-
-        .sobre-bloco {
-
-            background:
-                var(--card);
-
-            border:
-                1px solid var(--borda);
-
-            border-radius: 16px;
-
-            padding: 30px;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .sobre-kicker {
-
-            color:
-                var(--laranja);
-
-            font-size: 11px;
-
-            font-weight: bold;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .sobre-bloco h2 {
-
-            font-size: 25px;
-
-            letter-spacing: -0.5px;
-
-            margin-bottom: 14px;
-
-        }
-
-
-        .sobre-bloco h3 {
-
-            font-size: 20px;
-
-            margin-bottom: 14px;
-
-        }
-
-
-        .sobre-bloco p {
-
-            color:
-                var(--texto-secundario);
-
-            font-size: 14px;
-
-            line-height: 1.75;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .sobre-bloco p:last-child {
-
-            margin-bottom: 0;
-
-        }
-
-
-        .sobre-destaque {
-
-            color:
-                var(--texto) !important;
-
-            font-weight: 600;
-
-        }
-
-
-
-        /* =====================================================
-           CARDS DA HISTÓRIA
-        ===================================================== */
-
-        .historia-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 18px;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .historia-card {
-
-            background:
-                var(--card);
-
-            border:
-                1px solid var(--borda);
-
-            border-radius: 14px;
-
-            padding: 24px;
-
-            transition: 0.2s;
-
-        }
-
-
-        .historia-card:hover {
-
-            background:
-                var(--card-hover);
-
-            transform:
-                translateY(-2px);
-
-        }
-
-
-        .historia-card h3 {
-
-            font-size: 17px;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .historia-card p {
-
-            color:
-                var(--texto-secundario);
-
-            font-size: 13px;
-
-            line-height: 1.7;
-
-            margin-bottom: 0;
-
-        }
-
-
-
-        /* =====================================================
-           DESTAQUE FINAL DA HISTÓRIA
-        ===================================================== */
-
-        .alcans-final {
-
-            margin-top: 18px;
-
-            padding:
-                28px;
-
-            border-radius: 14px;
-
-            background:
-                linear-gradient(135deg,
-                    rgba(255, 90, 0, 0.13),
-                    rgba(255, 90, 0, 0.03));
-
-            border:
-                1px solid rgba(255, 90, 0, 0.28);
-
-        }
-
-
-        .alcans-final p {
-
-            color:
-                var(--texto);
-
-            font-size: 15px;
-
-            line-height: 1.7;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .alcans-final p:last-of-type {
-
-            margin-bottom: 0;
-
-        }
-
-
-        .alcans-valores {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 8px;
-
-            margin-top: 18px;
-
-        }
-
-
-        .valor {
-
-            padding:
-                8px 14px;
-
-            border-radius: 8px;
-
-            background:
-                var(--laranja);
-
-            color: white;
-
-            font-size: 12px;
-
-            font-weight: bold;
-
-        }
-
-
-
-        /* =====================================================
            AVISO
         ===================================================== */
 
@@ -982,9 +763,11 @@
             margin-top: 26px;
 
             background:
-                linear-gradient(135deg,
+                linear-gradient(
+                    135deg,
                     #191D24,
-                    #12151A);
+                    #12151A
+                );
 
             border:
                 1px solid var(--borda);
@@ -1115,787 +898,954 @@
 
             }
 
-
-            .historia-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .sobre-bloco {
-
-                padding: 22px;
-
-            }
-
-
-            .alcans-final {
-
-                padding: 22px;
-
-            }
-
         }
+
     </style>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        protegerPagina();
+    </script>
 
 </head>
 
 
-<body>
+<body style="visibility: hidden;">
 
 
 
-    <!-- =====================================================
+<!-- =====================================================
      BARRA SUPERIOR
 ===================================================== -->
 
-    <header class="topbar">
+<header class="topbar">
 
 
-        <!-- BOTÃO MENU -->
+    <!-- BOTÃO MENU -->
 
-        <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menu"
+    >
 
-            ☰
+        ☰
 
-        </button>
-
-
-
-        <!-- LOGO -->
-
-        <div class="logo">
-
-            <img src="logo-alcans.png" alt="Alcans">
-
-            <small>
-                PORTAL DO ATENDENTE
-            </small>
-
-        </div>
+    </button>
 
 
 
-        <!-- PESQUISA -->
+    <!-- LOGO -->
 
-        <div class="search">
+    <div class="logo">
 
-            🔎
+        <img
+            src="logo-alcans.png"
+            alt="Alcans"
+        >
 
-            <input type="text" id="searchInput" placeholder="Buscar no portal...">
+        <small>
+            PORTAL DO ATENDENTE
+        </small>
 
-        </div>
-
-
-
-        <!-- BOTÃO PERGUNTAR -->
-
-        <button class="ask-button" onclick="focarBusca()">
-
-            ✦ Perguntar
-
-        </button>
-
-
-    </header>
+    </div>
 
 
 
-    <!-- =====================================================
+    <!-- PESQUISA -->
+
+    <div class="search">
+
+        🔎
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar no portal..."
+        >
+
+    </div>
+
+
+
+    <!-- PERGUNTAR -->
+
+    <button
+        class="ask-button"
+        onclick="focarBusca()"
+    >
+
+        ✦ Perguntar
+
+    </button>
+
+
+</header>
+
+
+
+<!-- =====================================================
      MENU LATERAL
 ===================================================== -->
 
-    <aside class="sidebar" id="sidebar">
+<aside
+    class="sidebar"
+    id="sidebar"
+>
 
 
-        <div class="menu-title">
+    <div class="menu-title">
 
-            Portal do Atendente
+        Portal do Atendente
+
+    </div>
+
+
+
+    <!-- INÍCIO -->
+
+    <button
+        class="menu-item active"
+        onclick="abrirPagina('inicio', this)"
+    >
+
+        <span class="menu-icon">
+
+            🏠
+
+        </span>
+
+        Início
+
+    </button>
+
+
+
+    <!-- MULTAS -->
+
+    <button
+        class="menu-item"
+        onclick="abrirPagina('multas', this)"
+    >
+
+        <span class="menu-icon">
+
+            🧮
+
+        </span>
+
+        Calcular multas
+
+    </button>
+
+
+
+    <!-- PROCEDIMENTOS -->
+
+    <button
+        class="menu-item"
+        onclick="abrirPagina('procedimentos', this)"
+    >
+
+        <span class="menu-icon">
+
+            📚
+
+        </span>
+
+        Procedimentos
+
+    </button>
+
+
+
+    <!-- SISTEMAS -->
+
+    <button
+        class="menu-item"
+        onclick="abrirPagina('sistemas', this)"
+    >
+
+        <span class="menu-icon">
+
+            🖥️
+
+        </span>
+
+        Sistemas
+
+    </button>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     FUNDO DO MENU
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main id="conteudo">
+
+
+
+    <!-- =================================================
+         INÍCIO
+    ================================================= -->
+
+    <section class="hero">
+
+
+        <h1>
+
+            Alcans | Portal do Atendente
+
+        </h1>
+
+
+
+        <p class="description">
+
+            Sua central de apoio durante a operação.
+            Encontre rapidamente informações,
+            procedimentos, orientações e ferramentas
+            para conduzir seus atendimentos com mais
+            segurança e eficiência.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- DIVISOR -->
+
+    <div class="divider"></div>
+
+
+
+    <!-- =================================================
+         NOSSOS PILARES
+    ================================================= -->
+
+    <section class="pilares">
+
+
+        <div class="section-title">
+
+            Nossos Pilares
 
         </div>
 
 
 
-        <!-- INÍCIO -->
+        <div class="pilares-container">
 
-        <button class="menu-item active" onclick="abrirPagina('inicio', this)">
 
-            <span class="menu-icon">
+            <button class="pilar">
 
-                🏠
+                <span>1</span>
 
-            </span>
+                Tecnologia
 
-            Início
+            </button>
 
-        </button>
 
 
+            <button class="pilar">
 
-        <!-- CALCULAR MULTAS -->
+                <span>2</span>
 
-        <button class="menu-item" onclick="window.location.href='calculadora.html'">
+                Excelência
 
-            <span class="menu-icon">
+            </button>
 
-                $
 
-            </span>
 
-            Calcular multas
+            <button class="pilar">
 
-        </button>
+                <span>3</span>
 
+                Simplicidade
 
+            </button>
 
-        <!-- PROCEDIMENTOS -->
 
-        <button class="menu-item" onclick="window.location.href='procedimentos.html'">
 
-            <span class="menu-icon">
+            <button class="pilar">
 
-                %
+                <span>4</span>
 
-            </span>
+                Performance
 
-            Procedimentos
+            </button>
 
-        </button>
 
+        </div>
 
 
-        <!-- SISTEMAS -->
+    </section>
 
-        <button class="menu-item" onclick="window.location.href='sistemas.html'">
 
-            <span class="menu-icon">
 
-                #
-
-            </span>
-
-            Sistemas
-
-        </button>
-
-
-    </aside>
-
-
-
-    <!-- =====================================================
-     OVERLAY
-===================================================== -->
-
-    <div class="overlay" id="overlay"></div>
-
-
-
-    <!-- =====================================================
-     CONTEÚDO PRINCIPAL
-===================================================== -->
-
-    <main id="conteudo">
-
-
-
-        <!-- =================================================
-         APRESENTAÇÃO
-    ================================================= -->
-
-        <section class="hero">
-
-
-            <div class="kicker">
-
-                CENTRAL DE APOIO À OPERAÇÃO
-
-            </div>
-
-
-            <h1>
-
-                Alcans | Portal do Atendente
-
-            </h1>
-
-
-            <p class="description">
-
-                Sua central de apoio durante a operação.
-                Encontre rapidamente informações,
-                procedimentos, orientações e ferramentas
-                para conduzir seus atendimentos com mais
-                segurança e eficiência.
-
-            </p>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-         SOBRE A ALCANS
-    ================================================= -->
-
-        <section class="sobre-alcans">
-
-
-            <!-- O QUE É A ALCANS -->
-
-            <div class="sobre-bloco">
-
-
-                <div class="sobre-kicker">
-
-                    SOBRE A EMPRESA
-
-                </div>
-
-
-                <h2>
-
-                    O que é a Alcans?
-
-                </h2>
-
-
-                <p class="sobre-destaque">
-
-                    A Alcans é uma empresa de telecomunicações
-                    que nasceu com o propósito de conectar
-                    pessoas, empresas e comunidades, levando
-                    tecnologia, qualidade e proximidade para
-                    cada lugar onde está presente.
-
-                </p>
-
-
-                <p>
-
-                    Hoje, a Alcans oferece soluções de internet,
-                    telefonia, conectividade e entretenimento,
-                    contando com infraestrutura própria e uma
-                    operação construída para entregar uma
-                    experiência cada vez melhor aos seus clientes.
-
-                </p>
-
-
-            </div>
-
-
-
-            <!-- NOSSA HISTÓRIA -->
-
-            <div class="sobre-bloco">
-
-
-                <div class="sobre-kicker">
-
-                    NOSSA HISTÓRIA
-
-                </div>
-
-
-                <h2>
-
-                    Uma história construída por pessoas
-
-                </h2>
-
-
-                <p>
-
-                    Tudo começou a partir de uma necessidade
-                    simples: levar uma conexão de internet de
-                    qualidade até a empresa de sementes da
-                    família do fundador,
-                    <strong>Fernando Noronha</strong>.
-
-                    Na época, a solução encontrada foi a
-                    utilização de uma conexão via rádio.
-
-                </p>
-
-
-                <p>
-
-                    O que começou como uma solução para uma
-                    necessidade da família rapidamente despertou
-                    o interesse de outras pessoas da região.
-                    Moradores de cidades próximas passaram a
-                    procurar pelo serviço, e aquela pequena
-                    operação começou a crescer.
-
-                </p>
-
-
-                <p>
-
-                    A partir daí, nasceu uma visão que acompanha
-                    a Alcans até hoje:
-
-                    <strong>
-                        levar conexão de qualidade para cada
-                        vez mais pessoas, com proximidade,
-                        tecnologia e excelência.
-                    </strong>
-
-                </p>
-
-
-            </div>
-
-
-
-            <!-- MARCOS DA HISTÓRIA -->
-
-            <div class="historia-grid">
-
-
-                <!-- 2014 -->
-
-                <div class="historia-card">
-
-
-                    <h3>
-
-                        2014 · Fibra óptica
-
-                    </h3>
-
-
-                    <p>
-
-                        Em <strong>2014</strong>, a empresa deu
-                        um dos grandes passos de sua trajetória
-                        e passou a operar com uma rede
-                        <strong>100% em fibra óptica</strong>,
-                        permitindo oferecer conexões de alta
-                        velocidade com maior qualidade e
-                        estabilidade.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- EXPANSÃO -->
-
-                <div class="historia-card">
-
-
-                    <h3>
-
-                        Expansão
-
-                    </h3>
-
-
-                    <p>
-
-                        Com o passar dos anos, a Alcans deixou
-                        de ser uma pequena operação regional e
-                        se transformou em uma empresa de
-                        telecomunicações com presença em
-                        <strong>mais de 110 cidades</strong> do
-                        interior de São Paulo e do Sul de Minas
-                        Gerais.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- COLABORADORES -->
-
-                <div class="historia-card">
-
-
-                    <h3>
-
-                        Mais de 550 colaboradores
-
-                    </h3>
-
-
-                    <p>
-
-                        Hoje, a empresa conta com
-                        <strong>mais de 550 colaboradores</strong>,
-                        centenas de veículos, centenas de pontos
-                        de presença e uma extensa infraestrutura
-                        própria de fibra óptica.
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- ESTRUTURA -->
-
-                <div class="historia-card">
-
-
-                    <h3>
-
-                        Estrutura própria
-
-                    </h3>
-
-
-                    <p>
-
-                        A Alcans mantém equipes e estruturas
-                        próprias de engenharia, tecnologia,
-                        construção, atendimento e suporte,
-                        permitindo acompanhar internamente
-                        grande parte da jornada de conexão
-                        do cliente.
-
-                    </p>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- PROPÓSITO -->
-
-            <div class="alcans-final">
-
-
-                <p>
-
-                    Mas a história da Alcans não é feita apenas
-                    de números.
-
-                    É uma história construída por pessoas.
-                    Pessoas que começaram com uma necessidade,
-                    enxergaram uma oportunidade e transformaram
-                    uma pequena conexão via rádio em uma empresa
-                    que hoje conecta famílias, empresas e
-                    comunidades.
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Porque conectar vai muito além de oferecer
-                        internet.
-                    </strong>
-
-                    É aproximar pessoas, abrir possibilidades
-                    e contribuir para o desenvolvimento de onde
-                    estamos presentes.
-
-                </p>
-                <br>
-                <div class="section-title">
-
-                    Nossos Pilares
-
-                </div>
-
-                <div class="alcans-valores">
-
-
-                    <div class="valor">
-
-                        Tecnologia
-
-                    </div>
-
-
-                    <div class="valor">
-
-                        Excelência
-
-                    </div>
-
-
-                    <div class="valor">
-
-                        Simplicidade
-
-                    </div>
-
-                    <div class="valor">
-
-                        Performance
-
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-         DIVISOR
-    ================================================= -->
-
-        <div class="divider"></div>
-
-
-
-
-
-        <!-- =================================================
+    <!-- =================================================
          INFORMAÇÕES PRINCIPAIS
     ================================================= -->
 
-        <section class="informacoes">
+    <section class="informacoes">
 
 
-            <div class="section-title">
+        <div class="section-title">
 
-                Informações principais
-
-            </div>
-
-
-            <div class="cards">
-
-
-                <!-- PROCEDIMENTOS -->
-
-                <article class="card" onclick="window.location.href='procedimentos.html'" style="cursor:pointer;">
-
-
-                    <div class="card-icon">
-
-                        %
-
-                    </div>
-
-
-                    <h3>
-
-                        Procedimentos
-
-                    </h3>
-
-
-                    <p>
-
-                        Consulte os procedimentos
-                        documentados da operação e
-                        encontre rapidamente o passo
-                        a passo necessário para cada
-                        atendimento.
-
-                    </p>
-
-
-                </article>
-
-
-
-                <!-- MULTAS -->
-
-                <article class="card" onclick="window.location.href='calculadora.html'" style="cursor:pointer;">
-
-
-                    <div class="card-icon">
-
-                        $
-
-                    </div>
-
-
-                    <h3>
-
-                        Calcular multas
-
-                    </h3>
-
-
-                    <p>
-
-                        Acesse a calculadora de multas
-                        já existente. Esta ferramenta
-                        será integrada ao novo portal.
-
-                    </p>
-
-
-                </article>
-
-
-
-                <!-- SISTEMAS -->
-
-                <article class="card" onclick="window.location.href='sistemas.html'" style="cursor:pointer;">
-
-
-                    <div class="card-icon">
-
-                        #
-
-                    </div>
-
-
-                    <h3>
-
-                        Sistemas
-
-                    </h3>
-
-
-                    <p>
-
-                        Encontre em um só lugar todos
-                        os sistemas utilizados pela
-                        equipe.
-
-                    </p>
-
-
-                </article>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-         RODAPÉ
-    ================================================= -->
-
-        <div class="footer">
-
-            Alcans · Portal interno do Atendente
+            Informações principais
 
         </div>
 
 
-    </main>
+
+        <div class="cards">
+
+
+            <!-- PROCEDIMENTOS -->
+
+            <article class="card">
+
+
+                <div class="card-icon">
+
+                    %
+
+                </div>
 
 
 
-    <!-- =====================================================
+                <h3>
+
+                    Procedimentos
+
+                </h3>
+
+
+
+                <p>
+
+                    Consulte os procedimentos
+                    documentados da operação e
+                    encontre rapidamente o passo
+                    a passo necessário para cada
+                    atendimento.
+
+                </p>
+
+
+            </article>
+
+
+
+            <!-- MULTAS -->
+
+            <article class="card">
+
+
+                <div class="card-icon">
+
+                    $
+
+                </div>
+
+
+
+                <h3>
+
+                    Calcular multas
+
+                </h3>
+
+
+
+                <p>
+
+                    Acesse a calculadora de multas
+                    já existente. Esta ferramenta
+                    será integrada ao novo portal.
+
+                </p>
+
+
+            </article>
+
+
+
+            <!-- SISTEMAS -->
+
+            <article class="card">
+
+
+                <div class="card-icon">
+
+                    #
+
+                </div>
+
+
+
+                <h3>
+
+                    Sistemas
+
+                </h3>
+
+
+
+                <p>
+
+                    Encontre em um só lugar todos
+                    os sistemas utilizados pela
+                    equipe.
+
+                </p>
+
+
+            </article>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         RODAPÉ
+    ================================================= -->
+
+    <div class="footer">
+
+        Alcans · Portal interno do Atendente
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
-    <script>
+<script>
 
 
-        /* =====================================================
-           ELEMENTOS
-        ===================================================== */
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
 
-        const menuButton =
-            document.getElementById("menuButton");
-
-
-        const sidebar =
-            document.getElementById("sidebar");
+    const menuButton =
+        document.getElementById("menuButton");
 
 
-        const overlay =
-            document.getElementById("overlay");
+    const sidebar =
+        document.getElementById("sidebar");
 
 
-
-        /* =====================================================
-           ABRIR / FECHAR MENU
-        ===================================================== */
-
-        menuButton.addEventListener(
-            "click",
-            function () {
-
-                sidebar.classList.toggle("open");
-
-                overlay.classList.toggle("active");
-
-            }
-        );
+    const overlay =
+        document.getElementById("overlay");
 
 
 
-        /* =====================================================
-           FECHAR MENU CLICANDO FORA
-        ===================================================== */
+    /* =====================================================
+       ABRIR / FECHAR MENU
+    ===================================================== */
 
-        overlay.addEventListener(
-            "click",
-            function () {
+    menuButton.addEventListener(
+        "click",
+        function() {
 
-                sidebar.classList.remove("open");
+            sidebar.classList.toggle("open");
 
-                overlay.classList.remove("active");
+            overlay.classList.toggle("active");
 
-            }
-        );
+        }
+    );
 
 
 
-        /* =====================================================
-           PESQUISA
-        ===================================================== */
+    /* =====================================================
+       FECHAR MENU CLICANDO FORA
+    ===================================================== */
 
-        function focarBusca() {
+    overlay.addEventListener(
+        "click",
+        function() {
 
-            document
-                .getElementById("searchInput")
-                .focus();
+            sidebar.classList.remove("open");
+
+            overlay.classList.remove("active");
+
+        }
+    );
+
+
+
+    /* =====================================================
+       PESQUISA
+    ===================================================== */
+
+    function focarBusca() {
+
+        document
+            .getElementById("searchInput")
+            .focus();
+
+    }
+
+
+
+    /* =====================================================
+       ABRIR PÁGINAS
+    ===================================================== */
+
+    function abrirPagina(pagina, botao) {
+
+
+        /* -----------------------------------------------
+           REMOVE SELEÇÃO DOS BOTÕES
+        ----------------------------------------------- */
+
+        document
+            .querySelectorAll(".menu-item")
+            .forEach(function(item) {
+
+                item.classList.remove("active");
+
+            });
+
+
+
+        /* -----------------------------------------------
+           ATIVA BOTÃO ATUAL
+        ----------------------------------------------- */
+
+        botao.classList.add("active");
+
+
+
+        /* -----------------------------------------------
+           FECHA MENU
+        ----------------------------------------------- */
+
+        sidebar.classList.remove("open");
+
+        overlay.classList.remove("active");
+
+
+
+        /* -----------------------------------------------
+           CONTEÚDO
+        ----------------------------------------------- */
+
+        const conteudo =
+            document.getElementById("conteudo");
+
+
+
+        /* =================================================
+           INÍCIO
+        ================================================= */
+
+        if (pagina === "inicio") {
+
+            location.reload();
 
         }
 
 
 
-        /* =====================================================
-           ABRIR PÁGINAS
-        ===================================================== */
+        /* =================================================
+           CALCULAR MULTAS
+        ================================================= */
 
-        /* =====================================================
-           CTRL + K
-        ===================================================== */
+        else if (pagina === "multas") {
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
 
-                if (
-                    (event.ctrlKey || event.metaKey) &&
-                    event.key.toLowerCase() === "k"
-                ) {
+            conteudo.innerHTML = `
 
-                    event.preventDefault();
+                <section class="hero">
 
-                    focarBusca();
+                    <div class="kicker">
 
-                }
+                        FERRAMENTA
+
+                    </div>
+
+
+                    <h1>
+
+                        Calcular multas
+
+                    </h1>
+
+
+                    <p class="description">
+
+                        A calculadora de multas
+                        será integrada aqui.
+
+                        Vamos utilizar a calculadora
+                        que você já possui, sem precisar
+                        recriar toda a lógica.
+
+                    </p>
+
+                </section>
+
+
+
+                <div class="divider"></div>
+
+
+
+                <div class="notice">
+
+                    <div class="notice-icon">
+
+                        🧮
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            Calculadora de multas
+
+                        </strong>
+
+
+                        <span>
+
+                            Área preparada para receber
+                            sua calculadora atual.
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        /* =================================================
+           PROCEDIMENTOS
+        ================================================= */
+
+        else if (pagina === "procedimentos") {
+
+
+            conteudo.innerHTML = `
+
+                <section class="hero">
+
+                    <div class="kicker">
+
+                        BASE DE CONHECIMENTO
+
+                    </div>
+
+
+                    <h1>
+
+                        Procedimentos
+
+                    </h1>
+
+
+                    <p class="description">
+
+                        Aqui ficará toda a documentação
+                        dos procedimentos utilizados
+                        pela equipe de atendimento.
+
+                    </p>
+
+                </section>
+
+
+
+                <div class="divider"></div>
+
+
+
+                <div class="cards">
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            📡
+
+                        </div>
+
+
+                        <h3>
+
+                            Suporte técnico
+
+                        </h3>
+
+
+                        <p>
+
+                            Procedimentos relacionados
+                            à conexão e equipamentos.
+
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            👤
+
+                        </div>
+
+
+                        <h3>
+
+                            Atendimento
+
+                        </h3>
+
+
+                        <p>
+
+                            Orientações e procedimentos
+                            para atendimento ao cliente.
+
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            💳
+
+                        </div>
+
+
+                        <h3>
+
+                            Financeiro
+
+                        </h3>
+
+
+                        <p>
+
+                            Procedimentos relacionados
+                            a faturas, pagamentos e planos.
+
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        /* =================================================
+           SISTEMAS
+        ================================================= */
+
+        else if (pagina === "sistemas") {
+
+
+            conteudo.innerHTML = `
+
+                <section class="hero">
+
+                    <div class="kicker">
+
+                        FERRAMENTAS DA OPERAÇÃO
+
+                    </div>
+
+
+                    <h1>
+
+                        Sistemas
+
+                    </h1>
+
+
+                    <p class="description">
+
+                        Aqui serão cadastrados todos
+                        os sistemas utilizados pela equipe.
+
+                    </p>
+
+                </section>
+
+
+
+                <div class="divider"></div>
+
+
+
+                <div class="cards">
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            🖥️
+
+                        </div>
+
+
+                        <h3>
+
+                            Sistema 01
+
+                        </h3>
+
+
+                        <p>
+
+                            Descrição do sistema.
+
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            🖥️
+
+                        </div>
+
+
+                        <h3>
+
+                            Sistema 02
+
+                        </h3>
+
+
+                        <p>
+
+                            Descrição do sistema.
+
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="card">
+
+                        <div class="card-icon">
+
+                            🖥️
+
+                        </div>
+
+
+                        <h3>
+
+                            Sistema 03
+
+                        </h3>
+
+
+                        <p>
+
+                            Descrição do sistema.
+
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       CTRL + K
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                event.key.toLowerCase() === "k"
+            ) {
+
+                event.preventDefault();
+
+                focarBusca();
 
             }
-        );
+
+        }
+    );
 
 
-    </script>
-
+</script>
 
 
 </body>
