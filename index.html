@@ -13,20 +13,146 @@
     <title>Alcans | Portal do Atendente</title>
 
 
-    <style>
-
-        /* TODO O SEU CSS CONTINUA EXATAMENTE IGUAL */
-
-    </style>
-
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="auth.js"></script>
-
-</head>
 
 
-<body> {
+    <!-- =====================================================
+         AUTENTICAÇÃO
+    ====================================================== -->
+
+    <script>
+
+        const CENTRALSAC_SUPABASE_URL =
+            "https://adjrbgwnvagdqbqzfgwf.supabase.co";
+
+        const CENTRALSAC_SUPABASE_KEY =
+            "sb_publishable_YFkBbmCNye3C74aJuu7BcA_zmvSdRnT";
+
+
+        const centralSACAuthClient =
+            window.supabase.createClient(
+                CENTRALSAC_SUPABASE_URL,
+                CENTRALSAC_SUPABASE_KEY
+            );
+
+
+        /*
+         * Verifica se existe usuário logado.
+         *
+         * Se não existir sessão,
+         * envia imediatamente para o login.
+         */
+
+        async function verificarAcesso() {
+
+            try {
+
+                const resposta =
+                    await centralSACAuthClient.auth.getSession();
+
+
+                const session =
+                    resposta?.data?.session;
+
+
+                const error =
+                    resposta?.error;
+
+
+                if (error) {
+
+                    console.error(
+                        "Erro ao verificar sessão:",
+                        error
+                    );
+
+                    window.location.replace("login.html");
+
+                    return;
+
+                }
+
+
+                if (!session) {
+
+                    window.location.replace("login.html");
+
+                    return;
+
+                }
+
+
+                /*
+                 * Usuário autenticado.
+                 * Mantém a página normalmente.
+                 */
+
+                console.log(
+                    "CentralSAC: usuário autenticado."
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro inesperado na autenticação:",
+                    erro
+                );
+
+                window.location.replace("login.html");
+
+            }
+
+        }
+
+
+        verificarAcesso();
+
+    </script>
+
+
+    <style>
+
+        /* =====================================================
+           CONFIGURAÇÕES GERAIS
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --laranja: #FF5A00;
+            --laranja-hover: #FF6A1A;
+
+            --fundo: #111419;
+            --fundo-menu: #15181E;
+
+            --card: #191D24;
+            --card-hover: #20252D;
+
+            --borda: #303640;
+
+            --texto: #F5F6F8;
+            --texto-secundario: #9BA3AE;
+
+        }
+
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body {
 
             font-family:
                 Arial,
@@ -515,7 +641,7 @@
 
 
         /* =====================================================
-           TÍTULOS DAS SEÇÕES
+           TÍTULOS
         ===================================================== */
 
         .section-title {
@@ -655,6 +781,13 @@
         }
 
 
+        .card.clickable {
+
+            cursor: pointer;
+
+        }
+
+
 
         /* =====================================================
            ÍCONE DO CARD
@@ -669,7 +802,7 @@
             border-radius: 10px;
 
             background:
-                rgba(255, 138, 51, 0.13);
+                rgba(255, 90, 0, 0.13);
 
             display: grid;
 
@@ -853,18 +986,10 @@
 
     </style>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="auth.js"></script>
-    <script>
-        protegerPagina();
-    </script>
-
 </head>
 
 
-<body style="visibility: hidden;">
-
+<body>
 
 
 <!-- =====================================================
@@ -959,7 +1084,7 @@
 
     <button
         class="menu-item active"
-        onclick="abrirPagina('inicio', this)"
+        onclick="window.location.href='index.html'"
     >
 
         <span class="menu-icon">
@@ -974,16 +1099,16 @@
 
 
 
-    <!-- MULTAS -->
+    <!-- CALCULAR MULTAS -->
 
     <button
         class="menu-item"
-        onclick="abrirPagina('multas', this)"
+        onclick="window.location.href='calculadora.html'"
     >
 
         <span class="menu-icon">
 
-            🧮
+            $
 
         </span>
 
@@ -997,12 +1122,12 @@
 
     <button
         class="menu-item"
-        onclick="abrirPagina('procedimentos', this)"
+        onclick="window.location.href='procedimentos.html'"
     >
 
         <span class="menu-icon">
 
-            📚
+            %
 
         </span>
 
@@ -1016,12 +1141,12 @@
 
     <button
         class="menu-item"
-        onclick="abrirPagina('sistemas', this)"
+        onclick="window.location.href='sistemas.html'"
     >
 
         <span class="menu-icon">
 
-            🖥️
+            #
 
         </span>
 
@@ -1046,7 +1171,7 @@
 
 
 <!-- =====================================================
-     CONTEÚDO
+     CONTEÚDO PRINCIPAL
 ===================================================== -->
 
 <main id="conteudo">
@@ -1173,7 +1298,10 @@
 
             <!-- PROCEDIMENTOS -->
 
-            <article class="card">
+            <article
+                class="card clickable"
+                onclick="window.location.href='procedimentos.html'"
+            >
 
 
                 <div class="card-icon">
@@ -1209,7 +1337,10 @@
 
             <!-- MULTAS -->
 
-            <article class="card">
+            <article
+                class="card clickable"
+                onclick="window.location.href='calculadora.html'"
+            >
 
 
                 <div class="card-icon">
@@ -1231,8 +1362,9 @@
                 <p>
 
                     Acesse a calculadora de multas
-                    já existente. Esta ferramenta
-                    será integrada ao novo portal.
+                    já existente e utilize as
+                    ferramentas disponíveis para
+                    realizar os cálculos.
 
                 </p>
 
@@ -1243,7 +1375,10 @@
 
             <!-- SISTEMAS -->
 
-            <article class="card">
+            <article
+                class="card clickable"
+                onclick="window.location.href='sistemas.html'"
+            >
 
 
                 <div class="card-icon">
@@ -1278,10 +1413,6 @@
 
 
     </section>
-
-
-
-    </div>
 
 
 
@@ -1367,407 +1498,6 @@
         document
             .getElementById("searchInput")
             .focus();
-
-    }
-
-
-
-    /* =====================================================
-       ABRIR PÁGINAS
-    ===================================================== */
-
-    function abrirPagina(pagina, botao) {
-
-
-        /* -----------------------------------------------
-           REMOVE SELEÇÃO DOS BOTÕES
-        ----------------------------------------------- */
-
-        document
-            .querySelectorAll(".menu-item")
-            .forEach(function(item) {
-
-                item.classList.remove("active");
-
-            });
-
-
-
-        /* -----------------------------------------------
-           ATIVA BOTÃO ATUAL
-        ----------------------------------------------- */
-
-        botao.classList.add("active");
-
-
-
-        /* -----------------------------------------------
-           FECHA MENU
-        ----------------------------------------------- */
-
-        sidebar.classList.remove("open");
-
-        overlay.classList.remove("active");
-
-
-
-        /* -----------------------------------------------
-           CONTEÚDO
-        ----------------------------------------------- */
-
-        const conteudo =
-            document.getElementById("conteudo");
-
-
-
-        /* =================================================
-           INÍCIO
-        ================================================= */
-
-        if (pagina === "inicio") {
-
-            location.reload();
-
-        }
-
-
-
-        /* =================================================
-           CALCULAR MULTAS
-        ================================================= */
-
-        else if (pagina === "multas") {
-
-
-            conteudo.innerHTML = `
-
-                <section class="hero">
-
-                    <div class="kicker">
-
-                        FERRAMENTA
-
-                    </div>
-
-
-                    <h1>
-
-                        Calcular multas
-
-                    </h1>
-
-
-                    <p class="description">
-
-                        A calculadora de multas
-                        será integrada aqui.
-
-                        Vamos utilizar a calculadora
-                        que você já possui, sem precisar
-                        recriar toda a lógica.
-
-                    </p>
-
-                </section>
-
-
-
-                <div class="divider"></div>
-
-
-
-                <div class="notice">
-
-                    <div class="notice-icon">
-
-                        🧮
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-
-                            Calculadora de multas
-
-                        </strong>
-
-
-                        <span>
-
-                            Área preparada para receber
-                            sua calculadora atual.
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-
-
-
-        /* =================================================
-           PROCEDIMENTOS
-        ================================================= */
-
-        else if (pagina === "procedimentos") {
-
-
-            conteudo.innerHTML = `
-
-                <section class="hero">
-
-                    <div class="kicker">
-
-                        BASE DE CONHECIMENTO
-
-                    </div>
-
-
-                    <h1>
-
-                        Procedimentos
-
-                    </h1>
-
-
-                    <p class="description">
-
-                        Aqui ficará toda a documentação
-                        dos procedimentos utilizados
-                        pela equipe de atendimento.
-
-                    </p>
-
-                </section>
-
-
-
-                <div class="divider"></div>
-
-
-
-                <div class="cards">
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            📡
-
-                        </div>
-
-
-                        <h3>
-
-                            Suporte técnico
-
-                        </h3>
-
-
-                        <p>
-
-                            Procedimentos relacionados
-                            à conexão e equipamentos.
-
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            👤
-
-                        </div>
-
-
-                        <h3>
-
-                            Atendimento
-
-                        </h3>
-
-
-                        <p>
-
-                            Orientações e procedimentos
-                            para atendimento ao cliente.
-
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            💳
-
-                        </div>
-
-
-                        <h3>
-
-                            Financeiro
-
-                        </h3>
-
-
-                        <p>
-
-                            Procedimentos relacionados
-                            a faturas, pagamentos e planos.
-
-                        </p>
-
-                    </article>
-
-
-                </div>
-
-            `;
-
-        }
-
-
-
-        /* =================================================
-           SISTEMAS
-        ================================================= */
-
-        else if (pagina === "sistemas") {
-
-
-            conteudo.innerHTML = `
-
-                <section class="hero">
-
-                    <div class="kicker">
-
-                        FERRAMENTAS DA OPERAÇÃO
-
-                    </div>
-
-
-                    <h1>
-
-                        Sistemas
-
-                    </h1>
-
-
-                    <p class="description">
-
-                        Aqui serão cadastrados todos
-                        os sistemas utilizados pela equipe.
-
-                    </p>
-
-                </section>
-
-
-
-                <div class="divider"></div>
-
-
-
-                <div class="cards">
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            🖥️
-
-                        </div>
-
-
-                        <h3>
-
-                            Sistema 01
-
-                        </h3>
-
-
-                        <p>
-
-                            Descrição do sistema.
-
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            🖥️
-
-                        </div>
-
-
-                        <h3>
-
-                            Sistema 02
-
-                        </h3>
-
-
-                        <p>
-
-                            Descrição do sistema.
-
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-
-                            🖥️
-
-                        </div>
-
-
-                        <h3>
-
-                            Sistema 03
-
-                        </h3>
-
-
-                        <p>
-
-                            Descrição do sistema.
-
-                        </p>
-
-                    </article>
-
-
-                </div>
-
-            `;
-
-        }
 
     }
 
