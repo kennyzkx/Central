@@ -1,0 +1,3118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Alcans | Procedimentos</title>
+
+
+  <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <style>
+    /* =====================================================
+           RESET
+        ====================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+           CORES
+        ====================================================== */
+
+    :root {
+
+      --laranja: #FF5A00;
+      --laranja-hover: #FF6A1A;
+
+      --fundo: #111419;
+      --fundo-menu: #15181E;
+
+      --card: #191D24;
+      --card-hover: #20252D;
+
+      --borda: #303640;
+
+      --texto: #F5F6F8;
+      --texto-secundario: #9BA3AE;
+
+      --erro: #ef4444;
+
+    }
+
+
+    /* =====================================================
+           BODY
+        ====================================================== */
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background: var(--fundo);
+
+      color: var(--texto);
+
+      min-height: 100vh;
+
+    }
+
+
+    /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+    .topbar {
+
+      height: 66px;
+
+      background: var(--laranja);
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 0 24px;
+
+      gap: 16px;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+    }
+
+
+    /* =====================================================
+           BOTÃO MENU
+        ====================================================== */
+
+    .menu-button {
+
+      width: 42px;
+
+      height: 42px;
+
+      border: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-size: 27px;
+
+      line-height: 1;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      border-radius: 8px;
+
+      transition: .2s;
+
+    }
+
+
+    .menu-button:hover {
+
+      background:
+        rgba(255, 255, 255, .10);
+
+    }
+
+
+    /* =====================================================
+           LOGO
+        ====================================================== */
+
+    .logo {
+
+      width: 185px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+    }
+
+
+    .logo img {
+
+      width: 112px;
+
+      height: auto;
+
+      display: block;
+
+    }
+
+
+    .logo small {
+
+      display: block;
+
+      font-size: 8px;
+
+      letter-spacing: .7px;
+
+      color:
+        rgba(255, 255, 255, .82);
+
+      margin-top: 2px;
+
+    }
+
+
+    /* =====================================================
+           TÍTULO DO TOPO
+        ====================================================== */
+
+    .header-title {
+
+      margin-left: auto;
+
+      color:
+        rgba(255, 255, 255, .90);
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      letter-spacing: .7px;
+
+    }
+
+
+    /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+    .sidebar {
+
+      position: fixed;
+
+      top: 66px;
+
+      left: 0;
+
+      bottom: 0;
+
+      width: 280px;
+
+      background: var(--fundo-menu);
+
+      border-right:
+        1px solid var(--borda);
+
+      padding: 22px 14px;
+
+      transform:
+        translateX(-100%);
+
+      transition:
+        .25s ease;
+
+      z-index: 900;
+
+      overflow-y: auto;
+
+    }
+
+
+    .sidebar.open {
+
+      transform:
+        translateX(0);
+
+      box-shadow:
+        20px 0 50px rgba(0, 0, 0, .40);
+
+    }
+
+
+    .menu-title {
+
+      font-size: 11px;
+
+      color: #737B87;
+
+      text-transform: uppercase;
+
+      margin:
+        5px 12px 12px;
+
+      font-weight: bold;
+
+    }
+
+
+    .menu-item {
+
+      width: 100%;
+
+      border: none;
+
+      background: transparent;
+
+      color: #CBD0D8;
+
+      text-align: left;
+
+      padding: 13px 12px;
+
+      border-radius: 9px;
+
+      margin: 3px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+      transition: .2s;
+
+    }
+
+
+    .menu-item:hover {
+
+      background:
+        var(--card-hover);
+
+      color: white;
+
+    }
+
+
+    .menu-item.active {
+
+      background:
+        var(--card-hover);
+
+      color: white;
+
+      box-shadow:
+        inset 3px 0 0 var(--laranja);
+
+    }
+
+
+    .menu-icon {
+
+      width: 22px;
+
+      text-align: center;
+
+      color: var(--laranja);
+
+      font-size: 17px;
+
+    }
+
+
+    /* =====================================================
+           OVERLAY
+        ====================================================== */
+
+    .overlay {
+
+      position: fixed;
+
+      inset: 66px 0 0;
+
+      background:
+        rgba(0, 0, 0, .55);
+
+      display: none;
+
+      z-index: 800;
+
+    }
+
+
+    .overlay.active {
+
+      display: block;
+
+    }
+
+
+    /* =====================================================
+           CONTEÚDO
+        ====================================================== */
+
+    main {
+
+      max-width: 1080px;
+
+      margin: auto;
+
+      padding:
+        40px 28px 80px;
+
+    }
+
+
+    .kicker {
+
+      color:
+        var(--laranja);
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      letter-spacing: .8px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    h1 {
+
+      font-size: 39px;
+
+      letter-spacing: -1.4px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .description {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 16px;
+
+      line-height: 1.65;
+
+      max-width: 750px;
+
+    }
+
+
+    /* =====================================================
+           BARRA DE PESQUISA
+        ====================================================== */
+
+    .toolbar {
+
+      display: flex;
+
+      gap: 12px;
+
+      align-items: center;
+
+      margin-top: 30px;
+
+    }
+
+
+    .search-box {
+
+      flex: 1;
+
+      height: 46px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding:
+        0 15px;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 10px;
+
+    }
+
+
+    .search-box span {
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .search-box input {
+
+      width: 100%;
+
+      height: 100%;
+
+      border: none;
+
+      outline: none;
+
+      background: transparent;
+
+      color: var(--texto);
+
+      font-size: 14px;
+
+    }
+
+
+    .search-box input::placeholder {
+
+      color:
+        #68717D;
+
+    }
+
+
+    /* =====================================================
+           BOTÕES
+        ====================================================== */
+
+    .btn {
+
+      height: 46px;
+
+      padding:
+        0 18px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      transition: .2s;
+
+    }
+
+
+    .btn-primary {
+
+      background:
+        var(--laranja);
+
+      color: white;
+
+    }
+
+
+    .btn-primary:hover {
+
+      background:
+        var(--laranja-hover);
+
+    }
+
+
+    .btn-secondary {
+
+      background:
+        #252A32;
+
+      color:
+        #DDE1E7;
+
+      border:
+        1px solid var(--borda);
+
+    }
+
+
+    .btn-secondary:hover {
+
+      background:
+        #2C323B;
+
+    }
+
+
+    .btn-danger {
+
+      background:
+        rgba(239, 68, 68, .12);
+
+      color:
+        #ff7777;
+
+      border:
+        1px solid rgba(239, 68, 68, .25);
+
+    }
+
+
+    .btn-copy {
+
+      background:
+        rgba(255, 90, 0, .12);
+
+      color:
+        var(--laranja);
+
+      border:
+        1px solid rgba(255, 90, 0, .25);
+
+    }
+
+
+    /* =====================================================
+           FILTROS
+        ====================================================== */
+
+    .filters {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 18px;
+
+    }
+
+
+    .filter {
+
+      border:
+        1px solid var(--borda);
+
+      background:
+        var(--card);
+
+      color:
+        var(--texto-secundario);
+
+      padding:
+        8px 13px;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+    }
+
+
+    .filter:hover {
+
+      color: white;
+
+      border-color:
+        var(--laranja);
+
+    }
+
+
+    .filter.active {
+
+      background:
+        var(--laranja);
+
+      border-color:
+        var(--laranja);
+
+      color: white;
+
+    }
+
+
+    /* =====================================================
+           DIVISOR
+        ====================================================== */
+
+    .divider {
+
+      height: 1px;
+
+      background:
+        var(--borda);
+
+      margin:
+        30px 0 25px;
+
+    }
+
+
+    /* =====================================================
+           CABEÇALHO DOS RESULTADOS
+        ====================================================== */
+
+    .results-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .results-count {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 13px;
+
+    }
+
+
+    /* =====================================================
+           GRID
+        ====================================================== */
+
+    .procedimentos-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 14px;
+
+    }
+
+
+    /* =====================================================
+           CARD PROCEDIMENTO
+        ====================================================== */
+
+    .procedimento-card {
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 14px;
+
+      padding: 20px;
+
+      transition: .2s;
+
+      display: flex;
+
+      flex-direction: column;
+
+      min-height: 220px;
+
+    }
+
+
+    .procedimento-card:hover {
+
+      background:
+        var(--card-hover);
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        #414852;
+
+    }
+
+
+    .procedimento-icon {
+
+      width: 42px;
+
+      height: 42px;
+
+      border-radius: 10px;
+
+      display: grid;
+
+      place-items: center;
+
+      background:
+        rgba(255, 90, 0, .12);
+
+      color:
+        var(--laranja);
+
+      font-size: 20px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .procedimento-titulo {
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      margin-bottom: 7px;
+
+    }
+
+
+    .procedimento-categoria {
+
+      display: inline-flex;
+
+      align-self: flex-start;
+
+      padding:
+        5px 8px;
+
+      border-radius: 6px;
+
+      background:
+        rgba(255, 90, 0, .10);
+
+      color:
+        var(--laranja);
+
+      font-size: 10px;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      letter-spacing: .4px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .procedimento-descricao {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 13px;
+
+      line-height: 1.55;
+
+    }
+
+
+    .card-footer {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 8px;
+
+      margin-top: auto;
+
+      padding-top: 18px;
+
+    }
+
+
+    .card-link {
+
+      border: none;
+
+      background: transparent;
+
+      color:
+        var(--laranja);
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      padding: 0;
+
+    }
+
+
+    .card-actions {
+
+      display: flex;
+
+      gap: 6px;
+
+    }
+
+
+    .mini-btn {
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 7px;
+
+      border:
+        1px solid var(--borda);
+
+      background:
+        #20252D;
+
+      color:
+        var(--texto-secundario);
+
+      cursor: pointer;
+
+    }
+
+
+    .mini-btn:hover {
+
+      color: white;
+
+      border-color:
+        var(--laranja);
+
+    }
+
+
+    .gestao-only {
+      display: none;
+    }
+
+
+    /* =====================================================
+           ESTADO VAZIO
+        ====================================================== */
+
+    .empty {
+
+      grid-column:
+        1 / -1;
+
+      padding:
+        60px 20px;
+
+      text-align: center;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 14px;
+
+    }
+
+
+    .empty-icon {
+
+      font-size: 38px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .empty h3 {
+
+      font-size: 17px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .empty p {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 13px;
+
+    }
+
+
+    /* =====================================================
+           LOADING
+        ====================================================== */
+
+    .loading {
+
+      grid-column:
+        1 / -1;
+
+      text-align: center;
+
+      padding: 60px;
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    /* =====================================================
+           MODAL
+        ====================================================== */
+
+    .modal-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(0, 0, 0, .72);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 2000;
+
+    }
+
+
+    .modal-overlay.active {
+
+      display: flex;
+
+    }
+
+
+    .modal {
+
+      width: 100%;
+
+      max-width: 680px;
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow-y: auto;
+
+      background:
+        #171B21;
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, .55);
+
+    }
+
+
+    .modal-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding:
+        22px 24px;
+
+      border-bottom:
+        1px solid var(--borda);
+
+    }
+
+
+    .modal-header h2 {
+
+      font-size: 19px;
+
+    }
+
+
+    .close {
+
+      width: 34px;
+
+      height: 34px;
+
+      border: none;
+
+      background:
+        #252A32;
+
+      color:
+        #CDD2D9;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+    }
+
+
+    .close:hover {
+
+      background:
+        #303640;
+
+      color: white;
+
+    }
+
+
+    .modal-body {
+
+      padding: 24px;
+
+    }
+
+
+    /* =====================================================
+           FORMULÁRIO
+        ====================================================== */
+
+    .form-group {
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .form-group label {
+
+      display: block;
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      margin-bottom: 8px;
+
+      color:
+        #DCE0E5;
+
+    }
+
+
+    .form-control {
+
+      width: 100%;
+
+      border:
+        1px solid var(--borda);
+
+      background:
+        #111419;
+
+      color:
+        var(--texto);
+
+      border-radius: 9px;
+
+      outline: none;
+
+      padding:
+        12px;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 13px;
+
+    }
+
+
+    .form-control:focus {
+
+      border-color:
+        var(--laranja);
+
+    }
+
+
+    textarea.form-control {
+
+      min-height: 220px;
+
+      resize: vertical;
+
+      line-height: 1.6;
+
+    }
+
+
+    .modal-footer {
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      gap: 10px;
+
+      padding:
+        18px 24px;
+
+      border-top:
+        1px solid var(--borda);
+
+    }
+
+
+    /* =====================================================
+           MODAL VISUALIZAÇÃO
+        ====================================================== */
+
+    .view-category {
+
+      color:
+        var(--laranja);
+
+      font-size: 11px;
+
+      font-weight: bold;
+
+      text-transform: uppercase;
+
+      letter-spacing: .5px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .view-description {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin-bottom: 22px;
+
+    }
+
+
+    .view-content {
+
+      white-space: pre-wrap;
+
+      color:
+        #E1E4E8;
+
+      font-size: 14px;
+
+      line-height: 1.75;
+
+      background:
+        #111419;
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 10px;
+
+      padding: 18px;
+
+    }
+
+
+    /* =====================================================
+           TOAST
+        ====================================================== */
+
+    .toast {
+
+      position: fixed;
+
+      right: 22px;
+
+      bottom: 22px;
+
+      background:
+        #222831;
+
+      border:
+        1px solid var(--borda);
+
+      color: white;
+
+      padding:
+        13px 17px;
+
+      border-radius: 9px;
+
+      font-size: 13px;
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, .35);
+
+      transform:
+        translateY(100px);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: .25s;
+
+      z-index: 3000;
+
+    }
+
+
+    .toast.show {
+
+      transform:
+        translateY(0);
+
+      opacity: 1;
+
+    }
+
+
+    .toast.error {
+
+      border-color:
+        rgba(239, 68, 68, .5);
+
+    }
+
+
+    /* =====================================================
+           RESPONSIVO
+        ====================================================== */
+
+    @media (max-width: 800px) {
+
+      .topbar {
+
+        padding:
+          0 12px;
+
+      }
+
+
+      .logo {
+
+        width: auto;
+
+      }
+
+
+      .logo small {
+
+        display: none;
+
+      }
+
+
+      .header-title {
+
+        display: none;
+
+      }
+
+
+      main {
+
+        padding:
+          30px 18px 60px;
+
+      }
+
+
+      h1 {
+
+        font-size: 31px;
+
+      }
+
+
+      .toolbar {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+      }
+
+
+      .procedimentos-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .results-header {
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        flex-direction: column;
+
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+     TOPO
+====================================================== -->
+
+  <header class="topbar">
+
+
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+
+      ☰
+
+    </button>
+
+
+    <div class="logo">
+
+      <img src="logo-alcans.png" alt="Alcans">
+
+      <small>
+        PORTAL DO ATENDENTE
+      </small>
+
+    </div>
+
+
+    <div class="header-title">
+
+      PROCEDIMENTOS
+
+    </div>
+
+
+  </header>
+
+
+
+  <!-- =====================================================
+     MENU
+====================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+
+    <div class="menu-title">
+
+      Portal do Atendente
+
+    </div>
+
+
+    <button class="menu-item" onclick="irParaPagina('index.html')">
+
+      <span class="menu-icon">
+        🏠
+      </span>
+
+      Início
+
+    </button>
+
+
+    <button class="menu-item" onclick="irParaPagina('calculadora.html')">
+
+      <span class="menu-icon">
+        $
+      </span>
+
+      Calcular multas
+
+    </button>
+
+
+    <button class="menu-item active" onclick="fecharMenu()">
+
+      <span class="menu-icon">
+        %
+      </span>
+
+      Procedimentos
+
+    </button>
+
+
+    <button class="menu-item" onclick="irParaPagina('sistemas.html')">
+
+      <span class="menu-icon">
+        #
+      </span>
+
+      Sistemas
+
+    </button>
+
+
+  </aside>
+
+
+
+  <!-- =====================================================
+     OVERLAY
+====================================================== -->
+
+  <div class="overlay" id="overlay"></div>
+
+
+
+  <!-- =====================================================
+     CONTEÚDO
+====================================================== -->
+
+  <main>
+
+
+    <section>
+
+      <div class="kicker">
+
+        BASE DE CONHECIMENTO
+
+      </div>
+
+
+      <h1>
+
+        Procedimentos
+
+      </h1>
+
+
+      <p class="description">
+
+        Encontre rapidamente os procedimentos
+        necessários durante o atendimento.
+
+      </p>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PESQUISA + NOVO
+    ================================================== -->
+
+    <div class="toolbar">
+
+
+      <div class="search-box">
+
+        <span>
+          🔎
+        </span>
+
+
+        <input type="text" id="searchInput" placeholder="Pesquisar procedimento..." autocomplete="off">
+
+      </div>
+
+
+      <button
+        class="btn btn-primary gestao-only"
+        id="btnNovoProcedimento"
+        onclick="abrirNovoProcedimento()"
+      >
+
+        + Novo procedimento
+
+      </button>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FILTROS
+    ================================================== -->
+
+    <div class="filters" id="filters">
+
+      <button class="filter active" data-category="Todos" onclick="selecionarCategoria('Todos', this)">
+
+        Todos
+
+      </button>
+
+    </div>
+
+
+
+    <div class="divider"></div>
+
+
+
+    <!-- =================================================
+         RESULTADOS
+    ================================================== -->
+
+    <div class="results-header">
+
+
+      <div class="section-title">
+
+        Procedimentos cadastrados
+
+      </div>
+
+
+      <div class="results-count" id="resultsCount">
+
+        Carregando...
+
+      </div>
+
+
+    </div>
+
+
+    <div class="procedimentos-grid" id="procedimentosGrid">
+
+      <div class="loading">
+
+        Carregando procedimentos...
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+     MODAL NOVO / EDITAR
+====================================================== -->
+
+  <div class="modal-overlay" id="formModal">
+
+
+    <div class="modal">
+
+
+      <div class="modal-header">
+
+
+        <h2 id="formTitle">
+
+          Novo procedimento
+
+        </h2>
+
+
+        <button class="close" onclick="fecharModal('formModal')">
+
+          ×
+
+        </button>
+
+
+      </div>
+
+
+      <form id="procedimentoForm">
+
+
+        <div class="modal-body">
+
+
+          <input type="hidden" id="editId">
+
+
+          <div class="form-group">
+
+            <label for="titulo">
+
+              Título
+
+            </label>
+
+
+            <input class="form-control" id="titulo" type="text" placeholder="Ex.: Internet lenta" required>
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="categoria">
+
+              Categoria
+
+            </label>
+
+
+            <input class="form-control" id="categoria" type="text" placeholder="Ex.: Suporte técnico" required>
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="descricao">
+
+              Descrição
+
+            </label>
+
+
+            <input class="form-control" id="descricao" type="text" placeholder="Breve descrição do procedimento">
+
+          </div>
+
+
+
+          <div class="form-group">
+
+            <label for="conteudo">
+
+              Conteúdo do procedimento
+
+            </label>
+
+
+            <textarea class="form-control" id="conteudo" placeholder="Digite o passo a passo do procedimento..." required></textarea>
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+
+          <button type="button" class="btn btn-secondary" onclick="fecharModal('formModal')">
+
+            Cancelar
+
+          </button>
+
+
+          <button type="submit" class="btn btn-primary" id="saveButton">
+
+            Salvar
+
+          </button>
+
+
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+     MODAL VISUALIZAÇÃO
+====================================================== -->
+
+  <div class="modal-overlay" id="viewModal">
+
+
+    <div class="modal">
+
+
+      <div class="modal-header">
+
+
+        <h2 id="viewTitle">
+
+          Procedimento
+
+        </h2>
+
+
+        <button class="close" onclick="fecharModal('viewModal')">
+
+          ×
+
+        </button>
+
+
+      </div>
+
+
+      <div class="modal-body">
+
+
+        <div class="view-category" id="viewCategory"></div>
+
+
+        <div class="view-description" id="viewDescription"></div>
+
+
+        <div class="view-content" id="viewContent"></div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+
+
+        <button class="btn btn-copy" onclick="copiarProcedimento()">
+
+          📋 Copiar procedimento
+
+        </button>
+
+
+        <button class="btn btn-secondary" onclick="fecharModal('viewModal')">
+
+          Fechar
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+     TOAST
+====================================================== -->
+
+  <div class="toast" id="toast"></div>
+
+
+
+  <script>
+
+
+    /* =====================================================
+       SUPABASE
+
+       COLOQUE AQUI OS DADOS DO SEU PROJETO
+    ====================================================== */
+
+    const SUPABASE_URL =
+      "https://adjrbgwnvagdqbqzfgwf.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_YFkBbmCNye3C74aJuu7BcA_zmvSdRnT";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+
+    /* =====================================================
+       VARIÁVEIS
+    ====================================================== */
+
+    let procedimentos = [];
+
+    let categoriaAtual = "Todos";
+
+    let procedimentoVisualizado = null;
+
+    let perfilUsuario = null;
+
+    let isGestao = false;
+
+
+
+    /* =====================================================
+       ELEMENTOS
+    ====================================================== */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const overlay =
+      document.getElementById("overlay");
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    const grid =
+      document.getElementById("procedimentosGrid");
+
+    const resultsCount =
+      document.getElementById("resultsCount");
+
+
+
+    /* =====================================================
+       MENU
+    ====================================================== */
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        sidebar.classList.toggle("open");
+
+        overlay.classList.toggle("active");
+
+      }
+    );
+
+
+    overlay.addEventListener(
+      "click",
+      fecharMenu
+    );
+
+
+    function fecharMenu() {
+
+      sidebar.classList.remove("open");
+
+      overlay.classList.remove("active");
+
+    }
+
+
+    function irParaPagina(pagina) {
+
+      window.location.href = pagina;
+
+    }
+
+
+
+    /* =====================================================
+       ESC FECHA MENU / MODAIS
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (event.key === "Escape") {
+
+          fecharMenu();
+
+          fecharModal("formModal");
+
+          fecharModal("viewModal");
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       PERFIL / PERMISSÕES
+    ====================================================== */
+
+    async function carregarPerfil() {
+
+      const {
+        data: { user },
+        error: erroUsuario
+      } = await supabaseClient.auth.getUser();
+
+
+      if (erroUsuario || !user) {
+
+        window.location.href = "login.html";
+
+        return false;
+
+      }
+
+
+      const {
+        data: perfil,
+        error: erroPerfil
+      } = await supabaseClient
+        .from("perfis")
+        .select("usuario, perfil")
+        .eq("id", user.id)
+        .single();
+
+
+      if (erroPerfil || !perfil) {
+
+        console.error("Erro ao carregar perfil:", erroPerfil);
+
+        mostrarToast(
+          "Não foi possível identificar seu perfil.",
+          true
+        );
+
+        return false;
+
+      }
+
+
+      perfilUsuario = perfil;
+
+      isGestao = perfil.perfil === "gestao";
+
+
+      const botaoNovo =
+        document.getElementById("btnNovoProcedimento");
+
+
+      if (botaoNovo) {
+
+        botaoNovo.style.display =
+          isGestao ? "inline-flex" : "none";
+
+      }
+
+
+      return true;
+
+    }
+
+
+    function exigirGestao() {
+
+      if (isGestao) {
+
+        return true;
+
+      }
+
+
+      mostrarToast(
+        "Apenas a gestão pode realizar esta ação.",
+        true
+      );
+
+
+      return false;
+
+    }
+
+
+
+    /* =====================================================
+       CARREGAR PROCEDIMENTOS
+    ====================================================== */
+
+    async function carregarProcedimentos() {
+
+
+      grid.innerHTML = `
+
+            <div class="loading">
+
+                Carregando procedimentos...
+
+            </div>
+
+        `;
+
+
+      const {
+
+        data,
+
+        error
+
+      } = await supabaseClient
+
+        .from("procedimentos")
+
+        .select("*")
+
+        .order(
+          "titulo",
+          {
+            ascending: true
+          }
+        );
+
+
+      if (error) {
+
+        console.error(error);
+
+
+        grid.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Não foi possível carregar os procedimentos
+                    </h3>
+
+                    <p>
+                        Verifique a conexão com o Supabase
+                        e as configurações de acesso.
+                    </p>
+
+                </div>
+
+            `;
+
+
+        resultsCount.textContent =
+          "Erro ao carregar";
+
+
+        return;
+
+      }
+
+
+      procedimentos =
+        data || [];
+
+
+      criarFiltros();
+
+      renderizarProcedimentos();
+
+    }
+
+
+
+    /* =====================================================
+       CRIAR FILTROS
+    ====================================================== */
+
+    function criarFiltros() {
+
+
+      const container =
+        document.getElementById("filters");
+
+
+      const categorias =
+        [
+          ...new Set(
+            procedimentos
+              .map(item => item.categoria)
+              .filter(Boolean)
+          )
+        ]
+          .sort();
+
+
+      container.innerHTML = `
+
+            <button
+                class="filter active"
+                data-category="Todos"
+                onclick="selecionarCategoria('Todos', this)"
+            >
+                Todos
+            </button>
+
+        `;
+
+
+      categorias.forEach(
+        function (categoria) {
+
+
+          const button =
+            document.createElement("button");
+
+
+          button.className =
+            "filter";
+
+
+          button.dataset.category =
+            categoria;
+
+
+          button.textContent =
+            categoria;
+
+
+          button.onclick =
+            function () {
+
+              selecionarCategoria(
+                categoria,
+                button
+              );
+
+            };
+
+
+          container.appendChild(button);
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       SELECIONAR CATEGORIA
+    ====================================================== */
+
+    function selecionarCategoria(
+      categoria,
+      botao
+    ) {
+
+
+      categoriaAtual =
+        categoria;
+
+
+      document
+        .querySelectorAll(".filter")
+        .forEach(
+          function (item) {
+
+            item.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+      botao.classList.add("active");
+
+
+      renderizarProcedimentos();
+
+    }
+
+
+
+    /* =====================================================
+       RENDERIZAR
+    ====================================================== */
+
+    function renderizarProcedimentos() {
+
+
+      const termo =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+
+      let lista =
+        procedimentos.filter(
+          function (item) {
+
+
+            const categoriaOk =
+              categoriaAtual === "Todos" ||
+              item.categoria === categoriaAtual;
+
+
+            const texto =
+              (
+                (item.titulo || "") +
+                " " +
+                (item.categoria || "") +
+                " " +
+                (item.descricao || "") +
+                " " +
+                (item.conteudo || "")
+              )
+                .toLowerCase();
+
+
+            const pesquisaOk =
+              !termo ||
+              texto.includes(termo);
+
+
+            return (
+              categoriaOk &&
+              pesquisaOk
+            );
+
+          }
+        );
+
+
+      resultsCount.textContent =
+        lista.length +
+        (
+          lista.length === 1
+            ? " procedimento"
+            : " procedimentos"
+        );
+
+
+      if (!lista.length) {
+
+        grid.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Nenhum procedimento encontrado
+                    </h3>
+
+                    <p>
+                        Tente pesquisar outro termo
+                        ou selecione outra categoria.
+                    </p>
+
+                </div>
+
+            `;
+
+        return;
+
+      }
+
+
+      grid.innerHTML = "";
+
+
+      lista.forEach(
+        function (item) {
+
+          const card =
+            document.createElement("article");
+
+
+          card.className =
+            "procedimento-card";
+
+
+          card.innerHTML = `
+
+                    <div class="procedimento-icon">
+
+                        📋
+
+                    </div>
+
+
+                    <div class="procedimento-titulo">
+
+                        ${escaparHTML(item.titulo)}
+
+                    </div>
+
+
+                    <div class="procedimento-categoria">
+
+                        ${escaparHTML(item.categoria)}
+
+                    </div>
+
+
+                    <p class="procedimento-descricao">
+
+                        ${escaparHTML(
+            item.descricao ||
+            "Sem descrição cadastrada."
+          )}
+
+                    </p>
+
+
+                    <div class="card-footer">
+
+
+                        <button
+                            class="card-link"
+                            onclick="visualizarProcedimento('${item.id}')"
+                        >
+
+                            Ver procedimento →
+
+                        </button>
+
+
+                        ${isGestao ? `
+                        <div class="card-actions">
+
+
+                            <button
+                                class="mini-btn"
+                                title="Editar"
+                                onclick="editarProcedimento('${item.id}')"
+                            >
+
+                                ✏️
+
+                            </button>
+
+
+                            <button
+                                class="mini-btn"
+                                title="Excluir"
+                                onclick="excluirProcedimento('${item.id}')"
+                            >
+
+                                🗑️
+
+                            </button>
+
+
+                        </div>
+                        ` : ""}
+
+
+                    </div>
+
+                `;
+
+
+          grid.appendChild(card);
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       PESQUISA
+    ====================================================== */
+
+    searchInput.addEventListener(
+      "input",
+      renderizarProcedimentos
+    );
+
+
+
+    /* =====================================================
+       NOVO PROCEDIMENTO
+    ====================================================== */
+
+    function abrirNovoProcedimento() {
+
+      if (!exigirGestao()) {
+
+        return;
+
+      }
+
+
+      document
+        .getElementById("procedimentoForm")
+        .reset();
+
+
+      document
+        .getElementById("editId")
+        .value = "";
+
+
+      document
+        .getElementById("formTitle")
+        .textContent =
+        "Novo procedimento";
+
+
+      document
+        .getElementById("saveButton")
+        .textContent =
+        "Salvar";
+
+
+      abrirModal("formModal");
+
+    }
+
+
+
+    /* =====================================================
+       EDITAR
+    ====================================================== */
+
+    function editarProcedimento(id) {
+
+      if (!exigirGestao()) {
+
+        return;
+
+      }
+
+
+      const item =
+        procedimentos.find(
+          procedimento =>
+            String(procedimento.id) ===
+            String(id)
+        );
+
+
+      if (!item) {
+
+        mostrarToast(
+          "Procedimento não encontrado.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      document
+        .getElementById("editId")
+        .value =
+        item.id;
+
+
+      document
+        .getElementById("titulo")
+        .value =
+        item.titulo || "";
+
+
+      document
+        .getElementById("categoria")
+        .value =
+        item.categoria || "";
+
+
+      document
+        .getElementById("descricao")
+        .value =
+        item.descricao || "";
+
+
+      document
+        .getElementById("conteudo")
+        .value =
+        item.conteudo || "";
+
+
+      document
+        .getElementById("formTitle")
+        .textContent =
+        "Editar procedimento";
+
+
+      document
+        .getElementById("saveButton")
+        .textContent =
+        "Salvar alterações";
+
+
+      abrirModal("formModal");
+
+    }
+
+
+
+    /* =====================================================
+       SALVAR
+    ====================================================== */
+
+    document
+      .getElementById("procedimentoForm")
+      .addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+          if (!exigirGestao()) {
+
+            return;
+
+          }
+
+
+          const id =
+            document
+              .getElementById("editId")
+              .value
+              .trim();
+
+
+          const titulo =
+            document
+              .getElementById("titulo")
+              .value
+              .trim();
+
+
+          const categoria =
+            document
+              .getElementById("categoria")
+              .value
+              .trim();
+
+
+          const descricao =
+            document
+              .getElementById("descricao")
+              .value
+              .trim();
+
+
+          const conteudo =
+            document
+              .getElementById("conteudo")
+              .value
+              .trim();
+
+
+          if (
+            !titulo ||
+            !categoria ||
+            !conteudo
+          ) {
+
+            mostrarToast(
+              "Preencha título, categoria e conteúdo.",
+              true
+            );
+
+            return;
+
+          }
+
+
+          const button =
+            document
+              .getElementById("saveButton");
+
+
+          button.disabled = true;
+
+          button.textContent =
+            "Salvando...";
+
+
+          let result;
+
+
+          if (id) {
+
+
+            result =
+              await supabaseClient
+
+                .from("procedimentos")
+
+                .update({
+
+                  titulo,
+                  categoria,
+                  descricao,
+                  conteudo,
+                  atualizado_em:
+                    new Date().toISOString()
+
+                })
+
+                .eq("id", id);
+
+
+          } else {
+
+
+            result =
+              await supabaseClient
+
+                .from("procedimentos")
+
+                .insert({
+
+                  titulo,
+                  categoria,
+                  descricao,
+                  conteudo
+
+                });
+
+          }
+
+
+          button.disabled = false;
+
+          button.textContent =
+            id
+              ? "Salvar alterações"
+              : "Salvar";
+
+
+          if (result.error) {
+
+            console.error(
+              result.error
+            );
+
+
+            mostrarToast(
+              "Não foi possível salvar o procedimento.",
+              true
+            );
+
+
+            return;
+
+          }
+
+
+          fecharModal("formModal");
+
+
+          mostrarToast(
+            id
+              ? "Procedimento atualizado!"
+              : "Procedimento cadastrado!"
+          );
+
+
+          await carregarProcedimentos();
+
+        }
+      );
+
+
+
+    /* =====================================================
+       VISUALIZAR
+    ====================================================== */
+
+    function visualizarProcedimento(id) {
+
+
+      const item =
+        procedimentos.find(
+          procedimento =>
+            String(procedimento.id) ===
+            String(id)
+        );
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+      procedimentoVisualizado =
+        item;
+
+
+      document
+        .getElementById("viewTitle")
+        .textContent =
+        item.titulo;
+
+
+      document
+        .getElementById("viewCategory")
+        .textContent =
+        item.categoria;
+
+
+      document
+        .getElementById("viewDescription")
+        .textContent =
+        item.descricao ||
+        "Sem descrição cadastrada.";
+
+
+      document
+        .getElementById("viewContent")
+        .textContent =
+        item.conteudo;
+
+
+      abrirModal("viewModal");
+
+    }
+
+
+
+    /* =====================================================
+       COPIAR
+    ====================================================== */
+
+    async function copiarProcedimento() {
+
+
+      if (!procedimentoVisualizado) {
+
+        return;
+
+      }
+
+
+      const texto =
+
+        procedimentoVisualizado.titulo +
+        "\n\n" +
+
+        procedimentoVisualizado.categoria +
+        "\n\n" +
+
+        (
+          procedimentoVisualizado.descricao ||
+          ""
+        ) +
+
+        "\n\n" +
+
+        procedimentoVisualizado.conteudo;
+
+
+      try {
+
+
+        await navigator.clipboard.writeText(
+          texto
+        );
+
+
+        mostrarToast(
+          "Procedimento copiado!"
+        );
+
+
+      } catch (error) {
+
+
+        mostrarToast(
+          "Não foi possível copiar.",
+          true
+        );
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       EXCLUIR
+    ====================================================== */
+
+    async function excluirProcedimento(id) {
+
+      if (!exigirGestao()) {
+
+        return;
+
+      }
+
+
+      const item =
+        procedimentos.find(
+          procedimento =>
+            String(procedimento.id) ===
+            String(id)
+        );
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+      const confirmar =
+        confirm(
+          `Deseja realmente excluir o procedimento "${item.titulo}"?`
+        );
+
+
+      if (!confirmar) {
+
+        return;
+
+      }
+
+
+      const {
+        error
+      } = await supabaseClient
+
+        .from("procedimentos")
+
+        .delete()
+
+        .eq("id", id);
+
+
+      if (error) {
+
+        console.error(error);
+
+
+        mostrarToast(
+          "Não foi possível excluir o procedimento.",
+          true
+        );
+
+
+        return;
+
+      }
+
+
+      mostrarToast(
+        "Procedimento excluído."
+      );
+
+
+      await carregarProcedimentos();
+
+    }
+
+
+
+    /* =====================================================
+       MODAL
+    ====================================================== */
+
+    function abrirModal(id) {
+
+      document
+        .getElementById(id)
+        .classList.add("active");
+
+    }
+
+
+    function fecharModal(id) {
+
+      document
+        .getElementById(id)
+        .classList.remove("active");
+
+    }
+
+
+    document
+      .querySelectorAll(".modal-overlay")
+      .forEach(
+        function (modal) {
+
+          modal.addEventListener(
+            "click",
+            function (event) {
+
+              if (
+                event.target === modal
+              ) {
+
+                modal.classList.remove(
+                  "active"
+                );
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    let toastTimer;
+
+
+    function mostrarToast(
+      mensagem,
+      erro = false
+    ) {
+
+
+      const toast =
+        document.getElementById("toast");
+
+
+      toast.textContent =
+        mensagem;
+
+
+      toast.classList.toggle(
+        "error",
+        erro
+      );
+
+
+      toast.classList.add("show");
+
+
+      clearTimeout(toastTimer);
+
+
+      toastTimer =
+        setTimeout(
+          function () {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3000
+        );
+
+    }
+
+
+
+    /* =====================================================
+       PROTEÇÃO CONTRA HTML
+    ====================================================== */
+
+    function escaparHTML(valor) {
+
+      return String(valor || "")
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+
+    (async function inicializar() {
+
+      const perfilCarregado =
+        await carregarPerfil();
+
+
+      if (!perfilCarregado) {
+
+        return;
+
+      }
+
+
+      await carregarProcedimentos();
+
+    })();
+
+  </script>
+
+
+</body>
+
+</html>
