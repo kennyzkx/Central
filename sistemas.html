@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Alcans | Sistemas</title>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    :root {
+
+      --laranja: #FF5A00;
+      --laranja-hover: #FF6A1A;
+
+      --fundo: #111419;
+      --fundo-menu: #15181E;
+
+      --card: #191D24;
+      --card-hover: #20252D;
+
+      --borda: #303640;
+
+      --texto: #F5F6F8;
+      --texto-secundario: #9BA3AE;
+
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        var(--fundo);
+
+      color:
+        var(--texto);
+
+      min-height: 100vh;
+
+    }
+
+
+    /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+    .topbar {
+
+      height: 66px;
+
+      background:
+        var(--laranja);
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 0 24px;
+
+      gap: 16px;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+    }
+
+
+    .menu-button {
+
+      width: 42px;
+
+      height: 42px;
+
+      border: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-size: 27px;
+
+      line-height: 1;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      padding: 0;
+
+      border-radius: 8px;
+
+      transition: .2s;
+
+    }
+
+
+    .menu-button:hover {
+
+      background:
+        rgba(255, 255, 255, .10);
+
+    }
+
+
+    /* =====================================================
+           LOGO
+        ====================================================== */
+
+    .logo {
+
+      width: 185px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+    }
+
+
+    .logo img {
+
+      width: 112px;
+
+      height: auto;
+
+      display: block;
+
+    }
+
+
+    .logo small {
+
+      display: block;
+
+      font-size: 8px;
+
+      letter-spacing: .7px;
+
+      color:
+        rgba(255, 255, 255, .82);
+
+      margin-top: 2px;
+
+    }
+
+
+    .header-title {
+
+      margin-left: auto;
+
+      color:
+        rgba(255, 255, 255, .90);
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      letter-spacing: .7px;
+
+    }
+
+
+    /* =====================================================
+           MENU LATERAL
+        ====================================================== */
+
+    .sidebar {
+
+      position: fixed;
+
+      top: 66px;
+
+      left: 0;
+
+      bottom: 0;
+
+      width: 280px;
+
+      background:
+        var(--fundo-menu);
+
+      border-right:
+        1px solid var(--borda);
+
+      padding: 22px 14px;
+
+      transform:
+        translateX(-100%);
+
+      transition:
+        .25s ease;
+
+      z-index: 900;
+
+      overflow-y: auto;
+
+    }
+
+
+    .sidebar.open {
+
+      transform:
+        translateX(0);
+
+      box-shadow:
+        20px 0 50px rgba(0, 0, 0, .40);
+
+    }
+
+
+    .menu-title {
+
+      font-size: 11px;
+
+      color: #737B87;
+
+      text-transform: uppercase;
+
+      margin:
+        5px 12px 12px;
+
+      font-weight: bold;
+
+    }
+
+
+    .menu-item {
+
+      width: 100%;
+
+      border: none;
+
+      background: transparent;
+
+      color: #CBD0D8;
+
+      text-align: left;
+
+      padding: 13px 12px;
+
+      border-radius: 9px;
+
+      margin: 3px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      cursor: pointer;
+
+      font-size: 14px;
+
+      transition: .2s;
+
+    }
+
+
+    .menu-item:hover {
+
+      background:
+        var(--card-hover);
+
+      color: white;
+
+    }
+
+
+    .menu-item.active {
+
+      background:
+        var(--card-hover);
+
+      color: white;
+
+      box-shadow:
+        inset 3px 0 0 var(--laranja);
+
+    }
+
+
+    .menu-icon {
+
+      width: 22px;
+
+      text-align: center;
+
+      color:
+        var(--laranja);
+
+      font-size: 17px;
+
+    }
+
+
+    /* =====================================================
+           OVERLAY
+        ====================================================== */
+
+    .overlay {
+
+      position: fixed;
+
+      inset: 66px 0 0;
+
+      background:
+        rgba(0, 0, 0, .55);
+
+      display: none;
+
+      z-index: 800;
+
+    }
+
+
+    .overlay.active {
+
+      display: block;
+
+    }
+
+
+    /* =====================================================
+           CONTEÚDO
+        ====================================================== */
+
+    main {
+
+      max-width: 1080px;
+
+      margin: auto;
+
+      padding:
+        40px 28px 80px;
+
+    }
+
+
+    .hero {
+
+      max-width: 800px;
+
+    }
+
+
+    .kicker {
+
+      color:
+        var(--laranja);
+
+      font-size: 12px;
+
+      font-weight: bold;
+
+      letter-spacing: .8px;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    h1 {
+
+      font-size: 39px;
+
+      letter-spacing: -1.4px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .description {
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 16px;
+
+      line-height: 1.65;
+
+    }
+
+
+    .divider {
+
+      height: 1px;
+
+      background:
+        var(--borda);
+
+      margin:
+        34px 0 27px;
+
+    }
+
+
+    /* =====================================================
+           SISTEMAS
+        ====================================================== */
+
+    .sistemas-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+
+      margin-top: 24px;
+
+    }
+
+
+    .sistema-card {
+
+      display: flex;
+
+      flex-direction: column;
+
+      min-height: 290px;
+
+      padding: 0;
+
+      overflow: hidden;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius: 5px;
+
+      color:
+        var(--texto);
+
+      text-decoration: none;
+
+      transition:
+        transform .15s ease,
+        border-color .15s ease,
+        background .15s ease;
+
+    }
+
+
+    .sistema-card:hover {
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        var(--laranja);
+
+      background:
+        var(--card-hover);
+
+    }
+
+
+    .sistema-logo {
+
+      height: 168px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 24px;
+
+      background: #ffffff;
+
+      border-bottom:
+        1px solid var(--borda);
+
+    }
+
+
+    .sistema-logo.dark {
+
+      background:
+        #0d1927;
+
+      color: white;
+
+    }
+
+
+    .sistema-logo img {
+
+      max-width: 92%;
+
+      max-height: 118px;
+
+      width: auto;
+
+      height: auto;
+
+      object-fit: contain;
+
+      display: block;
+
+    }
+
+
+    .logo-fallback {
+
+      font-size: 38px;
+
+      font-weight: 800;
+
+      letter-spacing: -1px;
+
+      color: #222;
+
+    }
+
+
+    .sistema-info {
+
+      padding:
+        16px 14px 15px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+
+    }
+
+
+    .sistema-nome {
+
+      font-size: 17px;
+
+      font-weight: 700;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .sistema-descricao {
+
+      margin: 0;
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 13px;
+
+      line-height: 1.55;
+
+    }
+
+
+    .sistema-acesso {
+
+      margin-top: auto;
+
+      padding-top: 14px;
+
+      color:
+        var(--laranja);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .35px;
+
+    }
+
+
+    /* =====================================================
+           RESPONSIVO
+        ====================================================== */
+
+    @media (max-width: 800px) {
+
+      .topbar {
+
+        padding:
+          0 12px;
+
+      }
+
+
+      .logo {
+
+        width: auto;
+
+      }
+
+
+      .logo small {
+
+        display: none;
+
+      }
+
+
+      .header-title {
+
+        display: none;
+
+      }
+
+
+      main {
+
+        padding:
+          30px 18px;
+
+      }
+
+
+      h1 {
+
+        font-size: 31px;
+
+      }
+
+
+      .sistemas-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+  </style>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        protegerPagina();
+    </script>
+
+</head>
+
+
+<body style="visibility: hidden;">
+
+
+  <!-- =====================================================
+     TOPBAR
+====================================================== -->
+
+  <header class="topbar">
+
+
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+
+      ☰
+
+    </button>
+
+
+    <div class="logo">
+
+      <img src="logo-alcans.png" alt="Alcans">
+
+      <small>
+        PORTAL DO ATENDENTE
+      </small>
+
+    </div>
+
+
+    <div class="header-title">
+
+      SISTEMAS
+
+    </div>
+
+
+  </header>
+
+
+
+  <!-- =====================================================
+     MENU
+====================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+
+    <div class="menu-title">
+
+      Portal do Atendente
+
+    </div>
+
+
+    <button class="menu-item" onclick="window.location.href='index.html'">
+
+      <span class="menu-icon">
+        🏠
+      </span>
+
+      Início
+
+    </button>
+
+
+    <button class="menu-item" onclick="window.location.href='calculadora.html'">
+
+      <span class="menu-icon">
+        $
+      </span>
+
+      Calcular multas
+
+    </button>
+
+
+    <button class="menu-item" onclick="window.location.href='procedimentos.html'">
+
+      <span class="menu-icon">
+        %
+      </span>
+
+      Procedimentos
+
+    </button>
+
+
+    <button class="menu-item active">
+
+      <span class="menu-icon">
+        #
+      </span>
+
+      Sistemas
+
+    </button>
+
+
+  </aside>
+
+
+
+  <div class="overlay" id="overlay"></div>
+
+
+
+  <!-- =====================================================
+     CONTEÚDO
+====================================================== -->
+
+  <main>
+
+
+    <section class="hero">
+
+
+      <div class="kicker">
+
+        FERRAMENTAS DA OPERAÇÃO
+
+      </div>
+
+
+      <h1>
+
+        Sistemas
+
+      </h1>
+
+
+      <p class="description">
+
+        Acesse rapidamente os principais sistemas
+        e mapas utilizados durante a operação
+        do atendimento.
+
+      </p>
+
+
+    </section>
+
+
+
+    <div class="divider"></div>
+
+
+
+    <div class="sistemas-grid">
+
+
+      <!-- =================================================
+             cVORTEX
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcans.cvortex.com/crm/management/cases" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo dark">
+
+          <div class="logo-fallback" style="color:white;">
+            cVortex
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+            cVortex
+          </div>
+
+          <p class="sistema-descricao">
+
+            Sistema utilizado para comunicação
+            direta com o cliente, permitindo
+            realizar e acompanhar os atendimentos
+            durante a operação.
+
+          </p>
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             MK
+        ================================================== -->
+
+      <a class="sistema-card" href="https://sistema.alcans.psi.br/mk/open.do?sys=MK0" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            MK
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            MK Solutions
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Sistema de gestão utilizado para
+            consultar informações de clientes,
+            contratos, serviços e rotinas
+            da operação.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             BEMOBI
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcans.7az.com.br/" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            Bemobi
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Bemobi
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Ferramenta utilizada para consulta
+            de faturas e envio de boletos
+            aos clientes.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             ANIEL
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcansaniel.sinapseinformatica.com.br/Web/Aniel.Connect/" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            ANIEL
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Aniel Sinapse
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Sistema utilizado para realizar
+            agendamentos e consultar informações
+            relacionadas às Ordens de Serviço
+            (OS) durante o atendimento.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             MAPA
+        ================================================== -->
+
+      <a class="sistema-card" href="https://www.google.com/maps/d/u/0/viewer?mid=1ZjrcKw8M-m9R5Y2uD7KEJ4F_l9jlaeu78&ll=-21.124799400690275%2C-47.767015361444116&z=17" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            MAPA
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Mapa
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Mapa utilizado pela equipe para
+            localização e consulta das regiões
+            atendidas pela operação.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Abrir mapa →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             MAPA DE CONDOMÍNIO
+        ================================================== -->
+
+      <a class="sistema-card" href="https://www.google.com/maps/d/u/0/viewer?mid=1Pv3DUs7KJHVvwZMYhZGmjNkGRSM1KB0&ll=-21.2207608%2C-47.7674859&z=19" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            🏢
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Mapa de condomínio
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Mapa utilizado para consulta
+            de condomínios e localização
+            dos atendimentos.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Abrir mapa →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             FLASHMAN
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcans.flashman.anlix.io/login" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo">
+
+          <div class="logo-fallback">
+
+            Flashman
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Flashman
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Ferramenta utilizada para facilitar
+            o acesso, gerenciamento e configuração
+            remota dos equipamentos.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             PLAYHUB / API
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcans.com.br/alhub/password/forgot" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo dark">
+
+          <div class="logo-fallback" style="color:white;">
+
+            PlayHub
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            PlayHub / API
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Acesso utilizado para gerenciamento
+            e recuperação de acesso relacionado
+            ao PlayHub/API.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================================
+             WATCH / SKY API
+        ================================================== -->
+
+      <a class="sistema-card" href="https://alcans.com.br/sky/password/forgot" target="_blank" rel="noopener noreferrer">
+
+        <div class="sistema-logo dark">
+
+          <div class="logo-fallback" style="color:white;">
+
+            Watch
+
+          </div>
+
+        </div>
+
+
+        <div class="sistema-info">
+
+          <div class="sistema-nome">
+
+            Watch / Sky API
+
+          </div>
+
+
+          <p class="sistema-descricao">
+
+            Acesso utilizado para gerenciamento
+            e recuperação de acesso relacionado
+            ao Watch/Sky API.
+
+          </p>
+
+
+          <div class="sistema-acesso">
+
+            Acessar sistema →
+
+          </div>
+
+        </div>
+
+      </a>
+
+
+    </div>
+
+
+  </main>
+
+
+
+  <script>
+
+
+    /* =====================================================
+       MENU
+    ====================================================== */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+
+    const overlay =
+      document.getElementById("overlay");
+
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        sidebar.classList.toggle("open");
+
+        overlay.classList.toggle("active");
+
+      }
+    );
+
+
+    overlay.addEventListener(
+      "click",
+      function () {
+
+        sidebar.classList.remove("open");
+
+        overlay.classList.remove("active");
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>
