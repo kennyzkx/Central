@@ -1,1736 +1,1728 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculadora de Multas | ALCANS</title>
+    <title>Calculadora de Multas | ALCANS</title>
 
-<style>
-
-/* =====================================================
+    <style>
+        /* =====================================================
    IDENTIDADE VISUAL ALCANS
 ===================================================== */
 
-:root {
+        :root {
 
-    --laranja: #FF5A00;
-    --laranja-hover: #FF6A1A;
+            --laranja: #FF5A00;
+            --laranja-hover: #FF6A1A;
 
-    --fundo: #111419;
-    --fundo-menu: #15181E;
+            --fundo: #111419;
+            --fundo-menu: #15181E;
 
-    --card: #191D24;
-    --card-hover: #20252D;
+            --card: #191D24;
+            --card-hover: #20252D;
 
-    --borda: #303640;
+            --borda: #303640;
 
-    --texto: #F5F6F8;
-    --texto-secundario: #9BA3AE;
+            --texto: #F5F6F8;
+            --texto-secundario: #9BA3AE;
 
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        }
 
 
-body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        var(--fundo);
-
-    color:
-        var(--texto);
-
-    min-height: 100vh;
-
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 
+        body {
 
-/* =====================================================
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                var(--fundo);
+
+            color:
+                var(--texto);
+
+            min-height: 100vh;
+
+        }
+
+
+
+        /* =====================================================
    HEADER
 ===================================================== */
 
-.header {
+        .header {
 
-    height: 66px;
+            height: 66px;
 
-    background:
-        var(--laranja);
+            background:
+                var(--laranja);
 
-    display: flex;
+            display: flex;
 
-    align-items: center;
+            align-items: center;
 
-    gap: 16px;
+            gap: 16px;
 
-    padding:
-        0 24px;
+            padding:
+                0 24px;
 
-    color: white;
+            color: white;
 
-    position: sticky;
+            position: sticky;
 
-    top: 0;
+            top: 0;
 
-    z-index: 1000;
+            z-index: 1000;
 
-}
-
-
-.header-back {
-
-    width: 42px;
-
-    height: 42px;
-
-    border: none;
-
-    background: transparent;
-
-    color: white;
-
-    border-radius: 8px;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    display: grid;
-
-    place-items: center;
-
-}
+        }
 
 
-.header-back:hover {
+        .header-back {
 
-    background:
-        rgba(255,255,255,.10);
+            width: 42px;
 
-}
+            height: 42px;
 
+            border: none;
 
- .logo-area {
-    width: 185px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+            background: transparent;
 
-.header-logo {
-    width: 112px;
-    height: auto;
-    display: block;
-}
+            color: white;
 
-.logo-area .logo-sub {
-    font-size: 8px;
-    letter-spacing: .7px;
-    margin-top: 2px;
-}
+            border-radius: 8px;
 
-.logo {
+            font-size: 25px;
 
-    font-size: 24px;
+            cursor: pointer;
 
-    font-weight: 800;
+            display: grid;
 
-    letter-spacing: -1px;
+            place-items: center;
 
-    color: white;
-
-}
+        }
 
 
-.logo-sub {
+        .header-back:hover {
 
-    color:
-        rgba(255,255,255,.82);
+            background:
+                rgba(255, 255, 255, .10);
 
-    font-size: 8px;
-
-    letter-spacing: 1.5px;
-
-    margin-top: 2px;
-
-}
+        }
 
 
-.header-label {
+        .logo-area {
+            width: 185px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    margin-left: auto;
+        .header-logo {
+            width: 112px;
+            height: auto;
+            display: block;
+        }
 
-    font-size: 11px;
+        .logo-area .logo-sub {
+            font-size: 8px;
+            letter-spacing: .7px;
+            margin-top: 2px;
+        }
 
-    color:
-        rgba(255,255,255,.86);
+        .logo {
 
-}
+            font-size: 24px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            color: white;
+
+        }
+
+
+        .logo-sub {
+
+            color:
+                rgba(255, 255, 255, .82);
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            margin-top: 2px;
+
+        }
+
+
+        .header-label {
+
+            margin-left: auto;
+
+            font-size: 11px;
+
+            color:
+                rgba(255, 255, 255, .86);
+
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    CONTAINER
 ===================================================== */
 
-.container {
+        .container {
 
-    max-width: 1080px;
+            max-width: 1080px;
 
-    margin: auto;
+            margin: auto;
 
-    padding:
-        40px 28px 70px;
+            padding:
+                40px 28px 70px;
 
-}
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    HERO
 ===================================================== */
 
-.hero {
+        .hero {
 
-    background:
-        var(--card);
+            background:
+                var(--card);
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    padding:
-        30px 32px;
+            padding:
+                30px 32px;
 
-    border-radius: 16px;
+            border-radius: 16px;
 
-    color:
-        var(--texto);
+            color:
+                var(--texto);
 
-    position: relative;
+            position: relative;
 
-    overflow: hidden;
+            overflow: hidden;
 
-    margin-bottom: 22px;
+            margin-bottom: 22px;
 
-}
-
-
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    right: -80px;
-
-    top: -100px;
-
-    width: 300px;
-
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,90,0,.09);
-
-    pointer-events: none;
-
-}
+        }
 
 
-.hero h1 {
+        .hero::after {
 
-    font-size: 30px;
+            content: "";
 
-    font-weight: 800;
+            position: absolute;
 
-    letter-spacing: -1px;
+            right: -80px;
 
-    margin-bottom: 10px;
+            top: -100px;
 
-    position: relative;
+            width: 300px;
 
-    z-index: 2;
+            height: 300px;
 
-}
+            border-radius: 50%;
 
+            background:
+                rgba(255, 90, 0, .09);
 
-.hero p {
+            pointer-events: none;
 
-    font-size: 13px;
-
-    line-height: 1.7;
-
-    color:
-        var(--texto-secundario);
-
-    max-width: 560px;
-
-    position: relative;
-
-    z-index: 2;
-
-}
+        }
 
 
-.hero-tag {
+        .hero h1 {
 
-    font-size: 10px;
+            font-size: 30px;
 
-    letter-spacing: 1.5px;
+            font-weight: 800;
 
-    font-weight: 700;
+            letter-spacing: -1px;
 
-    margin-bottom: 12px;
+            margin-bottom: 10px;
 
-    color:
-        var(--laranja);
+            position: relative;
 
-    position: relative;
+            z-index: 2;
 
-    z-index: 2;
-
-}
+        }
 
 
-.constellations {
+        .hero p {
 
-    position: absolute;
+            font-size: 13px;
 
-    right: 0;
+            line-height: 1.7;
 
-    top: 0;
+            color:
+                var(--texto-secundario);
 
-    width: 55%;
+            max-width: 560px;
 
-    height: 100%;
+            position: relative;
 
-    opacity: .12;
+            z-index: 2;
 
-    pointer-events: none;
-
-}
-
+        }
 
 
-/* =====================================================
+        .hero-tag {
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+
+            color:
+                var(--laranja);
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .constellations {
+
+            position: absolute;
+
+            right: 0;
+
+            top: 0;
+
+            width: 55%;
+
+            height: 100%;
+
+            opacity: .12;
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* =====================================================
    ABAS
 ===================================================== */
 
-.main-tabs {
+        .main-tabs {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
-    gap: 12px;
+            gap: 12px;
 
-    margin-bottom: 16px;
+            margin-bottom: 16px;
 
-}
-
-
-.main-tab {
-
-    height: 48px;
-
-    border:
-        1px solid var(--borda);
-
-    background:
-        var(--card);
-
-    border-radius: 10px;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    color:
-        var(--texto-secundario);
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
+        }
 
 
-.main-tab:hover {
+        .main-tab {
 
-    border-color:
-        var(--laranja);
+            height: 48px;
 
-    color:
-        var(--texto);
+            border:
+                1px solid var(--borda);
 
-    background:
-        var(--card-hover);
+            background:
+                var(--card);
 
-}
+            border-radius: 10px;
 
+            font-family: inherit;
 
-.main-tab.active {
+            font-size: 13px;
 
-    background:
-        var(--laranja);
+            font-weight: 700;
 
-    color: white;
+            color:
+                var(--texto-secundario);
 
-    border-color:
-        var(--laranja);
+            cursor: pointer;
 
-    box-shadow:
-        0 5px 18px
-        rgba(255,90,0,.18);
+            transition: .2s;
 
-}
+        }
 
 
+        .main-tab:hover {
 
-/* =====================================================
+            border-color:
+                var(--laranja);
+
+            color:
+                var(--texto);
+
+            background:
+                var(--card-hover);
+
+        }
+
+
+        .main-tab.active {
+
+            background:
+                var(--laranja);
+
+            color: white;
+
+            border-color:
+                var(--laranja);
+
+            box-shadow:
+                0 5px 18px rgba(255, 90, 0, .18);
+
+        }
+
+
+
+        /* =====================================================
    CALCULADORA
 ===================================================== */
 
-.calculator {
+        .calculator {
 
-    background:
-        var(--card);
+            background:
+                var(--card);
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 15px;
+            border-radius: 15px;
 
-    padding: 30px;
+            padding: 30px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.12);
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, .12);
 
-}
-
-
-.section-title {
-
-    font-size: 18px;
-
-    font-weight: 750;
-
-    margin-bottom: 7px;
-
-}
+        }
 
 
-.section-description {
+        .section-title {
 
-    color:
-        var(--texto-secundario);
+            font-size: 18px;
 
-    font-size: 12px;
+            font-weight: 750;
 
-    line-height: 1.6;
+            margin-bottom: 7px;
 
-    margin-bottom: 24px;
-
-}
+        }
 
 
+        .section-description {
 
-/* =====================================================
+            color:
+                var(--texto-secundario);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-bottom: 24px;
+
+        }
+
+
+
+        /* =====================================================
    TIPO DE SERVIÇO
 ===================================================== */
 
-.type-selector {
+        .type-selector {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
-    gap: 12px;
+            gap: 12px;
 
-    margin-bottom: 27px;
+            margin-bottom: 27px;
 
-}
-
-
-.type-option {
-
-    padding: 17px;
-
-    border:
-        1px solid var(--borda);
-
-    background:
-        var(--fundo-menu);
-
-    color:
-        var(--texto);
-
-    border-radius: 10px;
-
-    text-align: left;
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    transition: .2s;
-
-}
+        }
 
 
-.type-option:hover {
+        .type-option {
 
-    border-color:
-        var(--laranja);
+            padding: 17px;
 
-    background:
-        var(--card-hover);
+            border:
+                1px solid var(--borda);
 
-}
+            background:
+                var(--fundo-menu);
 
+            color:
+                var(--texto);
 
-.type-option.active {
+            border-radius: 10px;
 
-    background:
-        rgba(255,90,0,.10);
+            text-align: left;
 
-    border:
-        1.5px solid var(--laranja);
+            cursor: pointer;
 
-}
+            font-family: inherit;
 
+            transition: .2s;
 
-.type-option strong {
-
-    display: block;
-
-    font-size: 12px;
-
-    margin-bottom: 6px;
-
-}
+        }
 
 
-.type-option span {
+        .type-option:hover {
 
-    font-size: 10px;
+            border-color:
+                var(--laranja);
 
-    color:
-        var(--texto-secundario);
+            background:
+                var(--card-hover);
 
-}
+        }
+
+
+        .type-option.active {
+
+            background:
+                rgba(255, 90, 0, .10);
+
+            border:
+                1.5px solid var(--laranja);
+
+        }
+
+
+        .type-option strong {
+
+            display: block;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .type-option span {
+
+            font-size: 10px;
+
+            color:
+                var(--texto-secundario);
+
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    FORMULÁRIOS
 ===================================================== */
 
-.form-grid {
+        .form-grid {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
-    gap: 20px;
+            gap: 20px;
 
-}
-
-
-.field {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-
-    position: relative;
-
-}
+        }
 
 
-.field.full {
+        .field {
 
-    grid-column:
-        1 / -1;
+            display: flex;
 
-}
+            flex-direction: column;
 
+            gap: 9px;
 
-.field label {
+            position: relative;
 
-    font-size: 11px;
-
-    font-weight: 650;
-
-    color:
-        var(--texto);
-
-}
+        }
 
 
-.field input:not(.date-display) {
+        .field.full {
 
-    height: 46px;
+            grid-column:
+                1 / -1;
 
-    width: 100%;
-
-    padding:
-        0 13px;
-
-    border:
-        1px solid var(--borda);
-
-    border-radius: 8px;
-
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    background:
-        var(--fundo);
-
-    color:
-        var(--texto);
-
-    transition: .2s;
-
-}
+        }
 
 
-.field input::placeholder {
+        .field label {
 
-    color:
-        #6f7782;
+            font-size: 11px;
 
-}
+            font-weight: 650;
 
+            color:
+                var(--texto);
 
-.field input:focus {
-
-    border-color:
-        var(--laranja);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(255,90,0,.12);
-
-}
+        }
 
 
-.field small {
+        .field input:not(.date-display) {
 
-    font-size: 10px;
+            height: 46px;
 
-    color:
-        #737B87;
+            width: 100%;
 
-}
+            padding:
+                0 13px;
+
+            border:
+                1px solid var(--borda);
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            background:
+                var(--fundo);
+
+            color:
+                var(--texto);
+
+            transition: .2s;
+
+        }
+
+
+        .field input::placeholder {
+
+            color:
+                #6f7782;
+
+        }
+
+
+        .field input:focus {
+
+            border-color:
+                var(--laranja);
+
+            box-shadow:
+                0 0 0 3px rgba(255, 90, 0, .12);
+
+        }
+
+
+        .field small {
+
+            font-size: 10px;
+
+            color:
+                #737B87;
+
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    CALENDÁRIO
 ===================================================== */
 
-.date-wrapper {
+        .date-wrapper {
 
-    position: relative;
+            position: relative;
 
-}
+        }
 
 
-.date-display {
+        .date-display {
 
-    height: 46px;
+            height: 46px;
 
-    width: 100%;
+            width: 100%;
 
-    padding:
-        0 45px 0 13px;
+            padding:
+                0 45px 0 13px;
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 8px;
+            border-radius: 8px;
 
-    outline: none;
+            outline: none;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-size: 13px;
+            font-size: 13px;
 
-    background:
-        var(--fundo);
+            background:
+                var(--fundo);
 
-    color:
-        var(--texto);
+            color:
+                var(--texto);
 
-    cursor: pointer;
+            cursor: pointer;
 
-    user-select: none;
+            user-select: none;
 
-}
+        }
 
 
-.date-display::placeholder {
+        .date-display::placeholder {
 
-    color:
-        #737B87;
+            color:
+                #737B87;
 
-}
+        }
 
 
-.date-display:focus {
+        .date-display:focus {
 
-    border-color:
-        var(--laranja);
+            border-color:
+                var(--laranja);
 
-    box-shadow:
-        0 0 0 3px
-        rgba(255,90,0,.12);
+            box-shadow:
+                0 0 0 3px rgba(255, 90, 0, .12);
 
-}
+        }
 
 
-.calendar-icon {
+        .calendar-icon {
 
-    position: absolute;
+            position: absolute;
 
-    right: 14px;
+            right: 14px;
 
-    top: 50%;
+            top: 50%;
 
-    transform:
-        translateY(-50%);
+            transform:
+                translateY(-50%);
 
-    pointer-events: none;
+            pointer-events: none;
 
-    font-size: 17px;
+            font-size: 17px;
 
-}
+        }
 
 
-.calendar-popup {
+        .calendar-popup {
 
-    display: none;
+            display: none;
 
-    position: absolute;
+            position: absolute;
 
-    top:
-        calc(100% + 8px);
+            top:
+                calc(100% + 8px);
 
-    left: 0;
+            left: 0;
 
-    width: 310px;
+            width: 310px;
 
-    background:
-        var(--card);
+            background:
+                var(--card);
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 12px;
+            border-radius: 12px;
 
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.4);
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .4);
 
-    padding: 15px;
+            padding: 15px;
 
-    z-index: 100;
+            z-index: 100;
 
-}
+        }
 
 
-.calendar-popup.open {
+        .calendar-popup.open {
 
-    display: block;
+            display: block;
 
-    animation:
-        calendarAppear .15s ease;
+            animation:
+                calendarAppear .15s ease;
 
-}
+        }
 
 
-@keyframes calendarAppear {
+        @keyframes calendarAppear {
 
-    from {
+            from {
 
-        opacity: 0;
+                opacity: 0;
 
-        transform:
-            translateY(-5px);
+                transform:
+                    translateY(-5px);
 
-    }
+            }
 
-    to {
+            to {
 
-        opacity: 1;
+                opacity: 1;
 
-        transform:
-            translateY(0);
+                transform:
+                    translateY(0);
 
-    }
+            }
 
-}
+        }
 
 
-.calendar-header {
+        .calendar-header {
 
-    display: flex;
+            display: flex;
 
-    align-items: center;
+            align-items: center;
 
-    justify-content: space-between;
+            justify-content: space-between;
 
-    margin-bottom: 15px;
+            margin-bottom: 15px;
 
-}
+        }
 
 
-.calendar-title {
+        .calendar-title {
 
-    font-size: 13px;
+            font-size: 13px;
 
-    font-weight: 750;
+            font-weight: 750;
 
-    text-transform: capitalize;
+            text-transform: capitalize;
 
-}
+        }
 
 
-.calendar-nav {
+        .calendar-nav {
 
-    width: 32px;
+            width: 32px;
 
-    height: 32px;
+            height: 32px;
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    background:
-        var(--fundo-menu);
+            background:
+                var(--fundo-menu);
 
-    color:
-        var(--texto);
+            color:
+                var(--texto);
 
-    border-radius: 7px;
+            border-radius: 7px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    font-size: 15px;
+            font-size: 15px;
 
-    transition: .2s;
+            transition: .2s;
 
-}
+        }
 
 
-.calendar-nav:hover {
+        .calendar-nav:hover {
 
-    border-color:
-        var(--laranja);
+            border-color:
+                var(--laranja);
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-}
+        }
 
 
-.calendar-weekdays {
+        .calendar-weekdays {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        repeat(7, 1fr);
+            grid-template-columns:
+                repeat(7, 1fr);
 
-    margin-bottom: 7px;
+            margin-bottom: 7px;
 
-}
+        }
 
 
-.calendar-weekdays span {
+        .calendar-weekdays span {
 
-    text-align: center;
+            text-align: center;
 
-    font-size: 9px;
+            font-size: 9px;
 
-    font-weight: 700;
+            font-weight: 700;
 
-    color:
-        #737B87;
+            color:
+                #737B87;
 
-    padding: 5px 0;
+            padding: 5px 0;
 
-}
+        }
 
 
-.calendar-days {
+        .calendar-days {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        repeat(7, 1fr);
+            grid-template-columns:
+                repeat(7, 1fr);
 
-    gap: 3px;
+            gap: 3px;
 
-}
+        }
 
 
-.calendar-day {
+        .calendar-day {
 
-    height: 34px;
+            height: 34px;
 
-    border: none;
+            border: none;
 
-    background: transparent;
+            background: transparent;
 
-    border-radius: 7px;
+            border-radius: 7px;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-size: 11px;
+            font-size: 11px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    color:
-        var(--texto);
+            color:
+                var(--texto);
 
-    transition: .15s;
+            transition: .15s;
 
-}
+        }
 
 
-.calendar-day:hover {
+        .calendar-day:hover {
 
-    background:
-        rgba(255,90,0,.12);
+            background:
+                rgba(255, 90, 0, .12);
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-}
+        }
 
 
-.calendar-day.other-month {
+        .calendar-day.other-month {
 
-    color:
-        #4e5661;
+            color:
+                #4e5661;
 
-}
+        }
 
 
-.calendar-day.today {
+        .calendar-day.today {
 
-    border:
-        1px solid var(--laranja);
+            border:
+                1px solid var(--laranja);
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-    font-weight: 700;
+            font-weight: 700;
 
-}
+        }
 
 
-.calendar-day.selected {
+        .calendar-day.selected {
 
-    background:
-        var(--laranja);
+            background:
+                var(--laranja);
 
-    color: white;
+            color: white;
 
-    font-weight: 700;
+            font-weight: 700;
 
-}
+        }
 
 
-.calendar-day.selected:hover {
+        .calendar-day.selected:hover {
 
-    background:
-        var(--laranja-hover);
+            background:
+                var(--laranja-hover);
 
-    color: white;
+            color: white;
 
-}
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    BOTÃO CALCULAR
 ===================================================== */
 
-.calculate-button {
+        .calculate-button {
 
-    height: 49px;
+            height: 49px;
 
-    width: 100%;
+            width: 100%;
 
-    border: none;
+            border: none;
 
-    background:
-        var(--laranja);
+            background:
+                var(--laranja);
 
-    color: white;
+            color: white;
 
-    border-radius: 8px;
+            border-radius: 8px;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-size: 12px;
+            font-size: 12px;
 
-    font-weight: 750;
+            font-weight: 750;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    margin-top: 25px;
+            margin-top: 25px;
 
-    transition: .2s;
+            transition: .2s;
 
-}
-
-
-.calculate-button:hover {
-
-    background:
-        var(--laranja-hover);
-
-}
+        }
 
 
+        .calculate-button:hover {
 
-/* =====================================================
+            background:
+                var(--laranja-hover);
+
+        }
+
+
+
+        /* =====================================================
    RESULTADO
 ===================================================== */
 
-.result {
+        .result {
 
-    margin-top: 25px;
+            margin-top: 25px;
 
-    background:
-        #0D0F12;
+            background:
+                #0D0F12;
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 13px;
+            border-radius: 13px;
 
-    padding: 28px;
+            padding: 28px;
 
-    color: white;
+            color: white;
 
-    display: none;
+            display: none;
 
-    animation:
-        appear .3s ease;
+            animation:
+                appear .3s ease;
 
-}
+        }
 
 
-.result.visible {
+        .result.visible {
 
-    display: block;
+            display: block;
 
-}
+        }
 
 
-@keyframes appear {
+        @keyframes appear {
 
-    from {
+            from {
 
-        opacity: 0;
+                opacity: 0;
 
-        transform:
-            translateY(8px);
+                transform:
+                    translateY(8px);
 
-    }
+            }
 
-    to {
+            to {
 
-        opacity: 1;
+                opacity: 1;
 
-        transform:
-            translateY(0);
+                transform:
+                    translateY(0);
 
-    }
+            }
 
-}
+        }
 
 
-.result-header {
+        .result-header {
 
-    display: flex;
+            display: flex;
 
-    justify-content: space-between;
+            justify-content: space-between;
 
-    align-items: center;
+            align-items: center;
 
-    gap: 15px;
+            gap: 15px;
 
-    margin-bottom: 22px;
+            margin-bottom: 22px;
 
-}
+        }
 
 
-.result-header h3 {
+        .result-header h3 {
 
-    font-size: 14px;
+            font-size: 14px;
 
-}
+        }
 
 
-.result-badge {
+        .result-badge {
 
-    font-size: 9px;
+            font-size: 9px;
 
-    background:
-        rgba(255,255,255,.06);
+            background:
+                rgba(255, 255, 255, .06);
 
-    color:
-        #BBB;
+            color:
+                #BBB;
 
-    padding:
-        7px 10px;
+            padding:
+                7px 10px;
 
-    border-radius: 5px;
+            border-radius: 5px;
 
-}
+        }
 
 
-.result-main {
+        .result-main {
 
-    background:
-        rgba(255,255,255,.03);
+            background:
+                rgba(255, 255, 255, .03);
 
-    border:
-        1px solid rgba(255,255,255,.08);
+            border:
+                1px solid rgba(255, 255, 255, .08);
 
-    padding: 22px;
+            padding: 22px;
 
-    border-radius: 10px;
+            border-radius: 10px;
 
-    margin-bottom: 18px;
+            margin-bottom: 18px;
 
-}
+        }
 
 
-.result-main span {
+        .result-main span {
 
-    font-size: 10px;
+            font-size: 10px;
 
-    color:
-        #8C949F;
+            color:
+                #8C949F;
 
-    text-transform: uppercase;
+            text-transform: uppercase;
 
-    letter-spacing: 1px;
+            letter-spacing: 1px;
 
-}
+        }
 
 
-.result-main strong {
+        .result-main strong {
 
-    display: block;
+            display: block;
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-    font-size:
-        clamp(30px,5vw,42px);
+            font-size:
+                clamp(30px, 5vw, 42px);
 
-    font-weight: 800;
+            font-weight: 800;
 
-    margin-top: 9px;
+            margin-top: 9px;
 
-    letter-spacing: -1.5px;
+            letter-spacing: -1.5px;
 
-    overflow-wrap: anywhere;
+            overflow-wrap: anywhere;
 
-}
+        }
 
 
-.result-details {
+        .result-details {
 
-    display: grid;
+            display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
-    gap: 12px;
+            gap: 12px;
 
-}
+        }
 
 
-.detail {
+        .detail {
 
-    padding: 15px;
+            padding: 15px;
 
-    background:
-        rgba(255,255,255,.035);
+            background:
+                rgba(255, 255, 255, .035);
 
-    border-radius: 8px;
+            border-radius: 8px;
 
-}
+        }
 
 
-.detail span {
+        .detail span {
 
-    color:
-        #8C949F;
+            color:
+                #8C949F;
 
-    font-size: 10px;
+            font-size: 10px;
 
-    display: block;
+            display: block;
 
-    margin-bottom: 7px;
+            margin-bottom: 7px;
 
-}
+        }
 
 
-.detail strong {
+        .detail strong {
 
-    font-size: 14px;
+            font-size: 14px;
 
-    overflow-wrap: anywhere;
+            overflow-wrap: anywhere;
 
-}
+        }
 
 
-.result-status {
+        .result-status {
 
-    margin-top: 18px;
+            margin-top: 18px;
 
-    padding: 13px;
+            padding: 13px;
 
-    border-radius: 8px;
+            border-radius: 8px;
 
-    background:
-        rgba(255,255,255,.04);
+            background:
+                rgba(255, 255, 255, .04);
 
-    color:
-        #CFD3D8;
+            color:
+                #CFD3D8;
 
-    font-size: 11px;
+            font-size: 11px;
 
-    line-height: 1.8;
+            line-height: 1.8;
 
-}
+        }
 
 
-.copy-button {
+        .copy-button {
 
-    width: 100%;
+            width: 100%;
 
-    height: 43px;
+            height: 43px;
 
-    background: transparent;
+            background: transparent;
 
-    border:
-        1px solid #4A515B;
+            border:
+                1px solid #4A515B;
 
-    border-radius: 8px;
+            border-radius: 8px;
 
-    color: white;
+            color: white;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-weight: 600;
+            font-weight: 600;
 
-    font-size: 11px;
+            font-size: 11px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    margin-top: 17px;
+            margin-top: 17px;
 
-}
+        }
 
 
-.copy-button:hover {
+        .copy-button:hover {
 
-    border-color:
-        var(--laranja);
+            border-color:
+                var(--laranja);
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-}
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    INFORMAÇÕES
 ===================================================== */
 
-.info,
-.fines-note {
+        .info,
+        .fines-note {
 
-    margin-top: 20px;
+            margin-top: 20px;
 
-    background:
-        rgba(255,90,0,.07);
+            background:
+                rgba(255, 90, 0, .07);
 
-    border:
-        1px solid rgba(255,90,0,.22);
+            border:
+                1px solid rgba(255, 90, 0, .22);
 
-    padding: 17px;
+            padding: 17px;
 
-    border-radius: 9px;
+            border-radius: 9px;
 
-    font-size: 10px;
+            font-size: 10px;
 
-    color:
-        #D8A98C;
+            color:
+                #D8A98C;
 
-    line-height: 1.8;
+            line-height: 1.8;
 
-}
-
-
-.info strong,
-.fines-note strong {
-
-    display: block;
-
-    margin-bottom: 5px;
-
-    color: white;
-
-}
+        }
 
 
+        .info strong,
+        .fines-note strong {
 
-/* =====================================================
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: white;
+
+        }
+
+
+
+        /* =====================================================
    VALORES DAS MULTAS
 ===================================================== */
 
-.fines-page {
+        .fines-page {
 
-    display: none;
+            display: none;
 
-}
+        }
 
 
-.fines-page.visible {
+        .fines-page.visible {
 
-    display: block;
+            display: block;
 
-    animation:
-        appear .25s ease;
+            animation:
+                appear .25s ease;
 
-}
+        }
 
 
-.fines-header {
+        .fines-header {
 
-    margin-bottom: 25px;
+            margin-bottom: 25px;
 
-}
+        }
 
 
-.fines-header h2 {
+        .fines-header h2 {
 
-    font-size: 20px;
+            font-size: 20px;
 
-    font-weight: 800;
+            font-weight: 800;
 
-    margin-bottom: 7px;
+            margin-bottom: 7px;
 
-}
+        }
 
 
-.fines-header p {
+        .fines-header p {
 
-    font-size: 11px;
+            font-size: 11px;
 
-    color:
-        var(--texto-secundario);
+            color:
+                var(--texto-secundario);
 
-    line-height: 1.6;
+            line-height: 1.6;
 
-}
+        }
 
 
-.search-box {
+        .search-box {
 
-    margin-bottom: 20px;
+            margin-bottom: 20px;
 
-}
+        }
 
 
-.search-box input {
+        .search-box input {
 
-    width: 100%;
+            width: 100%;
 
-    height: 48px;
+            height: 48px;
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 9px;
+            border-radius: 9px;
 
-    padding:
-        0 15px;
+            padding:
+                0 15px;
 
-    outline: none;
+            outline: none;
 
-    font-family: inherit;
+            font-family: inherit;
 
-    font-size: 12px;
+            font-size: 12px;
 
-    background:
-        var(--card);
+            background:
+                var(--card);
 
-    color:
-        var(--texto);
+            color:
+                var(--texto);
 
-}
+        }
 
 
-.search-box input::placeholder {
+        .search-box input::placeholder {
 
-    color:
-        #737B87;
+            color:
+                #737B87;
 
-}
+        }
 
 
-.search-box input:focus {
+        .search-box input:focus {
 
-    border-color:
-        var(--laranja);
+            border-color:
+                var(--laranja);
 
-    box-shadow:
-        0 0 0 3px
-        rgba(255,90,0,.12);
+            box-shadow:
+                0 0 0 3px rgba(255, 90, 0, .12);
 
-}
+        }
 
 
-.fines-section {
+        .fines-section {
 
-    background:
-        var(--card);
+            background:
+                var(--card);
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 15px;
+            border-radius: 15px;
 
-    padding: 25px;
+            padding: 25px;
 
-    margin-bottom: 20px;
+            margin-bottom: 20px;
 
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,.08);
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, .08);
 
-}
+        }
 
 
-.fines-section-title {
+        .fines-section-title {
 
-    display: flex;
+            display: flex;
 
-    justify-content: space-between;
+            justify-content: space-between;
 
-    align-items: center;
+            align-items: center;
 
-    gap: 15px;
+            gap: 15px;
 
-    margin-bottom: 18px;
+            margin-bottom: 18px;
 
-}
+        }
 
 
-.fines-section-title h3 {
+        .fines-section-title h3 {
 
-    font-size: 15px;
+            font-size: 15px;
 
-    font-weight: 800;
+            font-weight: 800;
 
-}
+        }
 
 
-.fines-section-title span {
+        .fines-section-title span {
 
-    font-size: 9px;
+            font-size: 9px;
 
-    background:
-        rgba(255,90,0,.12);
+            background:
+                rgba(255, 90, 0, .12);
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-    padding:
-        6px 9px;
+            padding:
+                6px 9px;
 
-    border-radius: 5px;
+            border-radius: 5px;
 
-    font-weight: 700;
+            font-weight: 700;
 
-}
+        }
 
 
-.fines-list {
+        .fines-list {
 
-    display: grid;
+            display: grid;
 
-    gap: 8px;
+            gap: 8px;
 
-}
+        }
 
 
-.fine-item {
+        .fine-item {
 
-    display: flex;
+            display: flex;
 
-    align-items: center;
+            align-items: center;
 
-    justify-content: space-between;
+            justify-content: space-between;
 
-    gap: 20px;
+            gap: 20px;
 
-    padding:
-        14px 15px;
+            padding:
+                14px 15px;
 
-    border:
-        1px solid var(--borda);
+            border:
+                1px solid var(--borda);
 
-    border-radius: 9px;
+            border-radius: 9px;
 
-    transition: .15s;
+            transition: .15s;
 
-    background:
-        var(--fundo-menu);
+            background:
+                var(--fundo-menu);
 
-}
+        }
 
 
-.fine-item:hover {
+        .fine-item:hover {
 
-    border-color:
-        rgba(255,90,0,.5);
+            border-color:
+                rgba(255, 90, 0, .5);
 
-    background:
-        var(--card-hover);
+            background:
+                var(--card-hover);
 
-}
+        }
 
 
-.fine-name {
+        .fine-name {
 
-    font-size: 11px;
+            font-size: 11px;
 
-    line-height: 1.5;
+            line-height: 1.5;
 
-    font-weight: 600;
+            font-weight: 600;
 
-}
+        }
 
 
-.fine-value {
+        .fine-value {
 
-    white-space: nowrap;
+            white-space: nowrap;
 
-    font-size: 13px;
+            font-size: 13px;
 
-    font-weight: 800;
+            font-weight: 800;
 
-    color:
-        var(--laranja);
+            color:
+                var(--laranja);
 
-}
+        }
 
 
-.no-results {
+        .no-results {
 
-    display: none;
+            display: none;
 
-    text-align: center;
+            text-align: center;
 
-    padding:
-        30px 15px;
+            padding:
+                30px 15px;
 
-    color:
-        #737B87;
+            color:
+                #737B87;
 
-    font-size: 11px;
+            font-size: 11px;
 
-}
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    RODAPÉ
 ===================================================== */
 
-.footer {
+        .footer {
 
-    text-align: center;
+            text-align: center;
 
-    margin-top: 30px;
+            margin-top: 30px;
 
-    font-size: 10px;
+            font-size: 10px;
 
-    color:
-        #737B87;
+            color:
+                #737B87;
 
-    line-height: 1.8;
+            line-height: 1.8;
 
-}
+        }
 
 
 
-/* =====================================================
+        /* =====================================================
    RESPONSIVO
 ===================================================== */
 
-@media(max-width:650px) {
+        @media(max-width:650px) {
 
-    .header {
+            .header {
 
-        padding:
-            0 14px;
+                padding:
+                    0 14px;
 
-    }
+            }
 
 
-    .header-label {
+            .header-label {
 
-        display: none;
+                display: none;
 
-    }
+            }
 
 
-    .container {
+            .container {
 
-        padding:
-            25px 15px 40px;
+                padding:
+                    25px 15px 40px;
 
-    }
+            }
 
 
-    .hero {
+            .hero {
 
-        padding:
-            27px 23px;
+                padding:
+                    27px 23px;
 
-    }
+            }
 
 
-    .hero h1 {
+            .hero h1 {
 
-        font-size: 24px;
+                font-size: 24px;
 
-    }
+            }
 
 
-    .calculator {
+            .calculator {
 
-        padding: 21px;
+                padding: 21px;
 
-    }
+            }
 
 
-    .main-tabs {
+            .main-tabs {
 
-        grid-template-columns:
-            1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
 
-    }
+            }
 
 
-    .type-selector {
+            .type-selector {
 
-        grid-template-columns:
-            1fr;
+                grid-template-columns:
+                    1fr;
 
-    }
+            }
 
 
-    .form-grid {
+            .form-grid {
 
-        grid-template-columns:
-            1fr;
+                grid-template-columns:
+                    1fr;
 
-    }
+            }
 
 
-    .field.full {
+            .field.full {
 
-        grid-column: auto;
+                grid-column: auto;
 
-    }
+            }
 
 
-    .result-details {
+            .result-details {
 
-        grid-template-columns:
-            1fr;
+                grid-template-columns:
+                    1fr;
 
-    }
+            }
 
 
-    .calendar-popup {
+            .calendar-popup {
 
-        width: 100%;
+                width: 100%;
 
-        max-width: 310px;
+                max-width: 310px;
 
-    }
+            }
 
 
-    .fines-section {
+            .fines-section {
 
-        padding: 18px;
+                padding: 18px;
 
-    }
+            }
 
 
-    .fine-item {
+            .fine-item {
 
-        align-items:
-            flex-start;
+                align-items:
+                    flex-start;
 
-        flex-direction:
-            column;
+                flex-direction:
+                    column;
 
-        gap: 7px;
+                gap: 7px;
 
-    }
+            }
 
 
-    .fine-value {
+            .fine-value {
 
-        font-size: 14px;
+                font-size: 14px;
 
-    }
+            }
 
-}
-
-</style>
+        }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js"></script>
@@ -1739,1138 +1731,1036 @@ body {
 
 <body>
 
-<header class="header">
+    <header class="header">
 
-    <button
-        class="header-back"
-        onclick="window.location.href='index.html'"
-        aria-label="Voltar ao portal"
-    >
-        ←
-    </button>
-
-    <div class="logo-area">
-        <img
-            src="logo-alcans.png"
-            alt="Alcans"
-            class="header-logo"
-        >
-        <div class="logo-sub">
-            PORTAL DO ATENDENTE
+        <button class="header-back" onclick="window.location.href='index.html'" aria-label="Abrir menu">
+            ☰
+        </button>
+        <div class="logo-area">
+            <img src="logo-alcans.png" alt="Alcans" class="header-logo">
+            <div class="logo-sub">
+                PORTAL DO ATENDENTE
+            </div>
         </div>
-    </div>
 
-    <div class="header-label">
-        FERRAMENTA OPERACIONAL
-    </div>
+        <div class="header-label">
+            FERRAMENTA OPERACIONAL
+        </div>
 
-</header>
+    </header>
 
-<main class="container">
+    <main class="container">
 
-<section class="hero">
+        <section class="hero">
 
-<svg
-    class="constellations"
-    viewBox="0 0 500 220"
-    fill="none"
->
+            <svg class="constellations" viewBox="0 0 500 220" fill="none">
 
-    <g
-        stroke="white"
-        stroke-width="1"
-        opacity=".5"
-    >
+                <g stroke="white" stroke-width="1" opacity=".5">
 
-        <path d="M20 30 L110 80 L190 25 L290 90 L390 35 L480 100"/>
-        <path d="M110 80 L140 170 L250 135 L290 90"/>
-        <path d="M190 25 L250 135 L370 180 L480 100"/>
-        <path d="M140 170 L70 210 L250 135"/>
-        <path d="M290 90 L370 180 L450 210"/>
+                    <path d="M20 30 L110 80 L190 25 L290 90 L390 35 L480 100" />
+                    <path d="M110 80 L140 170 L250 135 L290 90" />
+                    <path d="M190 25 L250 135 L370 180 L480 100" />
+                    <path d="M140 170 L70 210 L250 135" />
+                    <path d="M290 90 L370 180 L450 210" />
 
-    </g>
+                </g>
 
-    <g fill="white">
+                <g fill="white">
 
-        <circle cx="20" cy="30" r="3"/>
-        <circle cx="110" cy="80" r="4"/>
-        <circle cx="190" cy="25" r="3"/>
-        <circle cx="290" cy="90" r="4"/>
-        <circle cx="390" cy="35" r="3"/>
-        <circle cx="480" cy="100" r="4"/>
-        <circle cx="140" cy="170" r="3"/>
-        <circle cx="250" cy="135" r="4"/>
-        <circle cx="370" cy="180" r="3"/>
-        <circle cx="70" cy="210" r="3"/>
-        <circle cx="450" cy="210" r="3"/>
+                    <circle cx="20" cy="30" r="3" />
+                    <circle cx="110" cy="80" r="4" />
+                    <circle cx="190" cy="25" r="3" />
+                    <circle cx="290" cy="90" r="4" />
+                    <circle cx="390" cy="35" r="3" />
+                    <circle cx="480" cy="100" r="4" />
+                    <circle cx="140" cy="170" r="3" />
+                    <circle cx="250" cy="135" r="4" />
+                    <circle cx="370" cy="180" r="3" />
+                    <circle cx="70" cy="210" r="3" />
+                    <circle cx="450" cy="210" r="3" />
 
-    </g>
+                </g>
 
-</svg>
+            </svg>
 
-<div class="hero-tag">
-    ALCANS • SISTEMA INTERNO
-</div>
+            <div class="hero-tag">
+                ALCANS • SISTEMA INTERNO
+            </div>
 
-<h1>
-    Calculadora de multas
-</h1>
+            <h1>
+                Calculadora de multas
+            </h1>
 
-<p>
-    Calcule o valor proporcional de rescisão contratual de maneira simples, rápida e precisa.
-</p>
+            <p>
+                Calcule o valor proporcional de rescisão contratual de maneira simples, rápida e precisa.
+            </p>
 
-</section>
+        </section>
 
 
-<div class="main-tabs">
+        <div class="main-tabs">
 
-    <button
-        class="main-tab active"
-        id="calculatorTab"
-        onclick="showMainTab('calculator')"
-    >
-        🧮 Calculadora de multas
-    </button>
+            <button class="main-tab active" id="calculatorTab" onclick="showMainTab('calculator')">
+                🧮 Calculadora de multas
+            </button>
 
-    <button
-        class="main-tab"
-        id="finesTab"
-        onclick="showMainTab('fines')"
-    >
-        💰 Valor das multas
-    </button>
+            <button class="main-tab" id="finesTab" onclick="showMainTab('fines')">
+                💰 Valor das multas
+            </button>
 
-</div>
+        </div>
 
 
-<div id="calculatorPage">
+        <div id="calculatorPage">
 
-<section class="calculator">
+            <section class="calculator">
 
-<h2 class="section-title">
-    Simulação de rescisão
-</h2>
+                <h2 class="section-title">
+                    Simulação de rescisão
+                </h2>
 
-<p class="section-description">
-    Selecione o tipo de serviço e informe os dados necessários.
-</p>
+                <p class="section-description">
+                    Selecione o tipo de serviço e informe os dados necessários.
+                </p>
 
-<div class="type-selector">
+                <div class="type-selector">
 
-<button
-    class="type-option active"
-    id="internetOption"
-    onclick="selectType('internet')"
->
+                    <button class="type-option active" id="internetOption" onclick="selectType('internet')">
 
-<strong>
-    ◉ Planos de internet
-</strong>
+                        <strong>
+                            ◉ Planos de internet
+                        </strong>
 
-<span>
-    Fidelidade de 12 meses • Multa proporcional
-</span>
+                        <span>
+                            Fidelidade de 12 meses • Multa proporcional
+                        </span>
 
-</button>
+                    </button>
 
-<button
-    class="type-option"
-    id="cameraOption"
-    onclick="selectType('camera')"
->
+                    <button class="type-option" id="cameraOption" onclick="selectType('camera')">
 
-<strong>
-    ▣ Câmeras
-</strong>
+                        <strong>
+                            ▣ Câmeras
+                        </strong>
 
-<span>
-    Fidelidade de 36 meses • Multa de 30%
-</span>
+                        <span>
+                            Fidelidade de 36 meses • Multa de 30%
+                        </span>
 
-</button>
+                    </button>
 
-</div>
+                </div>
 
 
-<div id="internetForm">
+                <div id="internetForm">
 
-<div class="form-grid">
+                    <div class="form-grid">
 
-<div class="field full">
+                        <div class="field full">
 
-<label for="fineAmount">
-    Valor integral da multa do plano (R$)
-</label>
+                            <label for="fineAmount">
+                                Valor integral da multa do plano (R$)
+                            </label>
 
-<input
-    type="number"
-    id="fineAmount"
-    min="0.01"
-    step="0.01"
-    placeholder="Ex: 120,00"
->
+                            <input type="number" id="fineAmount" min="0.01" step="0.01" placeholder="Ex: 120,00">
 
-<small>
-    Informe o valor integral correspondente aos 12 meses.
-</small>
+                            <small>
+                                Informe o valor integral correspondente aos 12 meses.
+                            </small>
 
-</div>
+                        </div>
 
 
-<div class="field">
+                        <div class="field">
 
-<label>
-    Data da última renovação
-</label>
+                            <label>
+                                Data da última renovação
+                            </label>
 
-<div class="date-wrapper">
+                            <div class="date-wrapper">
 
-<input
-    type="text"
-    class="date-display"
-    id="renewalDisplay"
-    placeholder="DD/MM/AAAA"
-    readonly
-    autocomplete="off"
->
+                                <input type="text" class="date-display" id="renewalDisplay" placeholder="DD/MM/AAAA" readonly autocomplete="off">
 
-<span class="calendar-icon">
-    📅
-</span>
+                                <span class="calendar-icon">
+                                    📅
+                                </span>
 
-<div
-    class="calendar-popup"
-    id="renewalCalendar"
-></div>
+                                <div class="calendar-popup" id="renewalCalendar"></div>
 
-</div>
+                            </div>
 
-</div>
+                        </div>
 
 
-<div class="field">
+                        <div class="field">
 
-<label>
-    Data da solicitação de cancelamento
-</label>
+                            <label>
+                                Data da solicitação de cancelamento
+                            </label>
 
-<div class="date-wrapper">
+                            <div class="date-wrapper">
 
-<input
-    type="text"
-    class="date-display"
-    id="cancelDisplay"
-    placeholder="DD/MM/AAAA"
-    readonly
-    autocomplete="off"
->
+                                <input type="text" class="date-display" id="cancelDisplay" placeholder="DD/MM/AAAA" readonly autocomplete="off">
 
-<span class="calendar-icon">
-    📅
-</span>
+                                <span class="calendar-icon">
+                                    📅
+                                </span>
 
-<div
-    class="calendar-popup"
-    id="cancelCalendar"
-></div>
+                                <div class="calendar-popup" id="cancelCalendar"></div>
 
-</div>
+                            </div>
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
 
-<div
-    id="cameraForm"
-    style="display:none"
->
+                <div id="cameraForm" style="display:none">
 
-<div class="form-grid">
+                    <div class="form-grid">
 
-<div class="field full">
+                        <div class="field full">
 
-<label for="cameraValue">
-    Valor mensal da câmera (R$)
-</label>
+                            <label for="cameraValue">
+                                Valor mensal da câmera (R$)
+                            </label>
 
-<input
-    type="number"
-    id="cameraValue"
-    min="0.01"
-    step="0.01"
-    placeholder="Ex: 30,00"
->
+                            <input type="number" id="cameraValue" min="0.01" step="0.01" placeholder="Ex: 30,00">
 
-<small>
-    O sistema multiplicará o valor por 36 e aplicará 30%.
-</small>
+                            <small>
+                                O sistema multiplicará o valor por 36 e aplicará 30%.
+                            </small>
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
 
-<button
-    type="button"
-    class="calculate-button"
->
-    CALCULAR MULTA
-</button>
+                <button type="button" class="calculate-button">
+                    CALCULAR MULTA
+                </button>
 
 
-<div
-    class="result"
-    id="result"
->
+                <div class="result" id="result">
 
-<div class="result-header">
+                    <div class="result-header">
 
-<h3>
-    Resultado da simulação
-</h3>
+                        <h3>
+                            Resultado da simulação
+                        </h3>
 
-<span
-    class="result-badge"
-    id="resultBadge"
->
-    CONCLUÍDO
-</span>
+                        <span class="result-badge" id="resultBadge">
+                            CONCLUÍDO
+                        </span>
 
-</div>
+                    </div>
 
 
-<div class="result-main">
+                    <div class="result-main">
 
-<span>
-    Valor da multa
-</span>
+                        <span>
+                            Valor da multa
+                        </span>
 
-<strong id="resultPenalty">
-    R$ 0,00
-</strong>
+                        <strong id="resultPenalty">
+                            R$ 0,00
+                        </strong>
 
-</div>
+                    </div>
 
 
-<div class="result-details">
+                    <div class="result-details">
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Tipo
-</span>
+                            <span>
+                                Tipo
+                            </span>
 
-<strong id="resultType">
-    -
-</strong>
+                            <strong id="resultType">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Valor de referência
-</span>
+                            <span>
+                                Valor de referência
+                            </span>
 
-<strong id="resultReference">
-    -
-</strong>
+                            <strong id="resultReference">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Período
-</span>
+                            <span>
+                                Período
+                            </span>
 
-<strong id="resultPeriod">
-    -
-</strong>
+                            <strong id="resultPeriod">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Percentual
-</span>
+                            <span>
+                                Percentual
+                            </span>
 
-<strong id="resultPercentage">
-    -
-</strong>
+                            <strong id="resultPercentage">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Dias restantes
-</span>
+                            <span>
+                                Dias restantes
+                            </span>
 
-<strong id="resultRemaining">
-    -
-</strong>
+                            <strong id="resultRemaining">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Dias decorridos
-</span>
+                            <span>
+                                Dias decorridos
+                            </span>
 
-<strong id="resultElapsed">
-    -
-</strong>
+                            <strong id="resultElapsed">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div
-    class="detail"
-    id="resultEndDateContainer"
->
+                        <div class="detail" id="resultEndDateContainer">
 
-<span>
-    Fim da fidelidade
-</span>
+                            <span>
+                                Fim da fidelidade
+                            </span>
 
-<strong id="resultEndDate">
-    -
-</strong>
+                            <strong id="resultEndDate">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
 
-<div class="detail">
+                        <div class="detail">
 
-<span>
-    Status
-</span>
+                            <span>
+                                Status
+                            </span>
 
-<strong id="resultStatusShort">
-    -
-</strong>
+                            <strong id="resultStatusShort">
+                                -
+                            </strong>
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
 
-<div
-    class="result-status"
-    id="resultStatus"
->
-</div>
+                    <div class="result-status" id="resultStatus">
+                    </div>
 
 
-<button
-    class="copy-button"
-    onclick="copyResult()"
->
-    COPIAR RESUMO
-</button>
+                    <button class="copy-button" onclick="copyResult()">
+                        COPIAR RESUMO
+                    </button>
 
-</div>
+                </div>
 
 
-<div class="info">
+                <div class="info">
 
-<strong>
-    Como funciona?
-</strong>
+                    <strong>
+                        Como funciona?
+                    </strong>
 
-Para planos de internet, a multa é calculada proporcionalmente ao período restante da fidelidade de 12 meses.
+                    Para planos de internet, a multa é calculada proporcionalmente ao período restante da fidelidade de 12 meses.
 
-Para câmeras, o cálculo considera 36 meses de referência e multa de 30%.
+                    Para câmeras, o cálculo considera 36 meses de referência e multa de 30%.
 
-</div>
+                </div>
 
-</section>
+            </section>
 
-</div>
+        </div>
 
 
-<div
-    class="fines-page"
-    id="finesPage"
->
+        <div class="fines-page" id="finesPage">
 
-<div class="fines-header">
+            <div class="fines-header">
 
-<h2>
-    Valores das multas
-</h2>
+                <h2>
+                    Valores das multas
+                </h2>
 
-<p>
-    Consulte rapidamente os valores de referência das multas cadastradas.
-</p>
+                <p>
+                    Consulte rapidamente os valores de referência das multas cadastradas.
+                </p>
 
-</div>
+            </div>
 
 
-<div class="search-box">
+            <div class="search-box">
 
-<input
-    type="text"
-    id="fineSearch"
-    placeholder="Pesquisar multa..."
-    oninput="searchFines()"
->
+                <input type="text" id="fineSearch" placeholder="Pesquisar multa..." oninput="searchFines()">
 
-</div>
+            </div>
 
 
-<div class="fines-section">
+            <div class="fines-section">
 
-<div class="fines-section-title">
+                <div class="fines-section-title">
 
-<h3>
-    Multa Geral
-</h3>
+                    <h3>
+                        Multa Geral
+                    </h3>
 
-<span>
-    VALORES
-</span>
+                    <span>
+                        VALORES
+                    </span>
 
-</div>
+                </div>
 
-<div
-    class="fines-list"
-    id="generalFines"
->
-</div>
+                <div class="fines-list" id="generalFines">
+                </div>
 
-</div>
+            </div>
 
 
-<div class="fines-section">
+            <div class="fines-section">
 
-<div class="fines-section-title">
+                <div class="fines-section-title">
 
-<h3>
-    São Carlos
-</h3>
+                    <h3>
+                        São Carlos
+                    </h3>
 
-<span>
-    VALORES
-</span>
+                    <span>
+                        VALORES
+                    </span>
 
-</div>
+                </div>
 
-<div
-    class="fines-list"
-    id="saoCarlosFines"
->
-</div>
+                <div class="fines-list" id="saoCarlosFines">
+                </div>
 
-</div>
+            </div>
 
 
-<div
-    class="no-results"
-    id="noResults"
->
-    Nenhuma multa encontrada.
-</div>
+            <div class="no-results" id="noResults">
+                Nenhuma multa encontrada.
+            </div>
 
 
-<div class="fines-note">
+            <div class="fines-note">
 
-<strong>
-    Atenção
-</strong>
+                <strong>
+                    Atenção
+                </strong>
 
-Os valores apresentados são os valores cadastrados na ferramenta e devem ser utilizados conforme os procedimentos internos da empresa.
+                Os valores apresentados são os valores cadastrados na ferramenta e devem ser utilizados conforme os procedimentos internos da empresa.
 
-</div>
+            </div>
 
-</div>
+        </div>
 
 
-<div class="footer">
+        <div class="footer">
 
-    Alcans | Portal do Atendente
+            Alcans | Portal do Atendente
 
-</div>
+        </div>
 
-</main>
+    </main>
 
 
 
-<script>
-'use strict';
+    <script>
+        'use strict';
 
-let selectedType = 'internet';
-let renewalDate = null;
-let cancelDate = null;
-let lastCalculation = '';
+        let selectedType = 'internet';
+        let renewalDate = null;
+        let cancelDate = null;
+        let lastCalculation = '';
 
-function money(cents) {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format((Number(cents) || 0) / 100);
-}
-
-function parseMoney(value) {
-    let text = String(value ?? '').trim();
-    if (!text) return 0;
-    text = text.replace(/R\$\s?/gi, '').replace(/\s/g, '');
-
-    // Aceita: 120 | 120,50 | 120.50 | 1.218,50 | 1,218.50
-    if (text.includes(',') && text.includes('.')) {
-        if (text.lastIndexOf(',') > text.lastIndexOf('.')) {
-            text = text.replace(/\./g, '').replace(',', '.');
-        } else {
-            text = text.replace(/,/g, '');
+        function money(cents) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format((Number(cents) || 0) / 100);
         }
-    } else if (text.includes(',')) {
-        text = text.replace(',', '.');
-    }
-
-    const number = Number(text);
-    return Number.isFinite(number) && number > 0 ? Math.round(number * 100) : 0;
-}
-
-function dateOnly(date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
-
-function utcDate(date) {
-    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
-}
-
-function daysBetween(a, b) {
-    return Math.round((utcDate(b) - utcDate(a)) / 86400000);
-}
-
-function addMonths(date, months) {
-    const result = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    const originalDay = result.getDate();
-    result.setDate(1);
-    result.setMonth(result.getMonth() + months);
-    const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
-    result.setDate(Math.min(originalDay, lastDay));
-    return result;
-}
-
-function formatDate(date) {
-    if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '-';
-    return String(date.getDate()).padStart(2, '0') + '/' +
-           String(date.getMonth() + 1).padStart(2, '0') + '/' +
-           date.getFullYear();
-}
-
-function selectType(type) {
-    selectedType = type === 'camera' ? 'camera' : 'internet';
-    document.getElementById('internetOption').classList.toggle('active', selectedType === 'internet');
-    document.getElementById('cameraOption').classList.toggle('active', selectedType === 'camera');
-    document.getElementById('internetForm').style.display = selectedType === 'internet' ? 'block' : 'none';
-    document.getElementById('cameraForm').style.display = selectedType === 'camera' ? 'block' : 'none';
-    document.getElementById('result').classList.remove('visible');
-}
-
-function showMainTab(tab) {
-    const calculatorPage = document.getElementById('calculatorPage');
-    const finesPage = document.getElementById('finesPage');
-    const calculatorTab = document.getElementById('calculatorTab');
-    const finesTab = document.getElementById('finesTab');
-
-    const calculator = tab === 'calculator';
-    calculatorPage.style.display = calculator ? 'block' : 'none';
-    finesPage.classList.toggle('visible', !calculator);
-    calculatorTab.classList.toggle('active', calculator);
-    finesTab.classList.toggle('active', !calculator);
-    if (!calculator) renderFines();
-}
-
-const monthNames = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-const weekNames = ['D','S','T','Q','Q','S','S'];
-const calendarState = {
-    renewal: { date: null, month: new Date() },
-    cancel: { date: null, month: new Date() }
-};
-
-function closeCalendars() {
-    document.getElementById('renewalCalendar').classList.remove('open');
-    document.getElementById('cancelCalendar').classList.remove('open');
-}
-
-function openCalendar(type) {
-    const id = type === 'renewal' ? 'renewalCalendar' : 'cancelCalendar';
-    closeCalendars();
-    renderCalendar(type);
-    document.getElementById(id).classList.add('open');
-}
-
-function renderCalendar(type) {
-    const popup = document.getElementById(type === 'renewal' ? 'renewalCalendar' : 'cancelCalendar');
-    const state = calendarState[type];
-    const year = state.month.getFullYear();
-    const month = state.month.getMonth();
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const today = dateOnly(new Date());
-
-    let html = '<div class="calendar-header">' +
-        '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', -1)">‹</button>' +
-        '<span class="calendar-title">' + monthNames[month] + ' ' + year + '</span>' +
-        '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', 1)">›</button>' +
-        '</div>';
-
-    html += '<div class="calendar-weekdays">' + weekNames.map(d => '<span>' + d + '</span>').join('') + '</div>';
-    html += '<div class="calendar-days">';
-
-    for (let i = 0; i < firstDay; i++) html += '<span></span>';
-
-    for (let day = 1; day <= daysInMonth; day++) {
-        const current = new Date(year, month, day);
-        const classes = ['calendar-day'];
-        if (current.getTime() === today.getTime()) classes.push('today');
-        if (state.date && current.getTime() === state.date.getTime()) classes.push('selected');
-        html += '<button type="button" class="' + classes.join(' ') + '" onclick="selectCalendarDate(\'' + type + '\',' + year + ',' + month + ',' + day + ')">' + day + '</button>';
-    }
-
-    html += '</div>';
-    popup.innerHTML = html;
-}
-
-function changeMonth(type, amount) {
-    calendarState[type].month = new Date(
-        calendarState[type].month.getFullYear(),
-        calendarState[type].month.getMonth() + amount,
-        1
-    );
-    renderCalendar(type);
-}
-
-function selectCalendarDate(type, year, month, day) {
-    const date = dateOnly(new Date(year, month, day));
-    calendarState[type].date = date;
-    calendarState[type].month = new Date(date.getFullYear(), date.getMonth(), 1);
-
-    if (type === 'renewal') {
-        renewalDate = date;
-        document.getElementById('renewalDisplay').value = formatDate(date);
-    } else {
-        cancelDate = date;
-        document.getElementById('cancelDisplay').value = formatDate(date);
-    }
-    closeCalendars();
-}
-
-function showResult(data) {
-    const set = (id, value) => document.getElementById(id).textContent = value;
-
-    set('resultPenalty', money(data.penalty));
-    set('resultType', data.type);
-    set('resultReference', money(data.reference));
-    set('resultPeriod', data.period);
-    set('resultPercentage', data.percentage);
-    set('resultRemaining', data.remaining);
-    set('resultElapsed', data.elapsed || '-');
-    set('resultEndDate', data.endDate || '-');
-    set('resultStatusShort', data.statusShort || 'CONCLUÍDO');
-    set('resultStatus', data.status);
-
-    document.getElementById('resultEndDateContainer').style.display = data.showDates ? '' : 'none';
-    document.getElementById('result').classList.add('visible');
-
-    lastCalculation = [
-        'ALCANS - CALCULADORA DE MULTAS', '',
-        'Tipo: ' + data.type,
-        'Valor de referência: ' + money(data.reference),
-        'Fidelidade: ' + data.period,
-        'Tempo cumprido: ' + (data.elapsed || 'Não aplicável'),
-        'Tempo restante: ' + data.remaining,
-        'Término da fidelidade: ' + (data.endDate || 'Não aplicável'),
-        'Percentual aplicado: ' + data.percentage, '',
-        'VALOR DA MULTA: ' + money(data.penalty), '',
-        data.status,
-        '', 'Simulação para conferência contratual.'
-    ].join('\n');
-
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function calculateInternet() {
-    const amountCents = parseMoney(document.getElementById('fineAmount').value);
-    if (amountCents <= 0) {
-        alert('Informe o valor integral da multa.');
-        return;
-    }
-    if (!renewalDate) {
-        alert('Informe a data da última renovação.');
-        return;
-    }
-    if (!cancelDate) {
-        alert('Informe a data da solicitação de cancelamento.');
-        return;
-    }
-    if (cancelDate < renewalDate) {
-        alert('A data de cancelamento não pode ser anterior à data de renovação.');
-        return;
-    }
-
-    const endDate = addMonths(renewalDate, 12);
-    const totalDays = daysBetween(renewalDate, endDate);
-    const elapsedDays = Math.min(totalDays, Math.max(0, daysBetween(renewalDate, cancelDate)));
-    const remainingDays = Math.max(0, totalDays - elapsedDays);
-    const penaltyCents = Math.round(amountCents * remainingDays / totalDays);
-    const percentage = (remainingDays / totalDays * 100);
-
-    showResult({
-        type: 'INTERNET',
-        penalty: penaltyCents,
-        reference: amountCents,
-        remaining: remainingDays + ' dias',
-        period: '12 meses',
-        percentage: percentage.toFixed(2).replace('.', ',') + '%',
-        elapsed: elapsedDays + ' dias',
-        endDate: formatDate(endDate),
-        showDates: true,
-        statusShort: remainingDays === 0 ? 'FIDELIDADE CUMPRIDA' : 'MULTA PROPORCIONAL',
-        status: remainingDays === 0
-            ? 'A fidelidade já foi cumprida. Multa proporcional: R$ 0,00.'
-            : 'Restam ' + remainingDays + ' dias de fidelidade. A multa proporcional corresponde a ' + percentage.toFixed(2).replace('.', ',') + '% do valor integral.'
-    });
-}
-
-function calculateCamera() {
-    const monthlyCents = parseMoney(document.getElementById('cameraValue').value);
-    if (monthlyCents <= 0) {
-        alert('Informe o valor mensal da câmera.');
-        return;
-    }
-
-    const referenceCents = monthlyCents * 36;
-    const penaltyCents = Math.round(referenceCents * 30 / 100);
-
-    showResult({
-        type: 'CÂMERAS',
-        penalty: penaltyCents,
-        reference: referenceCents,
-        remaining: 'Regra fixa',
-        period: '36 meses',
-        percentage: '30%',
-        elapsed: '',
-        endDate: '',
-        showDates: false,
-        statusShort: 'MULTA FIXA',
-        status: 'Valor mensal: ' + money(monthlyCents) + '. Valor de referência: ' + money(monthlyCents) + ' × 36 = ' + money(referenceCents) + '. Multa de 30%: ' + money(penaltyCents) + '.'
-    });
-}
-
-function calculateFine(event) {
-    if (event) event.preventDefault();
-    document.getElementById('result').classList.remove('visible');
-    if (selectedType === 'internet') calculateInternet();
-    else calculateCamera();
-}
-
-async function copyResult() {
-    if (!lastCalculation) return;
-    try {
-        await navigator.clipboard.writeText(lastCalculation);
-        alert('Resumo copiado com sucesso!');
-    } catch (e) {
-        const area = document.createElement('textarea');
-        area.value = lastCalculation;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand('copy');
-        area.remove();
-        alert('Resumo copiado com sucesso!');
-    }
-}
-
-const generalFines = [
-
-    [
-        'Todos os Conect',
-        48000
-    ],
-   
-  [
-        'Planos 24 Meses',
-        96000
-    ],
-   
-    [
-        'Banda larga (250 Mega / 500 Mega / 1 Giga)',
-        72000
-    ],
-
-    [
-        '1 Giga + Mesh',
-        121800
-    ],
-
-    [
-        'Cada Mesh adicional',
-        27000
-    ],
-
-    [
-        'AI Fixo básico',
-        36000
-    ],
-
-    [
-        'AI Fixo ilimitado',
-        42000
-    ],
-
-    [
-        'ExitLag (por licença)',
-        6000
-    ],
-
-    [
-        'IP fixo',
-        36000
-    ],
-
-    [
-        'PlayHub',
-        12000
-    ],
-
-    [
-        'Watch',
-        6000
-    ],
-
-    [
-        'Watch + HBO Max',
-        18000
-    ],
-
-    [
-        'Sky+ Light',
-        6000
-    ],
-
-    [
-        'Sky+ Full',
-        12000
-    ],
-
-    [
-        'AI Fixo básico — PME',
-        48000
-    ],
-
-    [
-        'AI Fixo ilimitado — PME',
-        54000
-    ]
-
-];
-
-
-const saoCarlosFines = [
-
-    [
-        'CF - Conect Essencial 1 Giga',
-        50000
-    ],
-
-    [
-        'CF - Conect Básico 1 Giga',
-        20000
-    ],
-
-    [
-        'CF - Conect Essencial 1 Giga + Paramount',
-        68000
-    ],
-
-    [
-        'CF - Conect Essencial 1G + WPM',
-        86000
-    ],
-
-    [
-        'CF - Conect Essencial 1G + SkyL',
-        62000
-    ],
-
-    [
-        'CF - Conect Essencial 1G + SkyF',
-        68000
-    ],
-
-    [
-        'CF - Conect Essencial 1G + Mesh',
-        84000
-    ],
-
-    [
-        'CF - Conect Essencial 1 Giga + Mesh + Max + Paramount',
-        108000
-    ],
-
-    [
-        'CF - Conect Essencial 1 Giga + Fx Bas (Telefonia básica)',
-        56000
-    ],
-
-    [
-        'CF - Conect Essencial 1 Giga + Fxi Brasil (Telefonia ilimitada)',
-        68000
-    ],
-
-    [
-        'CF - Conect Master 2.5 Giga',
-        101000
-    ],
-
-    [
-        'CF - Conect Básico 2.5 Giga',
-        62000
-    ],
-
-    [
-        'CF - Conect Master 2.5G + WP',
-        119000
-    ],
-
-    [
-        'CF - Conect Master 2.5G + WPM',
-        131000
-    ],
-
-    [
-        'CF - Conect Essencial 2.5G + SkyL',
-        107000
-    ],
-
-    [
-        'CF - Conect Essencial 2.5G + SkyF',
-        116000
-    ],
-
-    [
-        'CF - Conect Essencial 2.5G + Mesh',
-        138700
-    ],
-
-    [
-        'CF - Conect Essencial 2.5 Giga + Mesh + Max + Paramount',
-        162700
-    ],
-
-    [
-        'CF - Conect Essencial 2.5 Giga + Fx Bas (Telefonia básica)',
-        107000
-    ],
-
-    [
-        'CF - Conect Essencial 2.5 Giga + Fxi Brasil (Telefonia ilimitada)',
-        119000
-    ],
-
-    [
-        'CF - Conect Premium 10 Giga + Mesh',
-        104000
-    ],
-
-    [
-        'Mesh (adicional)',
-        12000
-    ],
-
-    [
-        'AI Fixo básico',
-        6000
-    ],
-
-    [
-        'AI Fixo ilimitado',
-        18000
-    ],
-
-    [
-        'Watch',
-        12000
-    ],
-
-    [
-        'Watch + HBO Max',
-        24000
-    ],
-
-    [
-        'Sky+ Light e Sky+ Full',
-        6000
-    ],
-
-    [
-        'Sky+ Light ou Sky+ Full com 3 adicionais (Telecine, Premiere e Combate)',
-        12000
-    ]
-
-];
-
-
-
-
-function normalizeText(text) {
-    return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
-function renderFineList(id, list, search) {
-    const container = document.getElementById(id);
-    const filtered = list.filter(item => normalizeText(item[0]).includes(normalizeText(search)));
-    container.innerHTML = filtered.map(item =>
-        '<div class="fine-item"><span>' + item[0] + '</span><strong>' + money(item[1]) + '</strong></div>'
-    ).join('');
-    return filtered.length;
-}
-
-function renderFines() {
-    const search = document.getElementById('fineSearch').value || '';
-    const total = renderFineList('generalFines', generalFines, search) + renderFineList('saoCarlosFines', saoCarlosFines, search);
-    document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
-}
-
-function searchFines() { renderFines(); }
-
-// Inicialização: nenhum cálculo depende de outro script ou biblioteca externa.
-document.addEventListener('DOMContentLoaded', function () {
-    const calculateButton = document.querySelector('.calculate-button');
-    if (calculateButton) {
-        calculateButton.type = 'button';
-        calculateButton.onclick = calculateFine;
-    }
-
-    const renewal = document.getElementById('renewalDisplay');
-    const cancel = document.getElementById('cancelDisplay');
-
-    if (renewal) renewal.addEventListener('click', function(e) { e.stopPropagation(); openCalendar('renewal'); });
-    if (cancel) cancel.addEventListener('click', function(e) { e.stopPropagation(); openCalendar('cancel'); });
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.date-wrapper')) closeCalendars();
-    });
-
-    renderFines();
-});
-</script>
+
+        function parseMoney(value) {
+            let text = String(value ?? '').trim();
+            if (!text) return 0;
+            text = text.replace(/R\$\s?/gi, '').replace(/\s/g, '');
+
+            // Aceita: 120 | 120,50 | 120.50 | 1.218,50 | 1,218.50
+            if (text.includes(',') && text.includes('.')) {
+                if (text.lastIndexOf(',') > text.lastIndexOf('.')) {
+                    text = text.replace(/\./g, '').replace(',', '.');
+                } else {
+                    text = text.replace(/,/g, '');
+                }
+            } else if (text.includes(',')) {
+                text = text.replace(',', '.');
+            }
+
+            const number = Number(text);
+            return Number.isFinite(number) && number > 0 ? Math.round(number * 100) : 0;
+        }
+
+        function dateOnly(date) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+
+        function utcDate(date) {
+            return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+        }
+
+        function daysBetween(a, b) {
+            return Math.round((utcDate(b) - utcDate(a)) / 86400000);
+        }
+
+        function addMonths(date, months) {
+            const result = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            const originalDay = result.getDate();
+            result.setDate(1);
+            result.setMonth(result.getMonth() + months);
+            const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
+            result.setDate(Math.min(originalDay, lastDay));
+            return result;
+        }
+
+        function formatDate(date) {
+            if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '-';
+            return String(date.getDate()).padStart(2, '0') + '/' +
+                String(date.getMonth() + 1).padStart(2, '0') + '/' +
+                date.getFullYear();
+        }
+
+        function selectType(type) {
+            selectedType = type === 'camera' ? 'camera' : 'internet';
+            document.getElementById('internetOption').classList.toggle('active', selectedType === 'internet');
+            document.getElementById('cameraOption').classList.toggle('active', selectedType === 'camera');
+            document.getElementById('internetForm').style.display = selectedType === 'internet' ? 'block' : 'none';
+            document.getElementById('cameraForm').style.display = selectedType === 'camera' ? 'block' : 'none';
+            document.getElementById('result').classList.remove('visible');
+        }
+
+        function showMainTab(tab) {
+            const calculatorPage = document.getElementById('calculatorPage');
+            const finesPage = document.getElementById('finesPage');
+            const calculatorTab = document.getElementById('calculatorTab');
+            const finesTab = document.getElementById('finesTab');
+
+            const calculator = tab === 'calculator';
+            calculatorPage.style.display = calculator ? 'block' : 'none';
+            finesPage.classList.toggle('visible', !calculator);
+            calculatorTab.classList.toggle('active', calculator);
+            finesTab.classList.toggle('active', !calculator);
+            if (!calculator) renderFines();
+        }
+
+        const monthNames = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+        const weekNames = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+        const calendarState = {
+            renewal: { date: null, month: new Date() },
+            cancel: { date: null, month: new Date() }
+        };
+
+        function closeCalendars() {
+            document.getElementById('renewalCalendar').classList.remove('open');
+            document.getElementById('cancelCalendar').classList.remove('open');
+        }
+
+        function openCalendar(type) {
+            const id = type === 'renewal' ? 'renewalCalendar' : 'cancelCalendar';
+            closeCalendars();
+            renderCalendar(type);
+            document.getElementById(id).classList.add('open');
+        }
+
+        function renderCalendar(type) {
+            const popup = document.getElementById(type === 'renewal' ? 'renewalCalendar' : 'cancelCalendar');
+            const state = calendarState[type];
+            const year = state.month.getFullYear();
+            const month = state.month.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = dateOnly(new Date());
+
+            let html = '<div class="calendar-header">' +
+                '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', -1)">‹</button>' +
+                '<span class="calendar-title">' + monthNames[month] + ' ' + year + '</span>' +
+                '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', 1)">›</button>' +
+                '</div>';
+
+            html += '<div class="calendar-weekdays">' + weekNames.map(d => '<span>' + d + '</span>').join('') + '</div>';
+            html += '<div class="calendar-days">';
+
+            for (let i = 0; i < firstDay; i++) html += '<span></span>';
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const current = new Date(year, month, day);
+                const classes = ['calendar-day'];
+                if (current.getTime() === today.getTime()) classes.push('today');
+                if (state.date && current.getTime() === state.date.getTime()) classes.push('selected');
+                html += '<button type="button" class="' + classes.join(' ') + '" onclick="selectCalendarDate(\'' + type + '\',' + year + ',' + month + ',' + day + ')">' + day + '</button>';
+            }
+
+            html += '</div>';
+            popup.innerHTML = html;
+        }
+
+        function changeMonth(type, amount) {
+            calendarState[type].month = new Date(
+                calendarState[type].month.getFullYear(),
+                calendarState[type].month.getMonth() + amount,
+                1
+            );
+            renderCalendar(type);
+        }
+
+        function selectCalendarDate(type, year, month, day) {
+            const date = dateOnly(new Date(year, month, day));
+            calendarState[type].date = date;
+            calendarState[type].month = new Date(date.getFullYear(), date.getMonth(), 1);
+
+            if (type === 'renewal') {
+                renewalDate = date;
+                document.getElementById('renewalDisplay').value = formatDate(date);
+            } else {
+                cancelDate = date;
+                document.getElementById('cancelDisplay').value = formatDate(date);
+            }
+            closeCalendars();
+        }
+
+        function showResult(data) {
+            const set = (id, value) => document.getElementById(id).textContent = value;
+
+            set('resultPenalty', money(data.penalty));
+            set('resultType', data.type);
+            set('resultReference', money(data.reference));
+            set('resultPeriod', data.period);
+            set('resultPercentage', data.percentage);
+            set('resultRemaining', data.remaining);
+            set('resultElapsed', data.elapsed || '-');
+            set('resultEndDate', data.endDate || '-');
+            set('resultStatusShort', data.statusShort || 'CONCLUÍDO');
+            set('resultStatus', data.status);
+
+            document.getElementById('resultEndDateContainer').style.display = data.showDates ? '' : 'none';
+            document.getElementById('result').classList.add('visible');
+
+            lastCalculation = [
+                'ALCANS - CALCULADORA DE MULTAS', '',
+                'Tipo: ' + data.type,
+                'Valor de referência: ' + money(data.reference),
+                'Fidelidade: ' + data.period,
+                'Tempo cumprido: ' + (data.elapsed || 'Não aplicável'),
+                'Tempo restante: ' + data.remaining,
+                'Término da fidelidade: ' + (data.endDate || 'Não aplicável'),
+                'Percentual aplicado: ' + data.percentage, '',
+                'VALOR DA MULTA: ' + money(data.penalty), '',
+                data.status,
+                '', 'Simulação para conferência contratual.'
+            ].join('\n');
+
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function calculateInternet() {
+            const amountCents = parseMoney(document.getElementById('fineAmount').value);
+            if (amountCents <= 0) {
+                alert('Informe o valor integral da multa.');
+                return;
+            }
+            if (!renewalDate) {
+                alert('Informe a data da última renovação.');
+                return;
+            }
+            if (!cancelDate) {
+                alert('Informe a data da solicitação de cancelamento.');
+                return;
+            }
+            if (cancelDate < renewalDate) {
+                alert('A data de cancelamento não pode ser anterior à data de renovação.');
+                return;
+            }
+
+            const endDate = addMonths(renewalDate, 12);
+            const totalDays = daysBetween(renewalDate, endDate);
+            const elapsedDays = Math.min(totalDays, Math.max(0, daysBetween(renewalDate, cancelDate)));
+            const remainingDays = Math.max(0, totalDays - elapsedDays);
+            const penaltyCents = Math.round(amountCents * remainingDays / totalDays);
+            const percentage = (remainingDays / totalDays * 100);
+
+            showResult({
+                type: 'INTERNET',
+                penalty: penaltyCents,
+                reference: amountCents,
+                remaining: remainingDays + ' dias',
+                period: '12 meses',
+                percentage: percentage.toFixed(2).replace('.', ',') + '%',
+                elapsed: elapsedDays + ' dias',
+                endDate: formatDate(endDate),
+                showDates: true,
+                statusShort: remainingDays === 0 ? 'FIDELIDADE CUMPRIDA' : 'MULTA PROPORCIONAL',
+                status: remainingDays === 0
+                    ? 'A fidelidade já foi cumprida. Multa proporcional: R$ 0,00.'
+                    : 'Restam ' + remainingDays + ' dias de fidelidade. A multa proporcional corresponde a ' + percentage.toFixed(2).replace('.', ',') + '% do valor integral.'
+            });
+        }
+
+        function calculateCamera() {
+            const monthlyCents = parseMoney(document.getElementById('cameraValue').value);
+            if (monthlyCents <= 0) {
+                alert('Informe o valor mensal da câmera.');
+                return;
+            }
+
+            const referenceCents = monthlyCents * 36;
+            const penaltyCents = Math.round(referenceCents * 30 / 100);
+
+            showResult({
+                type: 'CÂMERAS',
+                penalty: penaltyCents,
+                reference: referenceCents,
+                remaining: 'Regra fixa',
+                period: '36 meses',
+                percentage: '30%',
+                elapsed: '',
+                endDate: '',
+                showDates: false,
+                statusShort: 'MULTA FIXA',
+                status: 'Valor mensal: ' + money(monthlyCents) + '. Valor de referência: ' + money(monthlyCents) + ' × 36 = ' + money(referenceCents) + '. Multa de 30%: ' + money(penaltyCents) + '.'
+            });
+        }
+
+        function calculateFine(event) {
+            if (event) event.preventDefault();
+            document.getElementById('result').classList.remove('visible');
+            if (selectedType === 'internet') calculateInternet();
+            else calculateCamera();
+        }
+
+        async function copyResult() {
+            if (!lastCalculation) return;
+            try {
+                await navigator.clipboard.writeText(lastCalculation);
+                alert('Resumo copiado com sucesso!');
+            } catch (e) {
+                const area = document.createElement('textarea');
+                area.value = lastCalculation;
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand('copy');
+                area.remove();
+                alert('Resumo copiado com sucesso!');
+            }
+        }
+
+        const generalFines = [
+
+            [
+                'Todos os Conect',
+                48000
+            ],
+
+            [
+                'Planos 24 Meses',
+                96000
+            ],
+
+            [
+                'Banda larga (250 Mega / 500 Mega / 1 Giga)',
+                72000
+            ],
+
+            [
+                '1 Giga + Mesh',
+                121800
+            ],
+
+            [
+                'Cada Mesh adicional',
+                27000
+            ],
+
+            [
+                'AI Fixo básico',
+                36000
+            ],
+
+            [
+                'AI Fixo ilimitado',
+                42000
+            ],
+
+            [
+                'ExitLag (por licença)',
+                6000
+            ],
+
+            [
+                'IP fixo',
+                36000
+            ],
+
+            [
+                'PlayHub',
+                12000
+            ],
+
+            [
+                'Watch',
+                6000
+            ],
+
+            [
+                'Watch + HBO Max',
+                18000
+            ],
+
+            [
+                'Sky+ Light',
+                6000
+            ],
+
+            [
+                'Sky+ Full',
+                12000
+            ],
+
+            [
+                'AI Fixo básico — PME',
+                48000
+            ],
+
+            [
+                'AI Fixo ilimitado — PME',
+                54000
+            ]
+
+        ];
+
+
+        const saoCarlosFines = [
+
+            [
+                'CF - Conect Essencial 1 Giga',
+                50000
+            ],
+
+            [
+                'CF - Conect Básico 1 Giga',
+                20000
+            ],
+
+            [
+                'CF - Conect Essencial 1 Giga + Paramount',
+                68000
+            ],
+
+            [
+                'CF - Conect Essencial 1G + WPM',
+                86000
+            ],
+
+            [
+                'CF - Conect Essencial 1G + SkyL',
+                62000
+            ],
+
+            [
+                'CF - Conect Essencial 1G + SkyF',
+                68000
+            ],
+
+            [
+                'CF - Conect Essencial 1G + Mesh',
+                84000
+            ],
+
+            [
+                'CF - Conect Essencial 1 Giga + Mesh + Max + Paramount',
+                108000
+            ],
+
+            [
+                'CF - Conect Essencial 1 Giga + Fx Bas (Telefonia básica)',
+                56000
+            ],
+
+            [
+                'CF - Conect Essencial 1 Giga + Fxi Brasil (Telefonia ilimitada)',
+                68000
+            ],
+
+            [
+                'CF - Conect Master 2.5 Giga',
+                101000
+            ],
+
+            [
+                'CF - Conect Básico 2.5 Giga',
+                62000
+            ],
+
+            [
+                'CF - Conect Master 2.5G + WP',
+                119000
+            ],
+
+            [
+                'CF - Conect Master 2.5G + WPM',
+                131000
+            ],
+
+            [
+                'CF - Conect Essencial 2.5G + SkyL',
+                107000
+            ],
+
+            [
+                'CF - Conect Essencial 2.5G + SkyF',
+                116000
+            ],
+
+            [
+                'CF - Conect Essencial 2.5G + Mesh',
+                138700
+            ],
+
+            [
+                'CF - Conect Essencial 2.5 Giga + Mesh + Max + Paramount',
+                162700
+            ],
+
+            [
+                'CF - Conect Essencial 2.5 Giga + Fx Bas (Telefonia básica)',
+                107000
+            ],
+
+            [
+                'CF - Conect Essencial 2.5 Giga + Fxi Brasil (Telefonia ilimitada)',
+                119000
+            ],
+
+            [
+                'CF - Conect Premium 10 Giga + Mesh',
+                104000
+            ],
+
+            [
+                'Mesh (adicional)',
+                12000
+            ],
+
+            [
+                'AI Fixo básico',
+                6000
+            ],
+
+            [
+                'AI Fixo ilimitado',
+                18000
+            ],
+
+            [
+                'Watch',
+                12000
+            ],
+
+            [
+                'Watch + HBO Max',
+                24000
+            ],
+
+            [
+                'Sky+ Light e Sky+ Full',
+                6000
+            ],
+
+            [
+                'Sky+ Light ou Sky+ Full com 3 adicionais (Telecine, Premiere e Combate)',
+                12000
+            ]
+
+        ];
+
+
+
+
+        function normalizeText(text) {
+            return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        }
+
+        function renderFineList(id, list, search) {
+            const container = document.getElementById(id);
+            const filtered = list.filter(item => normalizeText(item[0]).includes(normalizeText(search)));
+            container.innerHTML = filtered.map(item =>
+                '<div class="fine-item"><span>' + item[0] + '</span><strong>' + money(item[1]) + '</strong></div>'
+            ).join('');
+            return filtered.length;
+        }
+
+        function renderFines() {
+            const search = document.getElementById('fineSearch').value || '';
+            const total = renderFineList('generalFines', generalFines, search) + renderFineList('saoCarlosFines', saoCarlosFines, search);
+            document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+        }
+
+        function searchFines() { renderFines(); }
+
+        // Inicialização: nenhum cálculo depende de outro script ou biblioteca externa.
+        document.addEventListener('DOMContentLoaded', function () {
+            const calculateButton = document.querySelector('.calculate-button');
+            if (calculateButton) {
+                calculateButton.type = 'button';
+                calculateButton.onclick = calculateFine;
+            }
+
+            const renewal = document.getElementById('renewalDisplay');
+            const cancel = document.getElementById('cancelDisplay');
+
+            if (renewal) renewal.addEventListener('click', function (e) { e.stopPropagation(); openCalendar('renewal'); });
+            if (cancel) cancel.addEventListener('click', function (e) { e.stopPropagation(); openCalendar('cancel'); });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.date-wrapper')) closeCalendars();
+            });
+
+            renderFines();
+        });
+    </script>
 
 </body>
+
 </html>
