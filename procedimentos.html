@@ -1567,104 +1567,58 @@
   <!-- =====================================================
      TOPO
 ====================================================== -->
-
   <header class="topbar">
 
-
     <button class="menu-button" id="menuButton" aria-label="Abrir menu">
-
       ☰
-
     </button>
 
-
     <div class="logo">
-
       <img src="logo-alcans.png" alt="Alcans">
-
-      <small>
-        PORTAL DO ATENDENTE
-      </small>
-
+      <small>PORTAL DO ATENDENTE</small>
     </div>
-
 
     <div class="header-title">
-
       PROCEDIMENTOS
-
     </div>
-
 
   </header>
 
-
-
   <!-- =====================================================
-     MENU
+     MENU LATERAL
 ====================================================== -->
-
   <aside class="sidebar" id="sidebar">
 
-
     <div class="menu-title">
-
       Portal do Atendente
-
     </div>
 
-
-    <button class="menu-item" onclick="irParaPagina('index.html')">
-
-      <span class="menu-icon">
-        🏠
-      </span>
-
+    <button class="menu-item" onclick="window.location.href='index.html'">
+      <span class="menu-icon" aria-hidden="true">🏠</span>
       Início
-
     </button>
 
-
-    <button class="menu-item" onclick="irParaPagina('calculadora.html')">
-
-      <span class="menu-icon">
-        $
-      </span>
-
+    <button class="menu-item" onclick="window.location.href='calculadora.html'">
+      <span class="menu-icon" aria-hidden="true">🧮</span>
       Calcular multas
-
     </button>
-
 
     <button class="menu-item active" onclick="fecharMenu()">
-
-      <span class="menu-icon">
-        %
-      </span>
-
+      <span class="menu-icon" aria-hidden="true">📋</span>
       Procedimentos
-
     </button>
 
-
-    <button class="menu-item" onclick="irParaPagina('sistemas.html')">
-
-      <span class="menu-icon">
-        #
-      </span>
-
+    <button class="menu-item" onclick="window.location.href='sistemas.html'">
+      <span class="menu-icon" aria-hidden="true">🖥️</span>
       Sistemas
-
     </button>
 
+    <button class="menu-item" onclick="window.location.href='escala.html'">
+      <span class="menu-icon" aria-hidden="true">📅</span>
+      Escala
+    </button>
 
   </aside>
-
-
-
-  <!-- =====================================================
-     OVERLAY
-====================================================== -->
 
   <div class="overlay" id="overlay"></div>
 

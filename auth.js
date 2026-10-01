@@ -15,6 +15,14 @@ if (!window.centralSACAuthClient) {
   window.centralSACAuthClient = window.supabase.createClient(
     CENTRAL_SAC_SUPABASE_URL,
     CENTRAL_SAC_SUPABASE_KEY,
+    {
+      auth: {
+        storage: window.sessionStorage,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+      },
+    },
   );
 }
 

@@ -549,7 +549,7 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(4, 1fr);
 
             gap: 14px;
 
@@ -918,6 +918,16 @@
             }
 
         }
+
+        @media (min-width: 801px) and (max-width: 1050px) {
+
+            .cards {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+        }
     </style>
 
 </head>
@@ -980,9 +990,7 @@
 
         <button class="menu-item" onclick="window.location.href='calculadora.html'">
 
-            <span class="menu-icon">
-                $
-            </span>
+            <span class="menu-icon" aria-hidden="true">🧮</span>
 
             Calcular multas
 
@@ -991,9 +999,7 @@
 
         <button class="menu-item" onclick="window.location.href='procedimentos.html'">
 
-            <span class="menu-icon">
-                %
-            </span>
+            <span class="menu-icon" aria-hidden="true">📋</span>
 
             Procedimentos
 
@@ -1002,11 +1008,17 @@
 
         <button class="menu-item" onclick="window.location.href='sistemas.html'">
 
-            <span class="menu-icon">
-                #
-            </span>
+            <span class="menu-icon" aria-hidden="true">🖥️</span>
 
             Sistemas
+
+        </button>
+
+        <button class="menu-item" onclick="window.location.href='escala.html'">
+
+            <span class="menu-icon" aria-hidden="true">📅</span>
+
+            Escala
 
         </button>
 
@@ -1300,9 +1312,7 @@
 
                 <article class="card clickable" onclick="window.location.href='procedimentos.html'">
 
-                    <div class="card-icon">
-                        %
-                    </div>
+                    <div class="card-icon" aria-hidden="true">📋</div>
 
 
                     <h3>
@@ -1325,9 +1335,7 @@
 
                 <article class="card clickable" onclick="window.location.href='calculadora.html'">
 
-                    <div class="card-icon">
-                        $
-                    </div>
+                    <div class="card-icon" aria-hidden="true">🧮</div>
 
 
                     <h3>
@@ -1349,9 +1357,7 @@
 
                 <article class="card clickable" onclick="window.location.href='sistemas.html'">
 
-                    <div class="card-icon">
-                        #
-                    </div>
+                    <div class="card-icon" aria-hidden="true">🖥️</div>
 
 
                     <h3>
@@ -1364,6 +1370,27 @@
                         Encontre em um só lugar todos
                         os sistemas utilizados pela
                         equipe.
+
+                    </p>
+
+                </article>
+
+
+                <article class="card clickable" onclick="window.location.href='escala.html'">
+
+                    <div class="card-icon" aria-hidden="true">📅</div>
+
+
+                    <h3>
+                        Escala
+                    </h3>
+
+
+                    <p>
+
+                        Consulte a escala de atendimento
+                        atualizada e acompanhe os horários
+                        e a organização da equipe.
 
                     </p>
 
