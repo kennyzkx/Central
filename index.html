@@ -5,10 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alcans | Portal do Atendente</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -283,8 +280,7 @@
                 translateX(0);
 
             box-shadow:
-                20px 0 50px
-                rgba(0, 0, 0, 0.40);
+                20px 0 50px rgba(0, 0, 0, 0.40);
 
         }
 
@@ -793,15 +789,12 @@
             border-radius: 14px;
 
             background:
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     rgba(255, 90, 0, 0.13),
-                    rgba(255, 90, 0, 0.03)
-                );
+                    rgba(255, 90, 0, 0.03));
 
             border:
-                1px solid
-                rgba(255, 90, 0, 0.28);
+                1px solid rgba(255, 90, 0, 0.28);
 
         }
 
@@ -925,7 +918,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -934,572 +926,531 @@
 <body>
 
 
-<header class="topbar">
+    <header class="topbar">
 
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Abrir menu"
-    >
-        ☰
-    </button>
+        <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+            ☰
+        </button>
 
 
-    <div class="logo">
+        <div class="logo">
 
-        <img
-            src="logo-alcans.png"
-            alt="Alcans"
-        >
+            <img src="logo-alcans.png" alt="Alcans">
 
-        <small>
-            PORTAL DO ATENDENTE
-        </small>
+            <small>
+                PORTAL DO ATENDENTE
+            </small>
 
-    </div>
-
-
-    <div class="search">
-
-        🔎
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Buscar no portal..."
-        >
-
-    </div>
-
-
-    <button
-        class="ask-button"
-        onclick="focarBusca()"
-    >
-        ✦ Perguntar
-    </button>
-
-</header>
-
-
-<aside
-    class="sidebar"
-    id="sidebar"
->
-
-    <div class="menu-title">
-        Portal do Atendente
-    </div>
-
-
-    <button
-        class="menu-item active"
-        onclick="window.location.href='index.html'"
-    >
-
-        <span class="menu-icon">
-            🏠
-        </span>
-
-        Início
-
-    </button>
-
-
-    <button
-        class="menu-item"
-        onclick="window.location.href='calculadora.html'"
-    >
-
-        <span class="menu-icon">
-            $
-        </span>
-
-        Calcular multas
-
-    </button>
-
-
-    <button
-        class="menu-item"
-        onclick="window.location.href='procedimentos.html'"
-    >
-
-        <span class="menu-icon">
-            %
-        </span>
-
-        Procedimentos
-
-    </button>
-
-
-    <button
-        class="menu-item"
-        onclick="window.location.href='sistemas.html'"
-    >
-
-        <span class="menu-icon">
-            #
-        </span>
-
-        Sistemas
-
-    </button>
-
-</aside>
-
-
-<div
-    class="overlay"
-    id="overlay"
-></div>
-
-
-<main id="conteudo">
-
-
-    <section class="hero">
-
-        <div class="kicker">
-            CENTRAL DE APOIO À OPERAÇÃO
         </div>
 
 
-        <h1>
-            Alcans | Portal do Atendente
-        </h1>
+        <div class="search">
+
+            🔎
+
+            <input type="text" id="searchInput" placeholder="Buscar no portal...">
+
+        </div>
 
 
-        <p class="description">
+        <button class="ask-button" onclick="focarBusca()">
+            ✦ Perguntar
+        </button>
 
-            Sua central de apoio durante a operação.
-            Encontre rapidamente informações,
-            procedimentos, orientações e ferramentas
-            para conduzir seus atendimentos com mais
-            segurança e eficiência.
-
-        </p>
-
-    </section>
+    </header>
 
 
-    <section class="sobre-alcans">
+    <aside class="sidebar" id="sidebar">
+
+        <div class="menu-title">
+            Portal do Atendente
+        </div>
 
 
-        <div class="sobre-bloco">
+        <button class="menu-item active" onclick="window.location.href='index.html'">
 
-            <div class="sobre-kicker">
-                SOBRE A EMPRESA
+            <span class="menu-icon">
+                🏠
+            </span>
+
+            Início
+
+        </button>
+
+
+        <button class="menu-item" onclick="window.location.href='calculadora.html'">
+
+            <span class="menu-icon">
+                $
+            </span>
+
+            Calcular multas
+
+        </button>
+
+
+        <button class="menu-item" onclick="window.location.href='procedimentos.html'">
+
+            <span class="menu-icon">
+                %
+            </span>
+
+            Procedimentos
+
+        </button>
+
+
+        <button class="menu-item" onclick="window.location.href='sistemas.html'">
+
+            <span class="menu-icon">
+                #
+            </span>
+
+            Sistemas
+
+        </button>
+
+    </aside>
+
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <main id="conteudo">
+
+
+        <section class="hero">
+
+            <div class="kicker">
+                CENTRAL DE APOIO À OPERAÇÃO
             </div>
 
 
-            <h2>
-                O que é a Alcans?
-            </h2>
+            <h1>
+                Alcans | Portal do Atendente
+            </h1>
 
 
-            <p class="sobre-destaque">
+            <p class="description">
 
-                A Alcans é uma empresa de telecomunicações
-                que nasceu com o propósito de conectar
-                pessoas, empresas e comunidades, levando
-                tecnologia, qualidade e proximidade para
-                cada lugar onde está presente.
-
-            </p>
-
-
-            <p>
-
-                Hoje, a Alcans oferece soluções de internet,
-                telefonia, conectividade e entretenimento,
-                contando com infraestrutura própria e uma
-                operação construída para entregar uma
-                experiência cada vez melhor aos seus clientes.
+                Sua central de apoio durante a operação.
+                Encontre rapidamente informações,
+                procedimentos, orientações e ferramentas
+                para conduzir seus atendimentos com mais
+                segurança e eficiência.
 
             </p>
 
-        </div>
+        </section>
 
 
-        <div class="sobre-bloco">
-
-            <div class="sobre-kicker">
-                NOSSA HISTÓRIA
-            </div>
+        <section class="sobre-alcans">
 
 
-            <h2>
-                Uma história construída por pessoas
-            </h2>
+            <div class="sobre-bloco">
+
+                <div class="sobre-kicker">
+                    SOBRE A EMPRESA
+                </div>
 
 
-            <p>
-
-                Tudo começou a partir de uma necessidade
-                simples: levar uma conexão de internet de
-                qualidade até a empresa de sementes da
-                família do fundador,
-                <strong>Fernando Noronha</strong>.
-
-                Na época, a solução encontrada foi a
-                utilização de uma conexão via rádio.
-
-            </p>
+                <h2>
+                    O que é a Alcans?
+                </h2>
 
 
-            <p>
+                <p class="sobre-destaque">
 
-                O que começou como uma solução para uma
-                necessidade da família rapidamente despertou
-                o interesse de outras pessoas da região.
+                    A Alcans é uma empresa de telecomunicações
+                    que nasceu com o propósito de conectar
+                    pessoas, empresas e comunidades, levando
+                    tecnologia, qualidade e proximidade para
+                    cada lugar onde está presente.
 
-                Moradores de cidades próximas passaram a
-                procurar pelo serviço, e aquela pequena
-                operação começou a crescer.
+                </p>
 
-            </p>
-
-
-            <p>
-
-                A partir daí, nasceu uma visão que acompanha
-                a Alcans até hoje:
-
-                <strong>
-                    levar conexão de qualidade para cada
-                    vez mais pessoas, com proximidade,
-                    tecnologia e excelência.
-                </strong>
-
-            </p>
-
-        </div>
-
-
-        <div class="historia-grid">
-
-
-            <div class="historia-card">
-
-                <h3>
-                    2014 · Fibra óptica
-                </h3>
 
                 <p>
 
-                    Em <strong>2014</strong>, a empresa deu
-                    um dos grandes passos de sua trajetória
-                    e passou a operar com uma rede
-                    <strong>100% em fibra óptica</strong>,
-                    permitindo oferecer conexões de alta
-                    velocidade com maior qualidade e
-                    estabilidade.
+                    Hoje, a Alcans oferece soluções de internet,
+                    telefonia, conectividade e entretenimento,
+                    contando com infraestrutura própria e uma
+                    operação construída para entregar uma
+                    experiência cada vez melhor aos seus clientes.
 
                 </p>
 
             </div>
 
 
-            <div class="historia-card">
+            <div class="sobre-bloco">
 
-                <h3>
-                    Expansão
-                </h3>
+                <div class="sobre-kicker">
+                    NOSSA HISTÓRIA
+                </div>
+
+
+                <h2>
+                    Uma história construída por pessoas
+                </h2>
+
 
                 <p>
 
-                    Com o passar dos anos, a Alcans deixou
-                    de ser uma pequena operação regional e
-                    se transformou em uma empresa de
-                    telecomunicações com presença em
-                    <strong>mais de 110 cidades</strong> do
-                    interior de São Paulo e do Sul de Minas
-                    Gerais.
+                    Tudo começou a partir de uma necessidade
+                    simples: levar uma conexão de internet de
+                    qualidade até a empresa de sementes da
+                    família do fundador,
+                    <strong>Fernando Noronha</strong>.
+
+                    Na época, a solução encontrada foi a
+                    utilização de uma conexão via rádio.
+
+                </p>
+
+
+                <p>
+
+                    O que começou como uma solução para uma
+                    necessidade da família rapidamente despertou
+                    o interesse de outras pessoas da região.
+
+                    Moradores de cidades próximas passaram a
+                    procurar pelo serviço, e aquela pequena
+                    operação começou a crescer.
+
+                </p>
+
+
+                <p>
+
+                    A partir daí, nasceu uma visão que acompanha
+                    a Alcans até hoje:
+
+                    <strong>
+                        levar conexão de qualidade para cada
+                        vez mais pessoas, com proximidade,
+                        tecnologia e excelência.
+                    </strong>
 
                 </p>
 
             </div>
 
 
-            <div class="historia-card">
+            <div class="historia-grid">
 
-                <h3>
-                    Mais de 550 colaboradores
-                </h3>
 
-                <p>
+                <div class="historia-card">
 
-                    Hoje, a empresa conta com
-                    <strong>mais de 550 colaboradores</strong>,
-                    centenas de veículos, centenas de pontos
-                    de presença e uma extensa infraestrutura
-                    própria de fibra óptica.
+                    <h3>
+                        2014 · Fibra óptica
+                    </h3>
 
-                </p>
+                    <p>
+
+                        Em <strong>2014</strong>, a empresa deu
+                        um dos grandes passos de sua trajetória
+                        e passou a operar com uma rede
+                        <strong>100% em fibra óptica</strong>,
+                        permitindo oferecer conexões de alta
+                        velocidade com maior qualidade e
+                        estabilidade.
+
+                    </p>
+
+                </div>
+
+
+                <div class="historia-card">
+
+                    <h3>
+                        Expansão
+                    </h3>
+
+                    <p>
+
+                        Com o passar dos anos, a Alcans deixou
+                        de ser uma pequena operação regional e
+                        se transformou em uma empresa de
+                        telecomunicações com presença em
+                        <strong>mais de 110 cidades</strong> do
+                        interior de São Paulo e do Sul de Minas
+                        Gerais.
+
+                    </p>
+
+                </div>
+
+
+                <div class="historia-card">
+
+                    <h3>
+                        Mais de 550 colaboradores
+                    </h3>
+
+                    <p>
+
+                        Hoje, a empresa conta com
+                        <strong>mais de 550 colaboradores</strong>,
+                        centenas de veículos, centenas de pontos
+                        de presença e uma extensa infraestrutura
+                        própria de fibra óptica.
+
+                    </p>
+
+                </div>
+
+
+                <div class="historia-card">
+
+                    <h3>
+                        Estrutura própria
+                    </h3>
+
+                    <p>
+
+                        A Alcans mantém equipes e estruturas
+                        próprias de engenharia, tecnologia,
+                        construção, atendimento e suporte,
+                        permitindo acompanhar internamente
+                        grande parte da jornada de conexão
+                        do cliente.
+
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="historia-card">
-
-                <h3>
-                    Estrutura própria
-                </h3>
+            <div class="alcans-final">
 
                 <p>
 
-                    A Alcans mantém equipes e estruturas
-                    próprias de engenharia, tecnologia,
-                    construção, atendimento e suporte,
-                    permitindo acompanhar internamente
-                    grande parte da jornada de conexão
-                    do cliente.
+                    Mas a história da Alcans não é feita apenas
+                    de números.
+
+                    É uma história construída por pessoas.
+                    Pessoas que começaram com uma necessidade,
+                    enxergaram uma oportunidade e transformaram
+                    uma pequena conexão via rádio em uma empresa
+                    que hoje conecta famílias, empresas e
+                    comunidades.
 
                 </p>
 
+
+                <p>
+
+                    <strong>
+                        Porque conectar vai muito além de oferecer
+                        internet.
+                    </strong>
+
+                    É aproximar pessoas, abrir possibilidades
+                    e contribuir para o desenvolvimento de onde
+                    estamos presentes.
+
+                </p>
+
+
+                <div class="section-title">
+                    Nossos Pilares
+                </div>
+
+
+                <div class="alcans-valores">
+
+                    <div class="valor">
+                        Tecnologia
+                    </div>
+
+                    <div class="valor">
+                        Excelência
+                    </div>
+
+                    <div class="valor">
+                        Simplicidade
+                    </div>
+
+                    <div class="valor">
+                        Performance
+                    </div>
+
+                </div>
+
             </div>
 
-        </div>
+        </section>
 
 
-        <div class="alcans-final">
-
-            <p>
-
-                Mas a história da Alcans não é feita apenas
-                de números.
-
-                É uma história construída por pessoas.
-                Pessoas que começaram com uma necessidade,
-                enxergaram uma oportunidade e transformaram
-                uma pequena conexão via rádio em uma empresa
-                que hoje conecta famílias, empresas e
-                comunidades.
-
-            </p>
+        <div class="divider"></div>
 
 
-            <p>
-
-                <strong>
-                    Porque conectar vai muito além de oferecer
-                    internet.
-                </strong>
-
-                É aproximar pessoas, abrir possibilidades
-                e contribuir para o desenvolvimento de onde
-                estamos presentes.
-
-            </p>
-
+        <section class="informacoes">
 
             <div class="section-title">
-                Nossos Pilares
+                Informações principais
             </div>
 
 
-            <div class="alcans-valores">
+            <div class="cards">
 
-                <div class="valor">
-                    Tecnologia
-                </div>
 
-                <div class="valor">
-                    Excelência
-                </div>
+                <article class="card clickable" onclick="window.location.href='procedimentos.html'">
 
-                <div class="valor">
-                    Simplicidade
-                </div>
+                    <div class="card-icon">
+                        %
+                    </div>
 
-                <div class="valor">
-                    Performance
-                </div>
+
+                    <h3>
+                        Procedimentos
+                    </h3>
+
+
+                    <p>
+
+                        Consulte os procedimentos
+                        documentados da operação e
+                        encontre rapidamente o passo
+                        a passo necessário para cada
+                        atendimento.
+
+                    </p>
+
+                </article>
+
+
+                <article class="card clickable" onclick="window.location.href='calculadora.html'">
+
+                    <div class="card-icon">
+                        $
+                    </div>
+
+
+                    <h3>
+                        Calcular multas
+                    </h3>
+
+
+                    <p>
+
+                        Acesse a calculadora de multas
+                        já existente e utilize as
+                        ferramentas disponíveis para
+                        realizar os cálculos.
+
+                    </p>
+
+                </article>
+
+
+                <article class="card clickable" onclick="window.location.href='sistemas.html'">
+
+                    <div class="card-icon">
+                        #
+                    </div>
+
+
+                    <h3>
+                        Sistemas
+                    </h3>
+
+
+                    <p>
+
+                        Encontre em um só lugar todos
+                        os sistemas utilizados pela
+                        equipe.
+
+                    </p>
+
+                </article>
+
 
             </div>
 
-        </div>
-
-    </section>
+        </section>
 
 
-    <div class="divider"></div>
+        <div class="footer">
 
-
-    <section class="informacoes">
-
-        <div class="section-title">
-            Informações principais
-        </div>
-
-
-        <div class="cards">
-
-
-            <article
-                class="card clickable"
-                onclick="window.location.href='procedimentos.html'"
-            >
-
-                <div class="card-icon">
-                    %
-                </div>
-
-
-                <h3>
-                    Procedimentos
-                </h3>
-
-
-                <p>
-
-                    Consulte os procedimentos
-                    documentados da operação e
-                    encontre rapidamente o passo
-                    a passo necessário para cada
-                    atendimento.
-
-                </p>
-
-            </article>
-
-
-            <article
-                class="card clickable"
-                onclick="window.location.href='calculadora.html'"
-            >
-
-                <div class="card-icon">
-                    $
-                </div>
-
-
-                <h3>
-                    Calcular multas
-                </h3>
-
-
-                <p>
-
-                    Acesse a calculadora de multas
-                    já existente e utilize as
-                    ferramentas disponíveis para
-                    realizar os cálculos.
-
-                </p>
-
-            </article>
-
-
-            <article
-                class="card clickable"
-                onclick="window.location.href='sistemas.html'"
-            >
-
-                <div class="card-icon">
-                    #
-                </div>
-
-
-                <h3>
-                    Sistemas
-                </h3>
-
-
-                <p>
-
-                    Encontre em um só lugar todos
-                    os sistemas utilizados pela
-                    equipe.
-
-                </p>
-
-            </article>
-
+            Alcans · Portal interno do Atendente
 
         </div>
 
-    </section>
+
+    </main>
 
 
-    <div class="footer">
+    <script>
 
-        Alcans · Portal interno do Atendente
-
-    </div>
-
-
-</main>
+        const menuButton =
+            document.getElementById("menuButton");
 
 
-<script>
-
-    const menuButton =
-        document.getElementById("menuButton");
+        const sidebar =
+            document.getElementById("sidebar");
 
 
-    const sidebar =
-        document.getElementById("sidebar");
+        const overlay =
+            document.getElementById("overlay");
 
 
-    const overlay =
-        document.getElementById("overlay");
+        menuButton.addEventListener(
+            "click",
+            function () {
 
+                sidebar.classList.toggle("open");
 
-    menuButton.addEventListener(
-        "click",
-        function() {
-
-            sidebar.classList.toggle("open");
-
-            overlay.classList.toggle("active");
-
-        }
-    );
-
-
-    overlay.addEventListener(
-        "click",
-        function() {
-
-            sidebar.classList.remove("open");
-
-            overlay.classList.remove("active");
-
-        }
-    );
-
-
-    function focarBusca() {
-
-        document
-            .getElementById("searchInput")
-            .focus();
-
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                (event.ctrlKey || event.metaKey) &&
-                event.key.toLowerCase() === "k"
-            ) {
-
-                event.preventDefault();
-
-                focarBusca();
+                overlay.classList.toggle("active");
 
             }
+        );
+
+
+        overlay.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.remove("open");
+
+                overlay.classList.remove("active");
+
+            }
+        );
+
+
+        function focarBusca() {
+
+            document
+                .getElementById("searchInput")
+                .focus();
 
         }
-    );
 
-</script>
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    (event.ctrlKey || event.metaKey) &&
+                    event.key.toLowerCase() === "k"
+                ) {
+
+                    event.preventDefault();
+
+                    focarBusca();
+
+                }
+
+            }
+        );
+
+    </script>
 
 
 </body>
