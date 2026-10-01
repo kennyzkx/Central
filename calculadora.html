@@ -121,6 +121,107 @@
         }
 
 
+
+        /* =====================================================
+   MENU LATERAL — MESMO PADRÃO DO PORTAL
+===================================================== */
+
+        .sidebar {
+            position: fixed;
+            top: 66px;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            background: var(--fundo-menu);
+            border-right: 1px solid var(--borda);
+            padding: 22px 14px;
+            transform: translateX(-100%);
+            transition: 0.25s ease;
+            z-index: 900;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+            box-shadow: 20px 0 50px rgba(0, 0, 0, .40);
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #737B87;
+            text-transform: uppercase;
+            margin: 5px 12px 12px;
+            font-weight: bold;
+        }
+
+        .menu-item {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #CBD0D8;
+            text-align: left;
+            padding: 13px 12px;
+            border-radius: 9px;
+            margin: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .menu-item:hover {
+            background: var(--card-hover);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: var(--card-hover);
+            color: white;
+            box-shadow: inset 3px 0 0 var(--laranja);
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+            color: var(--laranja);
+            font-size: 17px;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 66px 0 0;
+            background: rgba(0, 0, 0, .55);
+            display: none;
+            z-index: 800;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .header-back {
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: transparent;
+            color: white;
+            border-radius: 8px;
+            font-size: 27px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: 0.2s;
+        }
+
+        .header-back:hover {
+            background: rgba(255, 255, 255, .10);
+        }
+
         .logo-area {
             width: 185px;
             display: flex;
@@ -1733,9 +1834,10 @@
 
     <header class="header">
 
-        <button class="header-back" onclick="window.location.href='index.html'" aria-label="Abrir menu">
+        <button class="header-back" id="menuButton" aria-label="Abrir menu" type="button">
             ☰
         </button>
+
         <div class="logo-area">
             <img src="logo-alcans.png" alt="Alcans" class="header-logo">
             <div class="logo-sub">
@@ -1748,6 +1850,36 @@
         </div>
 
     </header>
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="menu-title">
+            Portal do Atendente
+        </div>
+
+        <button class="menu-item" onclick="window.location.href='index.html'" type="button">
+            <span class="menu-icon">🏠</span>
+            Início
+        </button>
+
+        <button class="menu-item active" onclick="window.location.href='calculadora.html'" type="button">
+            <span class="menu-icon">$</span>
+            Calcular multas
+        </button>
+
+        <button class="menu-item" onclick="window.location.href='procedimentos.html'" type="button">
+            <span class="menu-icon">%</span>
+            Procedimentos
+        </button>
+
+        <button class="menu-item" onclick="window.location.href='sistemas.html'" type="button">
+            <span class="menu-icon">#</span>
+            Sistemas
+        </button>
+
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
 
     <main class="container">
 
@@ -2198,6 +2330,22 @@
     </main>
 
 
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+
+        menuButton.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+            overlay.classList.toggle("active");
+        });
+
+        overlay.addEventListener("click", function () {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("active");
+        });
+    </script>
 
     <script>
         'use strict';
