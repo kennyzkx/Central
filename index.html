@@ -40,13 +40,6 @@
             );
 
 
-        /*
-         * Verifica se existe usuário logado.
-         *
-         * Se não existir sessão,
-         * envia imediatamente para o login.
-         */
-
         async function verificarAcesso() {
 
             try {
@@ -86,11 +79,6 @@
                 }
 
 
-                /*
-                 * Usuário autenticado.
-                 * Mantém a página normalmente.
-                 */
-
                 console.log(
                     "CentralSAC: usuário autenticado."
                 );
@@ -114,79 +102,8 @@
 
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-
-const SUPABASE_URL =
-    "https://adjrbgwnvagdqbqzfgwf.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_YFkBbmCNye3C74aJuu7BcA_zmvSdRnT";
-
-const supabaseAuth =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-(async function () {
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabaseAuth.auth.getSession();
-
-
-        if (error) {
-
-            console.error(
-                "Erro ao verificar login:",
-                error
-            );
-
-            window.location.replace("login.html");
-
-            return;
-        }
-
-
-        if (!data || !data.session) {
-
-            window.location.replace("login.html");
-
-            return;
-        }
-
-
-        console.log(
-            "Usuário autenticado:",
-            data.session.user.email
-        );
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro na autenticação:",
-            erro
-        );
-
-        window.location.replace("login.html");
-
-    }
-
-})();
-
-</script>
     <style>
-
-        /* =====================================================
-           CONFIGURAÇÕES GERAIS
-        ===================================================== */
 
         * {
             margin: 0;
@@ -214,11 +131,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           BODY
-        ===================================================== */
-
         body {
 
             font-family:
@@ -234,11 +146,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           BARRA SUPERIOR
-        ===================================================== */
 
         .topbar {
 
@@ -262,11 +169,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           BOTÃO MENU
-        ===================================================== */
 
         .menu-button {
 
@@ -309,11 +211,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
         .logo {
 
             width: 185px;
@@ -353,11 +250,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           BARRA DE PESQUISA
-        ===================================================== */
 
         .search {
 
@@ -413,11 +305,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           BOTÃO PERGUNTAR
-        ===================================================== */
-
         .ask-button {
 
             padding: 10px 15px;
@@ -447,11 +334,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           MENU LATERAL
-        ===================================================== */
 
         .sidebar {
 
@@ -497,11 +379,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           TÍTULO DO MENU
-        ===================================================== */
-
         .menu-title {
 
             font-size: 11px;
@@ -517,11 +394,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           ITENS DO MENU
-        ===================================================== */
 
         .menu-item {
 
@@ -592,11 +464,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           OVERLAY
-        ===================================================== */
-
         .overlay {
 
             position: fixed;
@@ -620,11 +487,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           CONTEÚDO PRINCIPAL
-        ===================================================== */
-
         main {
 
             max-width: 1080px;
@@ -636,11 +498,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           HERO
-        ===================================================== */
 
         .hero {
 
@@ -688,11 +545,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           DIVISOR
-        ===================================================== */
-
         .divider {
 
             height: 1px;
@@ -706,11 +558,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           TÍTULOS
-        ===================================================== */
-
         .section-title {
 
             font-size: 18px;
@@ -721,11 +568,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           NOSSOS PILARES
-        ===================================================== */
 
         .pilares-container {
 
@@ -789,11 +631,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           INFORMAÇÕES PRINCIPAIS
-        ===================================================== */
-
         .informacoes {
 
             margin-top: 34px;
@@ -813,11 +650,6 @@ const supabaseAuth =
         }
 
 
-
-        /* =====================================================
-           CARD
-        ===================================================== */
-
         .card {
 
             background:
@@ -834,6 +666,8 @@ const supabaseAuth =
 
             transition: 0.2s;
 
+            cursor: pointer;
+
         }
 
 
@@ -847,18 +681,6 @@ const supabaseAuth =
 
         }
 
-
-        .card.clickable {
-
-            cursor: pointer;
-
-        }
-
-
-
-        /* =====================================================
-           ÍCONE DO CARD
-        ===================================================== */
 
         .card-icon {
 
@@ -904,73 +726,221 @@ const supabaseAuth =
         }
 
 
+        .sobre-alcans {
 
-        /* =====================================================
-           AVISO
-        ===================================================== */
+            margin-top: 50px;
 
-        .notice {
+        }
 
-            margin-top: 26px;
+
+        .sobre-bloco {
 
             background:
-                linear-gradient(
-                    135deg,
-                    #191D24,
-                    #12151A
-                );
+                var(--card);
+
+            border:
+                1px solid var(--borda);
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .sobre-kicker {
+
+            color:
+                var(--laranja);
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .sobre-bloco h2 {
+
+            font-size: 25px;
+
+            letter-spacing: -0.5px;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .sobre-bloco p {
+
+            color:
+                var(--texto-secundario);
+
+            font-size: 14px;
+
+            line-height: 1.75;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .sobre-bloco p:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .sobre-destaque {
+
+            color:
+                var(--texto) !important;
+
+            font-weight: 600;
+
+        }
+
+
+        .historia-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .historia-card {
+
+            background:
+                var(--card);
 
             border:
                 1px solid var(--borda);
 
             border-radius: 14px;
 
-            padding: 21px;
+            padding: 24px;
 
-            display: flex;
-
-            gap: 18px;
-
-            align-items: flex-start;
+            transition: 0.2s;
 
         }
 
 
-        .notice-icon {
+        .historia-card:hover {
 
-            font-size: 22px;
+            background:
+                var(--card-hover);
 
-            color:
-                var(--laranja);
-
-        }
-
-
-        .notice strong {
-
-            display: block;
-
-            margin-bottom: 6px;
+            transform:
+                translateY(-2px);
 
         }
 
 
-        .notice span {
+        .historia-card h3 {
+
+            font-size: 17px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .historia-card p {
 
             color:
                 var(--texto-secundario);
 
             font-size: 13px;
 
-            line-height: 1.5;
+            line-height: 1.7;
 
         }
 
 
+        .alcans-final {
 
-        /* =====================================================
-           RODAPÉ
-        ===================================================== */
+            margin-top: 18px;
+
+            padding:
+                28px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 90, 0, 0.13),
+                    rgba(255, 90, 0, 0.03)
+                );
+
+            border:
+                1px solid
+                rgba(255, 90, 0, 0.28);
+
+        }
+
+
+        .alcans-final p {
+
+            color:
+                var(--texto);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .alcans-valores {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .valor {
+
+            padding:
+                8px 14px;
+
+            border-radius: 8px;
+
+            background:
+                var(--laranja);
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
 
         .footer {
 
@@ -984,11 +954,6 @@ const supabaseAuth =
 
         }
 
-
-
-        /* =====================================================
-           RESPONSIVO
-        ===================================================== */
 
         @media (max-width: 800px) {
 
@@ -1059,28 +1024,16 @@ const supabaseAuth =
 <body>
 
 
-<!-- =====================================================
-     BARRA SUPERIOR
-===================================================== -->
-
 <header class="topbar">
-
-
-    <!-- BOTÃO MENU -->
 
     <button
         class="menu-button"
         id="menuButton"
         aria-label="Abrir menu"
     >
-
         ☰
-
     </button>
 
-
-
-    <!-- LOGO -->
 
     <div class="logo">
 
@@ -1096,9 +1049,6 @@ const supabaseAuth =
     </div>
 
 
-
-    <!-- PESQUISA -->
-
     <div class="search">
 
         🔎
@@ -1112,42 +1062,25 @@ const supabaseAuth =
     </div>
 
 
-
-    <!-- PERGUNTAR -->
-
     <button
         class="ask-button"
         onclick="focarBusca()"
     >
-
         ✦ Perguntar
-
     </button>
-
 
 </header>
 
-
-
-<!-- =====================================================
-     MENU LATERAL
-===================================================== -->
 
 <aside
     class="sidebar"
     id="sidebar"
 >
 
-
     <div class="menu-title">
-
         Portal do Atendente
-
     </div>
 
-
-
-    <!-- INÍCIO -->
 
     <button
         class="menu-item active"
@@ -1155,9 +1088,7 @@ const supabaseAuth =
     >
 
         <span class="menu-icon">
-
             🏠
-
         </span>
 
         Início
@@ -1165,18 +1096,13 @@ const supabaseAuth =
     </button>
 
 
-
-    <!-- CALCULAR MULTAS -->
-
     <button
         class="menu-item"
         onclick="window.location.href='calculadora.html'"
     >
 
         <span class="menu-icon">
-
             $
-
         </span>
 
         Calcular multas
@@ -1184,18 +1110,13 @@ const supabaseAuth =
     </button>
 
 
-
-    <!-- PROCEDIMENTOS -->
-
     <button
         class="menu-item"
         onclick="window.location.href='procedimentos.html'"
     >
 
         <span class="menu-icon">
-
             %
-
         </span>
 
         Procedimentos
@@ -1203,32 +1124,21 @@ const supabaseAuth =
     </button>
 
 
-
-    <!-- SISTEMAS -->
-
     <button
         class="menu-item"
         onclick="window.location.href='sistemas.html'"
     >
 
         <span class="menu-icon">
-
             #
-
         </span>
 
         Sistemas
 
     </button>
 
-
 </aside>
 
-
-
-<!-- =====================================================
-     FUNDO DO MENU
-===================================================== -->
 
 <div
     class="overlay"
@@ -1236,28 +1146,19 @@ const supabaseAuth =
 ></div>
 
 
-
-<!-- =====================================================
-     CONTEÚDO PRINCIPAL
-===================================================== -->
-
 <main id="conteudo">
 
 
-
-    <!-- =================================================
-         INÍCIO
-    ================================================= -->
-
     <section class="hero">
+
+        <div class="kicker">
+            CENTRAL DE APOIO À OPERAÇÃO
+        </div>
 
 
         <h1>
-
             Alcans | Portal do Atendente
-
         </h1>
-
 
 
         <p class="description">
@@ -1270,121 +1171,276 @@ const supabaseAuth =
 
         </p>
 
-
     </section>
 
 
+    <section class="sobre-alcans">
 
-    <!-- DIVISOR -->
+
+        <div class="sobre-bloco">
+
+            <div class="sobre-kicker">
+                SOBRE A EMPRESA
+            </div>
+
+
+            <h2>
+                O que é a Alcans?
+            </h2>
+
+
+            <p class="sobre-destaque">
+
+                A Alcans é uma empresa de telecomunicações
+                que nasceu com o propósito de conectar
+                pessoas, empresas e comunidades, levando
+                tecnologia, qualidade e proximidade para
+                cada lugar onde está presente.
+
+            </p>
+
+
+            <p>
+
+                Hoje, a Alcans oferece soluções de internet,
+                telefonia, conectividade e entretenimento,
+                contando com infraestrutura própria e uma
+                operação construída para entregar uma
+                experiência cada vez melhor aos seus clientes.
+
+            </p>
+
+        </div>
+
+
+        <div class="sobre-bloco">
+
+            <div class="sobre-kicker">
+                NOSSA HISTÓRIA
+            </div>
+
+
+            <h2>
+                Uma história construída por pessoas
+            </h2>
+
+
+            <p>
+
+                Tudo começou a partir de uma necessidade
+                simples: levar uma conexão de internet de
+                qualidade até a empresa de sementes da
+                família do fundador,
+                <strong>Fernando Noronha</strong>.
+
+                Na época, a solução encontrada foi a
+                utilização de uma conexão via rádio.
+
+            </p>
+
+
+            <p>
+
+                O que começou como uma solução para uma
+                necessidade da família rapidamente despertou
+                o interesse de outras pessoas da região.
+
+                Moradores de cidades próximas passaram a
+                procurar pelo serviço, e aquela pequena
+                operação começou a crescer.
+
+            </p>
+
+
+            <p>
+
+                A partir daí, nasceu uma visão que acompanha
+                a Alcans até hoje:
+
+                <strong>
+                    levar conexão de qualidade para cada
+                    vez mais pessoas, com proximidade,
+                    tecnologia e excelência.
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <div class="historia-grid">
+
+
+            <div class="historia-card">
+
+                <h3>
+                    2014 · Fibra óptica
+                </h3>
+
+                <p>
+
+                    Em <strong>2014</strong>, a empresa deu
+                    um dos grandes passos de sua trajetória
+                    e passou a operar com uma rede
+                    <strong>100% em fibra óptica</strong>,
+                    permitindo oferecer conexões de alta
+                    velocidade com maior qualidade e
+                    estabilidade.
+
+                </p>
+
+            </div>
+
+
+            <div class="historia-card">
+
+                <h3>
+                    Expansão
+                </h3>
+
+                <p>
+
+                    Com o passar dos anos, a Alcans deixou
+                    de ser uma pequena operação regional e
+                    se transformou em uma empresa de
+                    telecomunicações com presença em
+                    <strong>mais de 110 cidades</strong> do
+                    interior de São Paulo e do Sul de Minas
+                    Gerais.
+
+                </p>
+
+            </div>
+
+
+            <div class="historia-card">
+
+                <h3>
+                    Mais de 550 colaboradores
+                </h3>
+
+                <p>
+
+                    Hoje, a empresa conta com
+                    <strong>mais de 550 colaboradores</strong>,
+                    centenas de veículos, centenas de pontos
+                    de presença e uma extensa infraestrutura
+                    própria de fibra óptica.
+
+                </p>
+
+            </div>
+
+
+            <div class="historia-card">
+
+                <h3>
+                    Estrutura própria
+                </h3>
+
+                <p>
+
+                    A Alcans mantém equipes e estruturas
+                    próprias de engenharia, tecnologia,
+                    construção, atendimento e suporte,
+                    permitindo acompanhar internamente
+                    grande parte da jornada de conexão
+                    do cliente.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="alcans-final">
+
+            <p>
+
+                Mas a história da Alcans não é feita apenas
+                de números.
+
+                É uma história construída por pessoas.
+                Pessoas que começaram com uma necessidade,
+                enxergaram uma oportunidade e transformaram
+                uma pequena conexão via rádio em uma empresa
+                que hoje conecta famílias, empresas e
+                comunidades.
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Porque conectar vai muito além de oferecer
+                    internet.
+                </strong>
+
+                É aproximar pessoas, abrir possibilidades
+                e contribuir para o desenvolvimento de onde
+                estamos presentes.
+
+            </p>
+
+
+            <div class="section-title">
+                Nossos Pilares
+            </div>
+
+
+            <div class="alcans-valores">
+
+                <div class="valor">
+                    Tecnologia
+                </div>
+
+                <div class="valor">
+                    Excelência
+                </div>
+
+                <div class="valor">
+                    Simplicidade
+                </div>
+
+                <div class="valor">
+                    Performance
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 
     <div class="divider"></div>
 
 
-
-    <!-- =================================================
-         NOSSOS PILARES
-    ================================================= -->
-
-    <section class="pilares">
-
-
-        <div class="section-title">
-
-            Nossos Pilares
-
-        </div>
-
-
-
-        <div class="pilares-container">
-
-
-            <button class="pilar">
-
-                <span>1</span>
-
-                Tecnologia
-
-            </button>
-
-
-
-            <button class="pilar">
-
-                <span>2</span>
-
-                Excelência
-
-            </button>
-
-
-
-            <button class="pilar">
-
-                <span>3</span>
-
-                Simplicidade
-
-            </button>
-
-
-
-            <button class="pilar">
-
-                <span>4</span>
-
-                Performance
-
-            </button>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =================================================
-         INFORMAÇÕES PRINCIPAIS
-    ================================================= -->
-
     <section class="informacoes">
 
-
         <div class="section-title">
-
             Informações principais
-
         </div>
-
 
 
         <div class="cards">
 
-
-            <!-- PROCEDIMENTOS -->
 
             <article
                 class="card clickable"
                 onclick="window.location.href='procedimentos.html'"
             >
 
-
                 <div class="card-icon">
-
                     %
-
                 </div>
 
 
-
                 <h3>
-
                     Procedimentos
-
                 </h3>
-
 
 
                 <p>
@@ -1397,33 +1453,22 @@ const supabaseAuth =
 
                 </p>
 
-
             </article>
 
-
-
-            <!-- MULTAS -->
 
             <article
                 class="card clickable"
                 onclick="window.location.href='calculadora.html'"
             >
 
-
                 <div class="card-icon">
-
                     $
-
                 </div>
 
 
-
                 <h3>
-
                     Calcular multas
-
                 </h3>
-
 
 
                 <p>
@@ -1435,33 +1480,22 @@ const supabaseAuth =
 
                 </p>
 
-
             </article>
 
-
-
-            <!-- SISTEMAS -->
 
             <article
                 class="card clickable"
                 onclick="window.location.href='sistemas.html'"
             >
 
-
                 <div class="card-icon">
-
                     #
-
                 </div>
 
 
-
                 <h3>
-
                     Sistemas
-
                 </h3>
-
 
 
                 <p>
@@ -1472,20 +1506,13 @@ const supabaseAuth =
 
                 </p>
 
-
             </article>
 
 
         </div>
 
-
     </section>
 
-
-
-    <!-- =================================================
-         RODAPÉ
-    ================================================= -->
 
     <div class="footer">
 
@@ -1497,17 +1524,7 @@ const supabaseAuth =
 </main>
 
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
-
-
-    /* =====================================================
-       ELEMENTOS
-    ===================================================== */
 
     const menuButton =
         document.getElementById("menuButton");
@@ -1521,11 +1538,6 @@ const supabaseAuth =
         document.getElementById("overlay");
 
 
-
-    /* =====================================================
-       ABRIR / FECHAR MENU
-    ===================================================== */
-
     menuButton.addEventListener(
         "click",
         function() {
@@ -1537,11 +1549,6 @@ const supabaseAuth =
         }
     );
 
-
-
-    /* =====================================================
-       FECHAR MENU CLICANDO FORA
-    ===================================================== */
 
     overlay.addEventListener(
         "click",
@@ -1555,11 +1562,6 @@ const supabaseAuth =
     );
 
 
-
-    /* =====================================================
-       PESQUISA
-    ===================================================== */
-
     function focarBusca() {
 
         document
@@ -1568,11 +1570,6 @@ const supabaseAuth =
 
     }
 
-
-
-    /* =====================================================
-       CTRL + K
-    ===================================================== */
 
     document.addEventListener(
         "keydown",
@@ -1591,7 +1588,6 @@ const supabaseAuth =
 
         }
     );
-
 
 </script>
 
