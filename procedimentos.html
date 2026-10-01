@@ -1191,25 +1191,135 @@
     }
 
 
-    .editor-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:6px; padding:8px; background:#171B21; border:1px solid var(--borda); border-bottom:none; border-radius:9px 9px 0 0; }
-    .editor-tool { min-width:34px; height:34px; padding:0 9px; border:1px solid var(--borda); border-radius:7px; background:#252A32; color:#DDE1E7; cursor:pointer; font-size:13px; font-weight:bold; display:inline-flex; align-items:center; justify-content:center; }
-    .editor-tool:hover { background:#303640; color:white; border-color:var(--laranja); }
-    .editor-tool.active { background:rgba(255,90,0,.18); color:var(--laranja); border-color:var(--laranja); }
-    .editor-divider { width:1px; height:24px; background:var(--borda); margin:0 2px; }
-    .editor-colors { display:flex; align-items:center; gap:5px; padding:0 2px; }
-    .editor-color { width:25px; height:25px; padding:0; border:2px solid #454C57; border-radius:50%; cursor:pointer; transition:.15s; }
-    .editor-color:hover { transform:scale(1.12); border-color:white; }
-    .editor-color.white { box-shadow:inset 0 0 0 1px #777; }
-    .rich-editor { width:100%; min-height:220px; max-height:430px; overflow-y:auto; border:1px solid var(--borda); border-radius:0 0 9px 9px; background:#111419; color:var(--texto); outline:none; padding:12px; font-family:Arial,Helvetica,sans-serif; font-size:13px; line-height:1.65; white-space:pre-wrap; }
-    .rich-editor:focus { border-color:var(--laranja); }
-    .rich-editor:empty::before { content:attr(data-placeholder); color:#68717D; pointer-events:none; }
-    .rich-editor p { margin:0 0 8px; }
-    .rich-editor ul,.rich-editor ol { margin:8px 0 8px 22px; }
-    .view-content { white-space:normal; }
-    .view-content p { margin:0 0 10px; }
-    .view-content p:last-child { margin-bottom:0; }
-    .view-content ul,.view-content ol { margin:8px 0 8px 24px; }
-    .view-content li { margin-bottom:5px; }
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px;
+      background: #171B21;
+      border: 1px solid var(--borda);
+      border-bottom: none;
+      border-radius: 9px 9px 0 0;
+    }
+
+    .editor-tool {
+      min-width: 34px;
+      height: 34px;
+      padding: 0 9px;
+      border: 1px solid var(--borda);
+      border-radius: 7px;
+      background: #252A32;
+      color: #DDE1E7;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .editor-tool:hover {
+      background: #303640;
+      color: white;
+      border-color: var(--laranja);
+    }
+
+    .editor-tool.active {
+      background: rgba(255, 90, 0, .18);
+      color: var(--laranja);
+      border-color: var(--laranja);
+    }
+
+    .editor-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--borda);
+      margin: 0 2px;
+    }
+
+    .editor-colors {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 2px;
+    }
+
+    .editor-color {
+      width: 25px;
+      height: 25px;
+      padding: 0;
+      border: 2px solid #454C57;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .editor-color:hover {
+      transform: scale(1.12);
+      border-color: white;
+    }
+
+    .editor-color.white {
+      box-shadow: inset 0 0 0 1px #777;
+    }
+
+    .rich-editor {
+      width: 100%;
+      min-height: 220px;
+      max-height: 430px;
+      overflow-y: auto;
+      border: 1px solid var(--borda);
+      border-radius: 0 0 9px 9px;
+      background: #111419;
+      color: var(--texto);
+      outline: none;
+      padding: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .rich-editor:focus {
+      border-color: var(--laranja);
+    }
+
+    .rich-editor:empty::before {
+      content: attr(data-placeholder);
+      color: #68717D;
+      pointer-events: none;
+    }
+
+    .rich-editor p {
+      margin: 0 0 8px;
+    }
+
+    .rich-editor ul,
+    .rich-editor ol {
+      margin: 8px 0 8px 22px;
+    }
+
+    .view-content {
+      white-space: normal;
+    }
+
+    .view-content p {
+      margin: 0 0 10px;
+    }
+
+    .view-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .view-content ul,
+    .view-content ol {
+      margin: 8px 0 8px 24px;
+    }
+
+    .view-content li {
+      margin-bottom: 5px;
+    }
 
 
     .modal-footer {
@@ -1445,8 +1555,8 @@
   </style>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
 
 </head>
 
@@ -1614,11 +1724,7 @@
       </div>
 
 
-      <button
-        class="btn btn-primary gestao-only"
-        id="btnNovoProcedimento"
-        onclick="abrirNovoProcedimento()"
-      >
+      <button class="btn btn-primary gestao-only" id="btnNovoProcedimento" onclick="abrirNovoProcedimento()">
 
         + Novo procedimento
 
@@ -1782,29 +1888,29 @@
 
 
             <div class="editor-toolbar" id="editorToolbar">
-<button type="button" class="editor-tool" data-command="bold" title="Negrito"><strong>B</strong></button>
-<button type="button" class="editor-tool" data-command="italic" title="Itálico"><em>I</em></button>
-<button type="button" class="editor-tool" data-command="underline" title="Sublinhado"><u>U</u></button>
-<div class="editor-divider"></div>
-<button type="button" class="editor-tool" data-command="insertUnorderedList" title="Lista com marcadores">•</button>
-<button type="button" class="editor-tool" data-command="insertOrderedList" title="Lista numerada">1.</button>
-<div class="editor-divider"></div>
-<div class="editor-colors" title="Cor do texto">
-<button type="button" class="editor-color" data-color="#FF5A00" title="Laranja" style="background:#FF5A00"></button>
-<button type="button" class="editor-color" data-color="#EF4444" title="Vermelho" style="background:#EF4444"></button>
-<button type="button" class="editor-color" data-color="#FACC15" title="Amarelo" style="background:#FACC15"></button>
-<button type="button" class="editor-color" data-color="#22C55E" title="Verde" style="background:#22C55E"></button>
-<button type="button" class="editor-color" data-color="#3B82F6" title="Azul" style="background:#3B82F6"></button>
-<button type="button" class="editor-color" data-color="#A855F7" title="Roxo" style="background:#A855F7"></button>
-<button type="button" class="editor-color white" data-color="#FFFFFF" title="Branco" style="background:#FFFFFF"></button>
-</div>
-<div class="editor-divider"></div>
-<button type="button" class="editor-tool" id="btnHighlight" title="Marca-texto amarelo">🖍️</button>
-<button type="button" class="editor-tool" id="btnClearFormat" title="Limpar formatação">Tx</button>
-<button type="button" class="editor-tool" data-command="undo" title="Desfazer">↶</button>
-<button type="button" class="editor-tool" data-command="redo" title="Refazer">↷</button>
-</div>
-<div class="rich-editor" id="conteudo" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Digite o passo a passo do procedimento..."></div>
+              <button type="button" class="editor-tool" data-command="bold" title="Negrito"><strong>B</strong></button>
+              <button type="button" class="editor-tool" data-command="italic" title="Itálico"><em>I</em></button>
+              <button type="button" class="editor-tool" data-command="underline" title="Sublinhado"><u>U</u></button>
+              <div class="editor-divider"></div>
+              <button type="button" class="editor-tool" data-command="insertUnorderedList" title="Lista com marcadores">•</button>
+              <button type="button" class="editor-tool" data-command="insertOrderedList" title="Lista numerada">1.</button>
+              <div class="editor-divider"></div>
+              <div class="editor-colors" title="Cor do texto">
+                <button type="button" class="editor-color" data-color="#FF5A00" title="Laranja" style="background:#FF5A00"></button>
+                <button type="button" class="editor-color" data-color="#EF4444" title="Vermelho" style="background:#EF4444"></button>
+                <button type="button" class="editor-color" data-color="#FACC15" title="Amarelo" style="background:#FACC15"></button>
+                <button type="button" class="editor-color" data-color="#22C55E" title="Verde" style="background:#22C55E"></button>
+                <button type="button" class="editor-color" data-color="#3B82F6" title="Azul" style="background:#3B82F6"></button>
+                <button type="button" class="editor-color" data-color="#A855F7" title="Roxo" style="background:#A855F7"></button>
+                <button type="button" class="editor-color white" data-color="#FFFFFF" title="Branco" style="background:#FFFFFF"></button>
+              </div>
+              <div class="editor-divider"></div>
+              <button type="button" class="editor-tool" id="btnHighlight" title="Marca-texto amarelo">🖍️</button>
+              <button type="button" class="editor-tool" id="btnClearFormat" title="Limpar formatação">Tx</button>
+              <button type="button" class="editor-tool" data-command="undo" title="Desfazer">↶</button>
+              <button type="button" class="editor-tool" data-command="redo" title="Refazer">↷</button>
+            </div>
+            <div class="rich-editor" id="conteudo" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Digite o passo a passo do procedimento..."></div>
 
           </div>
 
@@ -3189,7 +3295,7 @@
       if (!html) return "";
       const parser = new DOMParser();
       const doc = parser.parseFromString(String(html), "text/html");
-      const permitidas = new Set(["B","STRONG","I","EM","U","SPAN","BR","P","DIV","UL","OL","LI"]);
+      const permitidas = new Set(["B", "STRONG", "I", "EM", "U", "SPAN", "BR", "P", "DIV", "UL", "OL", "LI"]);
 
       function limparNo(no) {
         if (no.nodeType === Node.TEXT_NODE) return document.createTextNode(no.nodeValue || "");
