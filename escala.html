@@ -161,20 +161,20 @@
 
     .logo {
 
-      width: 220px;
+      width: 185px;
 
       display: flex;
 
-      align-items: center;
+      flex-direction: column;
 
-      gap: 10px;
+      justify-content: center;
 
     }
 
 
     .logo img {
 
-      width: 110px;
+      width: 112px;
 
       height: auto;
 
@@ -185,14 +185,17 @@
 
     .logo small {
 
-      color:
-        rgba(255, 255, 255, .85);
+      display: block;
 
       font-size: 8px;
 
-      letter-spacing: 1px;
+      letter-spacing: 0.7px;
 
-      white-space: nowrap;
+      color:
+        rgba(255, 255, 255, 0.82);
+
+      margin-top: 2px;
+
 
     }
 
@@ -259,21 +262,17 @@
 
     .menu-title {
 
-      padding:
-        0 12px 14px;
-
-      color:
-        var(--texto-secundario);
-
       font-size: 11px;
 
-      font-weight: 700;
+      color: #737B87;
 
-      text-transform:
-        uppercase;
+      text-transform: uppercase;
 
-      letter-spacing:
-        .8px;
+      margin:
+        5px 12px 12px;
+
+      font-weight: bold;
+
 
     }
 
@@ -284,18 +283,17 @@
 
       border: none;
 
-      background:
-        transparent;
+      background: transparent;
 
-      color:
-        var(--texto);
+      color: #CBD0D8;
 
-      padding:
-        12px;
+      text-align: left;
 
-      margin-bottom: 4px;
+      padding: 13px 12px;
 
-      border-radius: 8px;
+      border-radius: 9px;
+
+      margin: 3px 0;
 
       display: flex;
 
@@ -305,9 +303,10 @@
 
       cursor: pointer;
 
-      text-align: left;
+      font-size: 14px;
 
-      font-size: 13px;
+      transition: 0.2s;
+
 
     }
 
@@ -323,21 +322,27 @@
     .menu-item.active {
 
       background:
-        var(--card);
+        var(--card-hover);
 
-      color:
-        var(--laranja);
+      color: white;
+
+      box-shadow:
+        inset 3px 0 0 var(--laranja);
+
 
     }
 
 
     .menu-icon {
 
-      width: 24px;
+      width: 22px;
 
       text-align: center;
 
+      color: var(--laranja);
+
       font-size: 17px;
+
 
     }
 
@@ -1546,59 +1551,29 @@
       Portal do Atendente
     </div>
 
-
     <button class="menu-item" onclick="window.location.href='index.html'">
-
-      <span class="menu-icon">
-        🏠
-      </span>
-
+      <span class="menu-icon">🏠</span>
       Início
-
     </button>
-
-
-    <button class="menu-item" onclick="window.location.href='procedimentos.html'">
-
-      <span class="menu-icon">
-        📋
-      </span>
-
-      Procedimentos
-
-    </button>
-
-
-    <button class="menu-item active">
-
-      <span class="menu-icon">
-        📅
-      </span>
-
-      Escala
-
-    </button>
-
-
-    <button class="menu-item" onclick="window.location.href='sistemas.html'">
-
-      <span class="menu-icon">
-        🖥️
-      </span>
-
-      Sistemas
-
-    </button>
-
 
     <button class="menu-item" onclick="window.location.href='calculadora.html'">
+      <span class="menu-icon" aria-hidden="true">🧮</span>
+      Calcular multas
+    </button>
 
-      <span class="menu-icon">
-        🧮
-      </span>
+    <button class="menu-item" onclick="window.location.href='procedimentos.html'">
+      <span class="menu-icon" aria-hidden="true">📋</span>
+      Procedimentos
+    </button>
 
-      Calculadora
+    <button class="menu-item" onclick="window.location.href='sistemas.html'">
+      <span class="menu-icon" aria-hidden="true">🖥️</span>
+      Sistemas
+    </button>
 
+    <button class="menu-item active">
+      <span class="menu-icon" aria-hidden="true">📅</span>
+      Escala
     </button>
 
   </aside>

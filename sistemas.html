@@ -184,6 +184,52 @@
     }
 
 
+    .search {
+      flex: 1;
+      max-width: 560px;
+      margin-left: auto;
+      position: relative;
+      color: rgba(255, 255, 255, .92);
+    }
+
+    .search input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 9px;
+      background: rgba(0, 0, 0, .16);
+      color: white;
+      outline: none;
+      padding: 0 14px 0 38px;
+      font-size: 13px;
+    }
+
+    .search input::placeholder {
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .search input:focus {
+      border-color: rgba(255, 255, 255, .55);
+      background: rgba(0, 0, 0, .20);
+    }
+
+    .ask-button {
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, .30);
+      border-radius: 9px;
+      background: rgba(0, 0, 0, .14);
+      color: white;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ask-button:hover {
+      background: rgba(0, 0, 0, .22);
+    }
+
     /* =====================================================
            MENU LATERAL
         ====================================================== */
@@ -627,6 +673,11 @@
         ====================================================== */
 
     @media (max-width: 800px) {
+      .ask-button {
+        display: none;
+      }
+
+
 
       .topbar {
 
@@ -696,33 +747,18 @@
 ====================================================== -->
 
   <header class="topbar">
-
-
-    <button class="menu-button" id="menuButton" aria-label="Abrir menu">
-
-      ☰
-
-    </button>
-
-
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
     <div class="logo">
-
       <img src="logo-alcans.png" alt="Alcans">
-
-      <small>
-        PORTAL DO ATENDENTE
-      </small>
-
+      <small>PORTAL DO ATENDENTE</small>
     </div>
-
-
-    <div class="header-title">
-
-      SISTEMAS
-
+    <div class="search">
+      🔎
+      <input type="text" id="searchInput" placeholder="Buscar no portal...">
     </div>
-
-
+    <button class="ask-button" onclick="focarBusca()">
+      ✦ Perguntar
+    </button>
   </header>
 
 
@@ -732,59 +768,32 @@
 ====================================================== -->
 
   <aside class="sidebar" id="sidebar">
-
-
-    <div class="menu-title">
-
-      Portal do Atendente
-
-    </div>
-
+    <div class="menu-title">Portal do Atendente</div>
 
     <button class="menu-item" onclick="window.location.href='index.html'">
-
-      <span class="menu-icon">
-        🏠
-      </span>
-
+      <span class="menu-icon">🏠</span>
       Início
-
     </button>
-
 
     <button class="menu-item" onclick="window.location.href='calculadora.html'">
-
-      <span class="menu-icon">
-        $
-      </span>
-
+      <span class="menu-icon" aria-hidden="true">🧮</span>
       Calcular multas
-
     </button>
-
 
     <button class="menu-item" onclick="window.location.href='procedimentos.html'">
-
-      <span class="menu-icon">
-        %
-      </span>
-
+      <span class="menu-icon" aria-hidden="true">📋</span>
       Procedimentos
-
     </button>
-
 
     <button class="menu-item active">
-
-      <span class="menu-icon">
-        #
-      </span>
-
+      <span class="menu-icon" aria-hidden="true">🖥️</span>
       Sistemas
-
     </button>
 
-
+    <button class="menu-item" onclick="window.location.href='escala.html'">
+      <span class="menu-icon" aria-hidden="true">📅</span>
+      Escala
+    </button>
   </aside>
 
 
@@ -1230,6 +1239,11 @@
 
 
   <script>
+    function focarBusca() {
+      const campo = document.getElementById("searchInput");
+      if (campo) campo.focus();
+    }
+
 
 
     /* =====================================================
