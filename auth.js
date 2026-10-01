@@ -10,7 +10,7 @@ const CENTRAL_SAC_SUPABASE_KEY =
 
 
 /* =====================================================
-   CRIA CLIENTE SUPABASE
+   CRIAR CLIENTE SUPABASE
 ===================================================== */
 
 if (!window.centralSACAuthClient) {
@@ -25,28 +25,22 @@ if (!window.centralSACAuthClient) {
 
 
 /* =====================================================
-   PROTEGER PÁGINA
+   VERIFICAR LOGIN
 ===================================================== */
 
 async function protegerPagina() {
 
     try {
 
-        const resposta =
-            await window.centralSACAuthClient.auth.getSession();
+        const {
+            data,
+            error
+        } = await window.centralSACAuthClient.auth.getSession();
 
 
-        const session =
-            resposta?.data?.session;
-
-
-        const error =
-            resposta?.error;
-
-
-        /* ---------------------------------------------
-           ERRO AO CONSULTAR SESSÃO
-        --------------------------------------------- */
+        /* =============================================
+           ERRO AO VERIFICAR
+        ============================================= */
 
         if (error) {
 
@@ -57,35 +51,32 @@ async function protegerPagina() {
 
             window.location.replace("login.html");
 
-            return false;
+            return;
 
         }
 
 
-        /* ---------------------------------------------
+        /* =============================================
            NÃO ESTÁ LOGADO
-        --------------------------------------------- */
+        ============================================= */
 
-        if (!session) {
+        if (!data || !data.session) {
 
             window.location.replace("login.html");
 
-            return false;
+            return;
 
         }
 
 
-        /* ---------------------------------------------
+        /* =============================================
            ESTÁ LOGADO
-        --------------------------------------------- */
+        ============================================= */
 
         console.log(
-            "CentralSAC: usuário autenticado."
+            "CentralSAC: usuário autenticado.",
+            data.session.user.email
         );
-
-
-        return true;
-
 
     } catch (erro) {
 
@@ -96,8 +87,13 @@ async function protegerPagina() {
 
         window.location.replace("login.html");
 
-        return false;
-
     }
 
 }
+
+
+/* =====================================================
+   EXECUTAR
+===================================================== */
+
+protegerPagina();
