@@ -1,0 +1,4013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Escala | CentralSAC</title>
+
+
+  <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <!-- =====================================================
+         SHEETJS
+         Leitura de arquivos Excel
+    ====================================================== -->
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+
+  <!-- =====================================================
+         AUTENTICAÇÃO
+    ====================================================== -->
+
+  <script src="auth.js"></script>
+
+
+  <style>
+    /* =====================================================
+           IDENTIDADE VISUAL CENTRALSAC
+        ====================================================== */
+
+    :root {
+
+      --laranja: #FF5A00;
+      --laranja-hover: #FF6A1A;
+
+      --fundo: #111419;
+      --fundo-menu: #15181E;
+
+      --card: #191D24;
+      --card-hover: #20252D;
+
+      --borda: #303640;
+
+      --texto: #F5F6F8;
+      --texto-secundario: #9BA3AE;
+
+    }
+
+
+    * {
+
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        var(--fundo);
+
+      color:
+        var(--texto);
+
+      min-height: 100vh;
+
+    }
+
+
+    button,
+    input {
+
+      font-family:
+        inherit;
+
+    }
+
+
+    /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+    .topbar {
+
+      height: 66px;
+
+      background:
+        var(--laranja);
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 16px;
+
+      padding:
+        0 24px;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+    }
+
+
+    .menu-button {
+
+      width: 42px;
+
+      height: 42px;
+
+      border: none;
+
+      background:
+        transparent;
+
+      color:
+        white;
+
+      border-radius: 8px;
+
+      font-size: 24px;
+
+      cursor: pointer;
+
+    }
+
+
+    .menu-button:hover {
+
+      background:
+        rgba(255, 255, 255, .12);
+
+    }
+
+
+    .logo {
+
+      width: 220px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+
+    .logo img {
+
+      width: 110px;
+
+      height: auto;
+
+      display: block;
+
+    }
+
+
+    .logo small {
+
+      color:
+        rgba(255, 255, 255, .85);
+
+      font-size: 8px;
+
+      letter-spacing: 1px;
+
+      white-space: nowrap;
+
+    }
+
+
+    .header-title {
+
+      margin-left: auto;
+
+      color:
+        rgba(255, 255, 255, .92);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+    .sidebar {
+
+      position: fixed;
+
+      left: 0;
+
+      top: 66px;
+
+      bottom: 0;
+
+      width: 280px;
+
+      background:
+        var(--fundo-menu);
+
+      border-right:
+        1px solid var(--borda);
+
+      padding:
+        24px 14px;
+
+      overflow-y: auto;
+
+      transform:
+        translateX(0);
+
+      transition:
+        transform .25s ease;
+
+      z-index: 900;
+
+    }
+
+
+    .sidebar.closed {
+
+      transform:
+        translateX(-100%);
+
+    }
+
+
+    .menu-title {
+
+      padding:
+        0 12px 14px;
+
+      color:
+        var(--texto-secundario);
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .8px;
+
+    }
+
+
+    .menu-item {
+
+      width: 100%;
+
+      border: none;
+
+      background:
+        transparent;
+
+      color:
+        var(--texto);
+
+      padding:
+        12px;
+
+      margin-bottom: 4px;
+
+      border-radius: 8px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      cursor: pointer;
+
+      text-align: left;
+
+      font-size: 13px;
+
+    }
+
+
+    .menu-item:hover {
+
+      background:
+        var(--card-hover);
+
+    }
+
+
+    .menu-item.active {
+
+      background:
+        var(--card);
+
+      color:
+        var(--laranja);
+
+    }
+
+
+    .menu-icon {
+
+      width: 24px;
+
+      text-align: center;
+
+      font-size: 17px;
+
+    }
+
+
+    /* =====================================================
+           CONTEÚDO
+        ====================================================== */
+
+    main {
+
+      margin-left: 280px;
+
+      padding:
+        36px 28px 70px;
+
+      transition:
+        margin-left .25s ease;
+
+    }
+
+
+    main.full {
+
+      margin-left: 0;
+
+    }
+
+
+    .container {
+
+      max-width:
+        1200px;
+
+      margin:
+        0 auto;
+
+    }
+
+
+    .page-title {
+
+      margin-bottom:
+        6px;
+
+      font-size:
+        28px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .page-subtitle {
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        13px;
+
+      margin-bottom:
+        24px;
+
+    }
+
+
+    /* =====================================================
+           CARD
+        ====================================================== */
+
+    .card {
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius:
+        12px;
+
+      padding:
+        20px;
+
+      margin-bottom:
+        18px;
+
+    }
+
+
+    /* =====================================================
+           BARRA DE CONTROLES
+        ====================================================== */
+
+    .controls {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .month-buttons {
+
+      display:
+        flex;
+
+      gap:
+        7px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .month-button {
+
+      border:
+        1px solid var(--borda);
+
+      background:
+        #20242B;
+
+      color:
+        var(--texto);
+
+      padding:
+        9px 13px;
+
+      border-radius:
+        7px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .month-button:hover {
+
+      background:
+        var(--card-hover);
+
+    }
+
+
+    .month-button.active {
+
+      background:
+        var(--laranja);
+
+      border-color:
+        var(--laranja);
+
+      color:
+        white;
+
+    }
+
+
+    .search-box {
+
+      margin-left:
+        auto;
+
+      min-width:
+        250px;
+
+    }
+
+
+    .search-box input {
+
+      width:
+        100%;
+
+      background:
+        #111419;
+
+      color:
+        var(--texto);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius:
+        8px;
+
+      padding:
+        10px 12px;
+
+      outline:
+        none;
+
+      font-size:
+        12px;
+
+    }
+
+
+    .search-box input:focus {
+
+      border-color:
+        var(--laranja);
+
+    }
+
+
+    /* =====================================================
+           GESTÃO
+        ====================================================== */
+
+    .management {
+
+      display:
+        none;
+
+      margin-top:
+        16px;
+
+      padding-top:
+        16px;
+
+      border-top:
+        1px solid var(--borda);
+
+    }
+
+
+    .management.visible {
+
+      display:
+        block;
+
+    }
+
+
+    .import-button {
+
+      border:
+        none;
+
+      background:
+        var(--laranja);
+
+      color:
+        white;
+
+      padding:
+        10px 15px;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      font-size:
+        12px;
+
+    }
+
+
+    .import-button:hover {
+
+      background:
+        var(--laranja-hover);
+
+    }
+
+
+    .import-help {
+
+      display:
+        block;
+
+      margin-top:
+        8px;
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        11px;
+
+    }
+
+
+    /* =====================================================
+           TÍTULO DA ESCALA
+        ====================================================== */
+
+    .scale-header {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        15px;
+
+      margin-bottom:
+        16px;
+
+    }
+
+
+    .scale-title {
+
+      font-size:
+        18px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .scale-info {
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        11px;
+
+    }
+
+
+    /* =====================================================
+           TABELA
+        ====================================================== */
+
+    .table-wrapper {
+
+      width:
+        100%;
+
+      overflow-x:
+        auto;
+
+      border:
+        1px solid var(--borda);
+
+      border-radius:
+        10px;
+
+      background:
+        #111419;
+
+    }
+
+
+    table {
+
+      border-collapse:
+        collapse;
+
+      min-width:
+        max-content;
+
+      width:
+        100%;
+
+    }
+
+
+    th,
+    td {
+
+      border:
+        1px solid var(--borda);
+
+      text-align:
+        center;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    thead th {
+
+      position:
+        sticky;
+
+      top:
+        0;
+
+      z-index:
+        5;
+
+      background:
+        #242932;
+
+      color:
+        var(--texto);
+
+      font-size:
+        11px;
+
+      padding:
+        8px 6px;
+
+    }
+
+
+    .fixed-column {
+
+      position:
+        sticky;
+
+      left:
+        0;
+
+      z-index:
+        10;
+
+      background:
+        #191D24;
+
+    }
+
+
+    thead .fixed-column {
+
+      z-index:
+        15;
+
+      background:
+        #242932;
+
+    }
+
+
+    .name-column {
+
+      min-width:
+        270px;
+
+      max-width:
+        330px;
+
+      text-align:
+        left;
+
+      padding:
+        8px 12px;
+
+    }
+
+
+    .shift-column {
+
+      min-width:
+        115px;
+
+      font-size:
+        10px;
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .time-column {
+
+      min-width:
+        70px;
+
+      font-size:
+        11px;
+
+    }
+
+
+    tbody td {
+
+      padding:
+        6px 5px;
+
+      font-size:
+        11px;
+
+    }
+
+
+    tbody tr:hover td {
+
+      background:
+        #20252D;
+
+    }
+
+
+    tbody tr:hover .fixed-column {
+
+      background:
+        #20252D;
+
+    }
+
+
+    .employee-name {
+
+      font-weight:
+        700;
+
+      text-align:
+        left;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .status {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      min-width:
+        30px;
+
+      height:
+        24px;
+
+      padding:
+        0 5px;
+
+      border-radius:
+        5px;
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .status-PR {
+
+      background:
+        #2FB36D;
+
+      color:
+        #07170E;
+
+    }
+
+
+    .status-FO {
+
+      background:
+        #F3A6A0;
+
+      color:
+        #46100D;
+
+    }
+
+
+    .status-FV {
+
+      background:
+        #F1C84B;
+
+      color:
+        #332600;
+
+    }
+
+
+    .status-FF {
+
+      background:
+        #D9A6D9;
+
+      color:
+        #381D38;
+
+    }
+
+
+    .status-FE {
+
+      background:
+        #D7B38C;
+
+      color:
+        #342313;
+
+    }
+
+
+    .status-FA {
+
+      background:
+        #E57373;
+
+      color:
+        #400909;
+
+    }
+
+
+    .status-AF {
+
+      background:
+        #8FB6E8;
+
+      color:
+        #10243D;
+
+    }
+
+
+    .status-DE {
+
+      background:
+        #B4B4B4;
+
+      color:
+        #222;
+
+    }
+
+
+    .status-empty {
+
+      color:
+        #59616D;
+
+    }
+
+
+    /* =====================================================
+           LEGENDA
+        ====================================================== */
+
+    .legend {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        8px;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .legend-item {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        5px;
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        10px;
+
+    }
+
+
+    .legend-dot {
+
+      width:
+        21px;
+
+      height:
+        21px;
+
+      border-radius:
+        4px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      font-size:
+        8px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    /* =====================================================
+           ESTADOS
+        ====================================================== */
+
+    .loading {
+
+      text-align:
+        center;
+
+      padding:
+        50px 20px;
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        13px;
+
+    }
+
+
+    .empty {
+
+      text-align:
+        center;
+
+      padding:
+        50px 20px;
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        13px;
+
+    }
+
+
+    .error {
+
+      background:
+        rgba(220, 53, 69, .10);
+
+      border:
+        1px solid rgba(220, 53, 69, .35);
+
+      color:
+        #ff9da5;
+
+      padding:
+        14px;
+
+      border-radius:
+        8px;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        15px;
+
+      display:
+        none;
+
+    }
+
+
+    .success {
+
+      background:
+        rgba(47, 179, 109, .10);
+
+      border:
+        1px solid rgba(47, 179, 109, .30);
+
+      color:
+        #79d8a6;
+
+      padding:
+        14px;
+
+      border-radius:
+        8px;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        15px;
+
+      display:
+        none;
+
+    }
+
+
+    /* =====================================================
+           MODAL DE IMPORTAÇÃO
+        ====================================================== */
+
+    .modal-overlay {
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      background:
+        rgba(0, 0, 0, .72);
+
+      display:
+        none;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      z-index:
+        2000;
+
+      padding:
+        20px;
+
+    }
+
+
+    .modal-overlay.visible {
+
+      display:
+        flex;
+
+    }
+
+
+    .modal {
+
+      width:
+        min(600px, 100%);
+
+      max-height:
+        85vh;
+
+      overflow-y:
+        auto;
+
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--borda);
+
+      border-radius:
+        12px;
+
+      padding:
+        22px;
+
+    }
+
+
+    .modal h2 {
+
+      font-size:
+        18px;
+
+      margin-bottom:
+        8px;
+
+    }
+
+
+    .modal-description {
+
+      color:
+        var(--texto-secundario);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+
+      margin-bottom:
+        18px;
+
+    }
+
+
+    .file-input {
+
+      width:
+        100%;
+
+      border:
+        1px dashed var(--borda);
+
+      border-radius:
+        9px;
+
+      padding:
+        18px;
+
+      background:
+        #111419;
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .preview-list {
+
+      margin-top:
+        15px;
+
+      display:
+        none;
+
+    }
+
+
+    .preview-item {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      background:
+        #111419;
+
+      border:
+        1px solid var(--borda);
+
+      border-radius:
+        7px;
+
+      padding:
+        9px 11px;
+
+      margin-bottom:
+        6px;
+
+      font-size:
+        11px;
+
+    }
+
+
+    .preview-ok {
+
+      color:
+        #71D7A0;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .preview-skip {
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    .modal-actions {
+
+      display:
+        flex;
+
+      justify-content:
+        flex-end;
+
+      gap:
+        8px;
+
+      margin-top:
+        20px;
+
+    }
+
+
+    .modal-button {
+
+      border:
+        1px solid var(--borda);
+
+      background:
+        #252A32;
+
+      color:
+        var(--texto);
+
+      padding:
+        9px 14px;
+
+      border-radius:
+        7px;
+
+      cursor:
+        pointer;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .modal-button.primary {
+
+      background:
+        var(--laranja);
+
+      border-color:
+        var(--laranja);
+
+      color:
+        white;
+
+    }
+
+
+    .modal-button:disabled {
+
+      opacity:
+        .45;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* =====================================================
+           RESPONSIVO
+        ====================================================== */
+
+    @media (max-width: 900px) {
+
+      .sidebar {
+
+        transform:
+          translateX(-100%);
+
+      }
+
+
+      .sidebar.open {
+
+        transform:
+          translateX(0);
+
+      }
+
+
+      main,
+      main.full {
+
+        margin-left:
+          0;
+
+      }
+
+
+      .header-title {
+
+        display:
+          none;
+
+      }
+
+
+      .logo {
+
+        width:
+          auto;
+
+      }
+
+
+      .logo small {
+
+        display:
+          none;
+
+      }
+
+
+      .search-box {
+
+        width:
+          100%;
+
+        margin-left:
+          0;
+
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+  <header class="topbar">
+
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu">
+      ☰
+    </button>
+
+
+    <div class="logo">
+
+      <img src="logo-alcans.png" alt="Alcans">
+
+      <small>
+        PORTAL DO ATENDENTE
+      </small>
+
+    </div>
+
+
+    <div class="header-title">
+      ESCALA DE ATENDIMENTO
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="menu-title">
+      Portal do Atendente
+    </div>
+
+
+    <button class="menu-item" onclick="window.location.href='index.html'">
+
+      <span class="menu-icon">
+        🏠
+      </span>
+
+      Início
+
+    </button>
+
+
+    <button class="menu-item" onclick="window.location.href='procedimentos.html'">
+
+      <span class="menu-icon">
+        📋
+      </span>
+
+      Procedimentos
+
+    </button>
+
+
+    <button class="menu-item active">
+
+      <span class="menu-icon">
+        📅
+      </span>
+
+      Escala
+
+    </button>
+
+
+    <button class="menu-item" onclick="window.location.href='sistemas.html'">
+
+      <span class="menu-icon">
+        🖥️
+      </span>
+
+      Sistemas
+
+    </button>
+
+
+    <button class="menu-item" onclick="window.location.href='calculadora.html'">
+
+      <span class="menu-icon">
+        🧮
+      </span>
+
+      Calculadora
+
+    </button>
+
+  </aside>
+
+
+  <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+  <main id="main">
+
+    <div class="container">
+
+
+      <h1 class="page-title">
+        Escala de Atendimento
+      </h1>
+
+
+      <p class="page-subtitle">
+        Consulte a escala mensal do SAC.
+      </p>
+
+
+      <div id="errorMessage" class="error"></div>
+
+
+      <div id="successMessage" class="success"></div>
+
+
+      <!-- =================================================
+                 CONTROLES
+            ================================================== -->
+
+      <section class="card">
+
+        <div class="controls">
+
+          <div class="month-buttons" id="monthButtons">
+          </div>
+
+
+          <div class="search-box">
+
+            <input type="text" id="searchInput" placeholder="🔎 Buscar atendente..." autocomplete="off">
+
+          </div>
+
+        </div>
+
+
+        <!-- =============================================
+                     GESTÃO
+                ============================================== -->
+
+        <div class="management" id="management">
+
+          <button class="import-button" id="importButton">
+            📤 Importar nova escala
+          </button>
+
+
+          <span class="import-help">
+
+            O sistema importa somente abas mensais
+            do SAC e ignora as demais abas do Excel.
+
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+                 ESCALA
+            ================================================== -->
+
+      <section class="card">
+
+        <div class="scale-header">
+
+          <div>
+
+            <div class="scale-title" id="scaleTitle">
+              Escala
+            </div>
+
+            <div class="scale-info" id="scaleInfo">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div id="tableContainer" class="loading">
+          Carregando escala...
+        </div>
+
+
+        <div class="legend" id="legend"></div>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+         MODAL IMPORTAÇÃO
+    ====================================================== -->
+
+  <div class="modal-overlay" id="importModal">
+
+    <div class="modal">
+
+      <h2>
+        Importar nova escala
+      </h2>
+
+
+      <p class="modal-description">
+
+        Selecione o arquivo Excel utilizado pela equipe.
+        O sistema irá procurar somente as abas de SAC
+        que possuem datas válidas e ignorará as demais.
+
+        Se o mesmo mês já existir, a escala daquele mês
+        será substituída.
+
+      </p>
+
+
+      <input type="file" id="excelFile" class="file-input" accept=".xlsx,.xls">
+
+
+      <div class="preview-list" id="previewList"></div>
+
+
+      <div class="modal-actions">
+
+        <button class="modal-button" id="cancelImport">
+          Cancelar
+        </button>
+
+
+        <button class="modal-button primary" id="confirmImport" disabled>
+          Confirmar importação
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       CONFIGURAÇÃO SUPABASE
+    ====================================================== */
+
+    const SUPABASE_URL =
+      "https://adjrbgwnvagdqbqzfgwf.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_YFkBbmCNye3C74aJuu7BcA_zmvSdRnT";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /* =====================================================
+       ESTADO
+    ====================================================== */
+
+    let escalas = [];
+
+    let escalaSelecionada = null;
+
+    let perfilAtual = null;
+
+    let dadosParaImportar = [];
+
+
+    const nomesMeses = [
+
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro"
+
+    ];
+
+
+    const nomesDias = [
+
+      "Dom",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb"
+
+    ];
+
+
+    /* =====================================================
+       ELEMENTOS
+    ====================================================== */
+
+    const sidebar =
+      document.getElementById(
+        "sidebar"
+      );
+
+
+    const main =
+      document.getElementById(
+        "main"
+      );
+
+
+    const tableContainer =
+      document.getElementById(
+        "tableContainer"
+      );
+
+
+    const monthButtons =
+      document.getElementById(
+        "monthButtons"
+      );
+
+
+    const searchInput =
+      document.getElementById(
+        "searchInput"
+      );
+
+
+    const scaleTitle =
+      document.getElementById(
+        "scaleTitle"
+      );
+
+
+    const scaleInfo =
+      document.getElementById(
+        "scaleInfo"
+      );
+
+
+    const legend =
+      document.getElementById(
+        "legend"
+      );
+
+
+    const errorMessage =
+      document.getElementById(
+        "errorMessage"
+      );
+
+
+    const successMessage =
+      document.getElementById(
+        "successMessage"
+      );
+
+
+    const management =
+      document.getElementById(
+        "management"
+      );
+
+
+    const importModal =
+      document.getElementById(
+        "importModal"
+      );
+
+
+    const excelFile =
+      document.getElementById(
+        "excelFile"
+      );
+
+
+    const previewList =
+      document.getElementById(
+        "previewList"
+      );
+
+
+    const confirmImport =
+      document.getElementById(
+        "confirmImport"
+      );
+
+
+    /* =====================================================
+       MENU
+    ====================================================== */
+
+    document
+      .getElementById("menuButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          if (
+            window.innerWidth <= 900
+          ) {
+
+            sidebar.classList.toggle(
+              "open"
+            );
+
+          } else {
+
+            sidebar.classList.toggle(
+              "closed"
+            );
+
+            main.classList.toggle(
+              "full"
+            );
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       MENSAGENS
+    ====================================================== */
+
+    function mostrarErro(mensagem) {
+
+      errorMessage.textContent =
+        mensagem;
+
+      errorMessage.style.display =
+        "block";
+
+      successMessage.style.display =
+        "none";
+
+    }
+
+
+    function mostrarSucesso(mensagem) {
+
+      successMessage.textContent =
+        mensagem;
+
+      successMessage.style.display =
+        "block";
+
+      errorMessage.style.display =
+        "none";
+
+      setTimeout(
+        function () {
+
+          successMessage.style.display =
+            "none";
+
+        },
+        5000
+      );
+
+    }
+
+
+    function limparMensagens() {
+
+      errorMessage.style.display =
+        "none";
+
+      successMessage.style.display =
+        "none";
+
+    }
+
+
+    /* =====================================================
+       PERFIL
+    ====================================================== */
+
+    async function carregarPerfil() {
+
+      try {
+
+        const {
+          data: {
+            user
+          },
+          error: authError
+        } =
+          await supabaseClient.auth.getUser();
+
+
+        if (
+          authError ||
+          !user
+        ) {
+
+          window.location.replace(
+            "login.html"
+          );
+
+          return;
+
+        }
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("perfis")
+            .select(
+              "usuario, perfil"
+            )
+            .eq(
+              "id",
+              user.id
+            )
+            .maybeSingle();
+
+
+        if (error) {
+
+          console.error(
+            error
+          );
+
+          return;
+
+        }
+
+
+        perfilAtual =
+          data;
+
+
+        if (
+          perfilAtual &&
+          perfilAtual.perfil ===
+          "gestao"
+        ) {
+
+          management.classList.add(
+            "visible"
+          );
+
+        }
+
+      } catch (erro) {
+
+        console.error(
+          erro
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       CARREGAR ESCALAS
+    ====================================================== */
+
+    async function carregarEscalas() {
+
+      tableContainer.innerHTML =
+        "Carregando escala...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("escala_mensal")
+            .select("*")
+            .order(
+              "ano",
+              {
+                ascending: false
+              }
+            )
+            .order(
+              "mes",
+              {
+                ascending: false
+              }
+            );
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        escalas =
+          data || [];
+
+
+        renderizarMeses();
+
+
+        if (
+          escalas.length === 0
+        ) {
+
+          escalaSelecionada =
+            null;
+
+          scaleTitle.textContent =
+            "Nenhuma escala cadastrada";
+
+          scaleInfo.textContent =
+            "";
+
+          tableContainer.innerHTML =
+            `<div class="empty">
+                            Nenhuma escala foi importada ainda.
+                        </div>`;
+
+          legend.innerHTML =
+            "";
+
+          return;
+
+        }
+
+
+        selecionarEscala(
+          escalas[0].id
+        );
+
+
+      } catch (erro) {
+
+        console.error(
+          erro
+        );
+
+        tableContainer.innerHTML =
+          `<div class="empty">
+                        Não foi possível carregar a escala.
+                    </div>`;
+
+        mostrarErro(
+          "Erro ao carregar a escala."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       BOTÕES DOS MESES
+    ====================================================== */
+
+    function renderizarMeses() {
+
+      monthButtons.innerHTML =
+        "";
+
+
+      escalas.forEach(
+        escala => {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.className =
+            "month-button";
+
+
+          button.dataset.id =
+            escala.id;
+
+
+          button.textContent =
+            `${nomesMeses[escala.mes - 1]}
+                         ${escala.ano}`;
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              selecionarEscala(
+                escala.id
+              );
+
+            }
+          );
+
+
+          monthButtons.appendChild(
+            button
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       SELECIONAR MÊS
+    ====================================================== */
+
+    function selecionarEscala(id) {
+
+      escalaSelecionada =
+        escalas.find(
+          item =>
+            Number(item.id) ===
+            Number(id)
+        );
+
+
+      if (
+        !escalaSelecionada
+      ) {
+
+        return;
+
+      }
+
+
+      document
+        .querySelectorAll(
+          ".month-button"
+        )
+        .forEach(
+          button => {
+
+            button.classList.toggle(
+              "active",
+              Number(
+                button.dataset.id
+              ) ===
+              Number(id)
+            );
+
+          }
+        );
+
+
+      searchInput.value =
+        "";
+
+
+      renderizarEscala();
+
+    }
+
+
+    /* =====================================================
+       FORMATAR DATA
+    ====================================================== */
+
+    function formatarData(iso) {
+
+      const [
+        ano,
+        mes,
+        dia
+      ] =
+        iso
+          .split("-")
+          .map(Number);
+
+
+      return `${String(dia).padStart(2, "0")}/${String(mes).padStart(2, "0")
+        }`;
+
+    }
+
+
+    /* =====================================================
+       RENDERIZAR ESCALA
+    ====================================================== */
+
+    function renderizarEscala() {
+
+      if (
+        !escalaSelecionada
+      ) {
+
+        return;
+
+      }
+
+
+      const dados =
+        escalaSelecionada.dados;
+
+
+      scaleTitle.textContent =
+        `${nomesMeses[
+        escalaSelecionada.mes - 1
+        ]} ${escalaSelecionada.ano}`;
+
+
+      scaleInfo.textContent =
+        `${dados.colaboradores.length} atendentes • ` +
+        `${dados.datas.length} dias • ` +
+        `Aba: ${escalaSelecionada.nome_aba}`;
+
+
+      const busca =
+        searchInput.value
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .trim();
+
+
+      const colaboradores =
+        dados.colaboradores.filter(
+          colaborador => {
+
+            if (
+              !busca
+            ) {
+
+              return true;
+
+            }
+
+
+            const nome =
+              colaborador.nome
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(
+                  /[\u0300-\u036f]/g,
+                  ""
+                );
+
+
+            return nome.includes(
+              busca
+            );
+
+          }
+        );
+
+
+      if (
+        colaboradores.length === 0
+      ) {
+
+        tableContainer.innerHTML =
+          `<div class="empty">
+                        Nenhum atendente encontrado.
+                    </div>`;
+
+        renderizarLegenda();
+
+        return;
+
+      }
+
+
+      let html = `
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th
+                                    class="fixed-column name-column"
+                                >
+                                    ATENDENTE
+                                </th>
+
+                                <th class="shift-column">
+                                    ESCALA
+                                </th>
+
+                                <th class="time-column">
+                                    HORÁRIO
+                                </th>
+
+            `;
+
+
+      dados.datas.forEach(
+        data => {
+
+          html += `
+
+                        <th>
+
+                            ${formatarData(data.iso)}
+
+                            <br>
+
+                            <span
+                                style="
+                                    color:#9BA3AE;
+                                    font-size:9px;
+                                "
+                            >
+                                ${data.diaSemana}
+                            </span>
+
+                        </th>
+
+                    `;
+
+        }
+      );
+
+
+      html += `
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+            `;
+
+
+      colaboradores.forEach(
+        colaborador => {
+
+          html += `
+
+                        <tr>
+
+                            <td
+                                class="fixed-column name-column employee-name"
+                                title="${escaparHTML(
+            colaborador.nome
+          )}"
+                            >
+                                ${escaparHTML(
+            colaborador.nome
+          )}
+                            </td>
+
+                            <td class="shift-column">
+
+                                ${escaparHTML(
+            colaborador.escala || "-"
+          )}
+
+                            </td>
+
+                            <td class="time-column">
+
+                                ${escaparHTML(
+            colaborador.horario || "-"
+          )}
+
+                            </td>
+
+                    `;
+
+
+          dados.datas.forEach(
+            data => {
+
+              const codigo =
+                colaborador.status[
+                data.iso
+                ] || "";
+
+
+              const classe =
+                classeStatus(
+                  codigo
+                );
+
+
+              html += `
+
+                                <td>
+
+                                    ${codigo
+                  ? `<span class="status ${classe}">
+                                                ${escaparHTML(codigo)}
+                                               </span>`
+                  : `<span class="status-empty">—</span>`
+                }
+
+                                </td>
+
+                            `;
+
+            }
+          );
+
+
+          html += `
+
+                        </tr>
+
+                    `;
+
+        }
+      );
+
+
+      html += `
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            `;
+
+
+      tableContainer.innerHTML =
+        html;
+
+
+      renderizarLegenda();
+
+    }
+
+
+    /* =====================================================
+       STATUS
+    ====================================================== */
+
+    function classeStatus(codigo) {
+
+      const valor =
+        String(codigo)
+          .trim()
+          .toUpperCase();
+
+
+      const mapa = {
+
+        "PR":
+          "status-PR",
+
+        "FO":
+          "status-FO",
+
+        "FV":
+          "status-FV",
+
+        "FF":
+          "status-FF",
+
+        "FÉ":
+          "status-FE",
+
+        "FE":
+          "status-FE",
+
+        "FA":
+          "status-FA",
+
+        "AF":
+          "status-AF",
+
+        "DE":
+          "status-DE"
+
+      };
+
+
+      return mapa[valor] ||
+        "";
+
+    }
+
+
+    function renderizarLegenda() {
+
+      const itens = [
+
+        ["PR", "Presença"],
+        ["FO", "Folga"],
+        ["FV", "Virada de escala"],
+        ["FF", "Folga feriado"],
+        ["FÉ", "Férias"],
+        ["FA", "Falta"],
+        ["AF", "Afastamento"],
+        ["DE", "Declaração"]
+
+      ];
+
+
+      legend.innerHTML =
+        itens
+          .map(
+            ([codigo, descricao]) => {
+
+              return `
+
+                                <div class="legend-item">
+
+                                    <span
+                                        class="legend-dot ${classeStatus(codigo)}"
+                                    >
+                                        ${codigo}
+                                    </span>
+
+                                    ${descricao}
+
+                                </div>
+
+                            `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       BUSCA
+    ====================================================== */
+
+    searchInput.addEventListener(
+      "input",
+      function () {
+
+        renderizarEscala();
+
+      }
+    );
+
+
+    /* =====================================================
+       ESCAPAR HTML
+    ====================================================== */
+
+    function escaparHTML(valor) {
+
+      return String(valor ?? "")
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       MODAL IMPORTAÇÃO
+    ====================================================== */
+
+    document
+      .getElementById("importButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          limparImportacao();
+
+          importModal.classList.add(
+            "visible"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById("cancelImport")
+      .addEventListener(
+        "click",
+        function () {
+
+          importModal.classList.remove(
+            "visible"
+          );
+
+          limparImportacao();
+
+        }
+      );
+
+
+    importModal.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target ===
+          importModal
+        ) {
+
+          importModal.classList.remove(
+            "visible"
+          );
+
+          limparImportacao();
+
+        }
+
+      }
+    );
+
+
+    function limparImportacao() {
+
+      excelFile.value =
+        "";
+
+      previewList.innerHTML =
+        "";
+
+      previewList.style.display =
+        "none";
+
+      confirmImport.disabled =
+        true;
+
+      dadosParaImportar =
+        [];
+
+    }
+
+
+    /* =====================================================
+       IMPORTAR EXCEL
+    ====================================================== */
+
+    excelFile.addEventListener(
+      "change",
+      async function () {
+
+        const arquivo =
+          excelFile.files[0];
+
+
+        if (
+          !arquivo
+        ) {
+
+          return;
+
+        }
+
+
+        previewList.innerHTML =
+          `<div class="loading">
+                        Lendo arquivo...
+                     </div>`;
+
+        previewList.style.display =
+          "block";
+
+
+        confirmImport.disabled =
+          true;
+
+
+        try {
+
+          const buffer =
+            await arquivo.arrayBuffer();
+
+
+          const workbook =
+            XLSX.read(
+              buffer,
+              {
+                type:
+                  "array",
+                cellDates:
+                  true
+              }
+            );
+
+
+          dadosParaImportar =
+            analisarWorkbook(
+              workbook
+            );
+
+
+          if (
+            dadosParaImportar.length === 0
+          ) {
+
+            previewList.innerHTML =
+              `<div class="preview-item">
+                                <span class="preview-skip">
+                                    Nenhuma aba mensal de SAC com datas válidas foi encontrada.
+                                </span>
+                             </div>`;
+
+            return;
+
+          }
+
+
+          renderizarPreview();
+
+
+          confirmImport.disabled =
+            false;
+
+
+        } catch (erro) {
+
+          console.error(
+            erro
+          );
+
+          previewList.innerHTML =
+            `<div class="preview-item">
+                            <span style="color:#ff9da5">
+                                Não foi possível ler o arquivo Excel.
+                            </span>
+                         </div>`;
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       ANALISAR WORKBOOK
+    ====================================================== */
+
+    function analisarWorkbook(workbook) {
+
+      const resultados = [];
+
+
+      workbook.SheetNames.forEach(
+        nomeAba => {
+
+          const nomeNormalizado =
+            nomeAba
+              .normalize("NFD")
+              .replace(
+                /[\u0300-\u036f]/g,
+                ""
+              )
+              .toUpperCase();
+
+
+          /*
+           * Somente abas SAC.
+           *
+           * Exemplos aceitos:
+           *
+           * SAC (SETEMBRO)
+           * SAC OUTUBRO
+           *
+           * As abas de liderança,
+           * DP, pausas etc.
+           * serão ignoradas.
+           */
+
+          if (
+            !nomeNormalizado.startsWith(
+              "SAC"
+            )
+          ) {
+
+            return;
+
+          }
+
+
+          const worksheet =
+            workbook.Sheets[
+            nomeAba
+            ];
+
+
+          const dados =
+            XLSX.utils.sheet_to_json(
+              worksheet,
+              {
+                header:
+                  1,
+                defval:
+                  null,
+                raw:
+                  true
+              }
+            );
+
+
+          const resultado =
+            analisarAbaSAC(
+              nomeAba,
+              dados
+            );
+
+
+          if (
+            resultado
+          ) {
+
+            resultados.push(
+              resultado
+            );
+
+          }
+
+        }
+      );
+
+
+      /*
+       * Se houver mais de uma aba para o mesmo
+       * mês/ano, a última encontrada prevalece.
+       */
+
+      const mapa =
+        new Map();
+
+
+      resultados.forEach(
+        resultado => {
+
+          mapa.set(
+            `${resultado.ano}-${resultado.mes}`,
+            resultado
+          );
+
+        }
+      );
+
+
+      return Array.from(
+        mapa.values()
+      )
+        .sort(
+          (a, b) => {
+
+            const dataA =
+              new Date(
+                a.ano,
+                a.mes - 1
+              );
+
+            const dataB =
+              new Date(
+                b.ano,
+                b.mes - 1
+              );
+
+            return dataA - dataB;
+
+          }
+        );
+
+    }
+
+
+    /* =====================================================
+       ANALISAR UMA ABA SAC
+    ====================================================== */
+
+    function analisarAbaSAC(
+      nomeAba,
+      linhas
+    ) {
+
+      /*
+       * Procuramos uma linha contendo várias datas.
+       * No arquivo atual, essa é a linha DATA.
+       */
+
+      let linhaDatas =
+        -1;
+
+
+      let colunasDatas =
+        [];
+
+
+      for (
+        let r = 0;
+        r < Math.min(
+          linhas.length,
+          10
+        );
+        r++
+      ) {
+
+        const datasEncontradas = [];
+
+
+        for (
+          let c = 0;
+          c < linhas[r].length;
+          c++
+        ) {
+
+          const valor =
+            converterData(
+              linhas[r][c]
+            );
+
+
+          if (
+            valor
+          ) {
+
+            datasEncontradas.push(
+              {
+                coluna: c,
+                data: valor
+              }
+            );
+
+          }
+
+        }
+
+
+        if (
+          datasEncontradas.length >= 5
+        ) {
+
+          linhaDatas =
+            r;
+
+          colunasDatas =
+            datasEncontradas;
+
+          break;
+
+        }
+
+      }
+
+
+      if (
+        linhaDatas === -1
+      ) {
+
+        return null;
+
+      }
+
+
+      /*
+       * Descobrimos a coluna dos nomes.
+       *
+       * Normalmente é a coluna C.
+       * Procuramos strings longas na linha
+       * imediatamente abaixo da linha de datas.
+       */
+
+      let colunaNome =
+        -1;
+
+
+      let maiorPontuacao =
+        0;
+
+
+      for (
+        let c = 0;
+        c < Math.min(
+          linhas[linhaDatas + 1]
+            ? linhas[linhaDatas + 1].length
+            : 10,
+          8
+        );
+        c++
+      ) {
+
+        let pontuacao =
+          0;
+
+
+        for (
+          let r =
+            linhaDatas + 1;
+
+          r <
+          Math.min(
+            linhas.length,
+            linhaDatas + 25
+          );
+
+          r++
+        ) {
+
+          const valor =
+            linhas[r]?.[c];
+
+
+          if (
+            typeof valor ===
+            "string" &&
+            valor.trim().length >= 5 &&
+            !ehCodigoStatus(
+              valor
+            )
+          ) {
+
+            pontuacao++;
+
+          }
+
+        }
+
+
+        if (
+          pontuacao >
+          maiorPontuacao
+        ) {
+
+          maiorPontuacao =
+            pontuacao;
+
+          colunaNome =
+            c;
+
+        }
+
+      }
+
+
+      if (
+        colunaNome === -1
+      ) {
+
+        return null;
+
+      }
+
+
+      /*
+       * O arquivo atual possui:
+       *
+       * A = escala
+       * B = horário
+       * C = atendente
+       *
+       * Mas fazemos a leitura de forma relativa.
+       */
+
+      const colunaEscala =
+        Math.max(
+          0,
+          colunaNome - 2
+        );
+
+
+      const colunaHorario =
+        Math.max(
+          0,
+          colunaNome - 1
+        );
+
+
+      /*
+       * Mantemos somente datas de um único
+       * mês/ano coerente.
+       */
+
+      const primeiraData =
+        colunasDatas[0].data;
+
+
+      const mes =
+        primeiraData.getMonth() + 1;
+
+
+      const ano =
+        primeiraData.getFullYear();
+
+
+      const datasValidas =
+        colunasDatas.filter(
+          item => {
+
+            return (
+              item.data.getMonth() + 1 ===
+              mes &&
+              item.data.getFullYear() ===
+              ano
+            );
+
+          }
+        );
+
+
+      if (
+        datasValidas.length < 20
+      ) {
+
+        return null;
+
+      }
+
+
+      /*
+       * Ignora planilhas históricas do arquivo
+       * que possuem datas antigas/inconsistentes.
+       *
+       * A escala atual começa em 2026.
+       */
+
+      const anoAtual =
+        new Date().getFullYear();
+
+
+      if (
+        ano < anoAtual
+      ) {
+
+        return null;
+
+      }
+
+
+      const datas =
+        datasValidas.map(
+          item => {
+
+            const iso =
+              `${item.data.getFullYear()}-` +
+              `${String(
+                item.data.getMonth() + 1
+              ).padStart(2, "0")}-` +
+              `${String(
+                item.data.getDate()
+              ).padStart(2, "0")}`;
+
+
+            return {
+
+              iso,
+
+              diaSemana:
+                nomesDias[
+                item.data.getDay()
+                ]
+
+            };
+
+          }
+        );
+
+
+      const colaboradores = [];
+
+
+      /*
+       * A partir da linha seguinte à DATA,
+       * procuramos os nomes.
+       */
+
+      for (
+        let r =
+          linhaDatas + 1;
+
+        r <
+        linhas.length;
+
+        r++
+      ) {
+
+        const nomeBruto =
+          linhas[r]?.[
+          colunaNome
+          ];
+
+
+        if (
+          typeof nomeBruto !==
+          "string"
+        ) {
+
+          continue;
+
+        }
+
+
+        const nome =
+          nomeBruto
+            .replace(
+              /\s+/g,
+              " "
+            )
+            .trim();
+
+
+        if (
+          !nome ||
+          nome.length < 3 ||
+          ehCodigoStatus(nome)
+        ) {
+
+          continue;
+
+        }
+
+
+        /*
+         * Evita capturar legendas como:
+         *
+         * Folga Semanal
+         * Presença
+         * Férias
+         * etc.
+         */
+
+        if (
+          ehLegendaEscala(
+            nome
+          )
+        ) {
+
+          continue;
+
+        }
+
+
+        const escalaValor =
+          linhas[r]?.[
+          colunaEscala
+          ];
+
+
+        const horarioValor =
+          linhas[r]?.[
+          colunaHorario
+          ];
+
+
+        const colaborador = {
+
+          nome,
+
+          escala:
+            limparValor(
+              escalaValor
+            ),
+
+          horario:
+            formatarHorario(
+              horarioValor
+            ),
+
+          status: {}
+
+        };
+
+
+        datasValidas.forEach(
+          item => {
+
+            const iso =
+              `${item.data.getFullYear()}-` +
+              `${String(
+                item.data.getMonth() + 1
+              ).padStart(2, "0")}-` +
+              `${String(
+                item.data.getDate()
+              ).padStart(2, "0")}`;
+
+
+            const codigo =
+              limparValor(
+                linhas[r]?.[
+                item.coluna
+                ]
+              );
+
+
+            if (
+              codigo
+            ) {
+
+              colaborador.status[
+                iso
+              ] =
+                codigo;
+
+            }
+
+          }
+        );
+
+
+        colaboradores.push(
+          colaborador
+        );
+
+      }
+
+
+      if (
+        colaboradores.length === 0
+      ) {
+
+        return null;
+
+      }
+
+
+      /*
+       * Ordenação:
+       * escala → horário → nome
+       */
+
+      colaboradores.sort(
+        (a, b) => {
+
+          const escalaA =
+            a.escala || "";
+
+          const escalaB =
+            b.escala || "";
+
+
+          if (
+            escalaA !==
+            escalaB
+          ) {
+
+            return escalaA.localeCompare(
+              escalaB,
+              "pt-BR"
+            );
+
+          }
+
+
+          const horarioA =
+            a.horario || "";
+
+          const horarioB =
+            b.horario || "";
+
+
+          if (
+            horarioA !==
+            horarioB
+          ) {
+
+            return horarioA.localeCompare(
+              horarioB
+            );
+
+          }
+
+
+          return a.nome.localeCompare(
+            b.nome,
+            "pt-BR"
+          );
+
+        }
+      );
+
+
+      return {
+
+        mes,
+
+        ano,
+
+        nomeAba,
+
+        datas,
+
+        colaboradores
+
+      };
+
+    }
+
+
+    /* =====================================================
+       CONVERSÃO DE DATA
+    ====================================================== */
+
+    function converterData(valor) {
+
+      if (
+        valor instanceof Date &&
+        !isNaN(
+          valor.getTime()
+        )
+      ) {
+
+        return valor;
+
+      }
+
+
+      if (
+        typeof valor ===
+        "number"
+      ) {
+
+        const data =
+          XLSX.SSF.parse_date_code(
+            valor
+          );
+
+
+        if (
+          data
+        ) {
+
+          return new Date(
+            data.y,
+            data.m - 1,
+            data.d
+          );
+
+        }
+
+      }
+
+
+      return null;
+
+    }
+
+
+    /* =====================================================
+       STATUS
+    ====================================================== */
+
+    function ehCodigoStatus(valor) {
+
+      const codigo =
+        String(valor)
+          .trim()
+          .toUpperCase();
+
+
+      return [
+
+        "PR",
+        "FO",
+        "FV",
+        "FF",
+        "FÉ",
+        "FE",
+        "FA",
+        "AF",
+        "DE"
+
+      ].includes(
+        codigo
+      );
+
+    }
+
+
+    function ehLegendaEscala(valor) {
+
+      const texto =
+        String(valor)
+          .trim()
+          .toLowerCase();
+
+
+      return [
+
+        "folga semanal",
+        "presença",
+        "f. virada de escala",
+        "folga feriado",
+        "férias",
+        "falta",
+        "afastamento",
+        "declaração",
+        "madrugada"
+
+      ].includes(
+        texto
+      );
+
+    }
+
+
+    /* =====================================================
+       LIMPAR VALORES
+    ====================================================== */
+
+    function limparValor(valor) {
+
+      if (
+        valor === null ||
+        valor === undefined
+      ) {
+
+        return "";
+
+      }
+
+
+      if (
+        typeof valor ===
+        "boolean"
+      ) {
+
+        return valor
+          ? "PR"
+          : "";
+
+      }
+
+
+      return String(valor)
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim();
+
+    }
+
+
+    /* =====================================================
+       HORÁRIO
+    ====================================================== */
+
+    function formatarHorario(valor) {
+
+      if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+      ) {
+
+        return "";
+
+      }
+
+
+      if (
+        valor instanceof Date
+      ) {
+
+        const horas =
+          String(
+            valor.getHours()
+          ).padStart(
+            2,
+            "0"
+          );
+
+
+        const minutos =
+          String(
+            valor.getMinutes()
+          ).padStart(
+            2,
+            "0"
+          );
+
+
+        return `${horas}:${minutos}`;
+
+      }
+
+
+      /*
+       * SheetJS pode entregar horários
+       * como fração decimal.
+       */
+
+      if (
+        typeof valor ===
+        "number" &&
+        valor >= 0 &&
+        valor < 1
+      ) {
+
+        const totalMinutos =
+          Math.round(
+            valor * 24 * 60
+          );
+
+
+        const horas =
+          Math.floor(
+            totalMinutos / 60
+          );
+
+
+        const minutos =
+          totalMinutos % 60;
+
+
+        return `${String(
+          horas
+        ).padStart(
+          2,
+          "0"
+        )}:${String(
+          minutos
+        ).padStart(
+          2,
+          "0"
+        )}`;
+
+      }
+
+
+      return String(valor)
+        .trim();
+
+    }
+
+
+    /* =====================================================
+       PREVIEW
+    ====================================================== */
+
+    function renderizarPreview() {
+
+      previewList.innerHTML =
+        "";
+
+
+      previewList.style.display =
+        "block";
+
+
+      dadosParaImportar.forEach(
+        item => {
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "preview-item";
+
+
+          div.innerHTML = `
+
+                        <span>
+                            ${escaparHTML(
+            item.nomeAba
+          )}
+                        </span>
+
+                        <span class="preview-ok">
+
+                            ${nomesMeses[
+            item.mes - 1
+            ]}
+
+                            ${item.ano}
+
+                            •
+                            ${item.colaboradores.length}
+                            atendentes
+
+                        </span>
+
+                    `;
+
+
+          previewList.appendChild(
+            div
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       CONFIRMAR IMPORTAÇÃO
+    ====================================================== */
+
+    confirmImport.addEventListener(
+      "click",
+      async function () {
+
+        if (
+          !dadosParaImportar.length
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          !perfilAtual ||
+          perfilAtual.perfil !==
+          "gestao"
+        ) {
+
+          mostrarErro(
+            "Somente usuários da gestão podem importar escalas."
+          );
+
+          return;
+
+        }
+
+
+        confirmImport.disabled =
+          true;
+
+        confirmImport.textContent =
+          "Importando...";
+
+
+        try {
+
+          /*
+           * UPSERT por mês/ano.
+           *
+           * Se Setembro já existe,
+           * será substituído.
+           *
+           * Se Outubro já existe,
+           * será substituído.
+           *
+           * Um novo mês será criado.
+           */
+
+          const registros =
+            dadosParaImportar.map(
+              item => ({
+
+                mes:
+                  item.mes,
+
+                ano:
+                  item.ano,
+
+                nome_aba:
+                  item.nomeAba,
+
+                dados:
+                  item,
+
+                atualizado_em:
+                  new Date()
+                    .toISOString()
+
+              })
+            );
+
+
+          const {
+            error
+          } =
+            await supabaseClient
+              .from(
+                "escala_mensal"
+              )
+              .upsert(
+                registros,
+                {
+                  onConflict:
+                    "mes,ano"
+                }
+              );
+
+
+          if (error) {
+
+            throw error;
+
+          }
+
+
+          importModal.classList.remove(
+            "visible"
+          );
+
+
+          limparImportacao();
+
+
+          mostrarSucesso(
+            "Escala importada com sucesso."
+          );
+
+
+          await carregarEscalas();
+
+
+        } catch (erro) {
+
+          console.error("ERRO COMPLETO AO IMPORTAR ESCALA:", erro);
+
+          const mensagem =
+            erro?.message ||
+            erro?.details ||
+            erro?.hint ||
+            "Erro desconhecido ao salvar a escala.";
+
+          mostrarErro(
+            "Erro do Supabase: " + mensagem
+          );
+
+        } finally {
+
+          confirmImport.disabled =
+            false;
+
+          confirmImport.textContent =
+            "Confirmar importação";
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+
+    async function inicializar() {
+
+      /*
+       * auth.js já protege a página.
+       */
+
+      await carregarPerfil();
+
+      await carregarEscalas();
+
+    }
+
+
+    inicializar();
+
+  </script>
+
+
+</body>
+
+</html> qqq
