@@ -2463,9 +2463,9 @@
             const today = dateOnly(new Date());
 
             let html = '<div class="calendar-header">' +
-                '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', -1)">‹</button>' +
+                '<button type="button" class="calendar-nav" onclick="event.stopPropagation(); changeMonth(\'' + type + '\', -1)">‹</button>' +
                 '<span class="calendar-title">' + monthNames[month] + ' ' + year + '</span>' +
-                '<button type="button" class="calendar-nav" onclick="changeMonth(\'' + type + '\', 1)">›</button>' +
+                '<button type="button" class="calendar-nav" onclick="event.stopPropagation(); changeMonth(\'' + type + '\', 1)">›</button>' +
                 '</div>';
 
             html += '<div class="calendar-weekdays">' + weekNames.map(d => '<span>' + d + '</span>').join('') + '</div>';
@@ -2491,7 +2491,16 @@
                 calendarState[type].month.getMonth() + amount,
                 1
             );
+
             renderCalendar(type);
+
+            document
+                .getElementById(
+                    type === 'renewal'
+                        ? 'renewalCalendar'
+                        : 'cancelCalendar'
+                )
+                .classList.add('open');
         }
 
         function selectCalendarDate(type, year, month, day) {
