@@ -1751,7 +1751,15 @@
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+          auth: {
+            storage: window.sessionStorage,
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        }
       );
 
 
@@ -3982,7 +3990,6 @@
 
   </script>
 
-  <script src="auth.js?v=2"></script>
 </body>
 
-</html> qqq
+</html>

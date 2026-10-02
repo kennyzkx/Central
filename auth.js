@@ -69,7 +69,11 @@ async function protegerPagina() {
 }
 
 /* =====================================================
-   EXECUTAR
+   EXECUTAR PROTEÇÃO SOMENTE NAS PÁGINAS DO PORTAL
 ===================================================== */
 
-protegerPagina();
+const caminhoAtual = window.location.pathname.toLowerCase();
+
+if (!caminhoAtual.endsWith("/login.html") && !caminhoAtual.endsWith("/login")) {
+  protegerPagina();
+}
